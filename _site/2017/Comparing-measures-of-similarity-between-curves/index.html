@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Charles Jekel">
+  <meta name="description" content="There are many different metrics that can be minimized to determine how similar two different curves are. This post looks at fitting a line to data points by minimizing different metrics of similarity. A least squares optimization is done which minimizes the sum-of-squares. The traditional least squares fit is compared to minimizing the discrete Fréchet distance, the dynamic time warping (DTW) distance, and my own area metric.">
+  
+  <meta name="keywords" content="similarity between two curves,Fréchet distance,dynamic time warping,DTW,Python">
+  
+  
+  <title>Charles Jekel - jekel.me - Comparing measures of similarity between curves</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+            <a href="/about">About </a>
+    
+
+    
+            <a href="/cv">CV </a>
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Comparing measures of similarity between curves</h1>
+        <h2 class="headline">July 2, 2017</h2>
+    </header>
+    <section id="post-body">
+        <p>A simple regression problem is set up to compare the effect of minimizing the sum-of-squares, discrete Fréchet distance, dynamic time warping (DTW) distance, and the area between two curves. The sum-of-squares is minimized with a traditional least squares fit. The discrete Fréchet distance is an approximation of the Fréchet distance which measures the similarity between two curves.  The Fréchet distance is famously described with the walking dog analogy. For more on the Fréchet distance, check out this <a href="https://en.wikipedia.org/wiki/Fr%C3%A9chet_distance">wiki</a>. Dynamic time warping (DTW) has been used famously for speech recognition, and essentially calculates a metric of the similarity between two curves. The wiki page on <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping">DTW</a> is pretty useful. I’ve create an algorithm to calculate the area between two curves. The area between two curves can be used as another metric of similarity.</p>
+
+<p>With regression, model parameters are determined by minimizing some measure of the similarity between two curves. With the sum-of-squares error metric, parameters are determined with a least-squares fit. A least squares fit is an easy to solve optimization problem. However model parameters can also be determined with a more expensive global optimization method by minimizing any one of the discrete Fréchet distance, DTW, and area metrics.</p>
+
+<h2 id="methodology">Methodology</h2>
+<p>Data is generated from <span>\( y = 2x + 1 \)</span> for <span>\( 0 \leq x \leq 10 \)</span>. A line is fit to the data with the <span>\( y = mx + b \)</span> where <span>\( m \)</span> and <span>\( b \)</span> are the two parameters of the line. Various outliers are created by adding or subtracting 10 to the <span>\( y \)</span> value at a particular <span>\( x \)</span> location. Various lines are fit with different outliers to the data. Additionally the number of data points are varied. Lines are fit to the various data sets by minimizing either the sum-of-squares, discrete Fréchet distance, DTW, and area between curves. The intention is to compare the lines from the different metrics of similarity between two curves.</p>
+
+<h2 id="results">Results</h2>
+<p>Various fits were attempted by varying the number of data points and outliers. Plots of the fits are shown bellow.</p>
+
+<h3 id="n--50-no-outlier">n = 50, no outlier</h3>
+<p><img src="/assets/2017-07-02/0.png" alt="n = 50, no outlier" /></p>
+
+<h3 id="n--50-one-outlier-towards-ends">n = 50, one outlier, towards ends</h3>
+<p><img src="/assets/2017-07-02/1.png" alt="n = 50, one outlier, towards ends" /></p>
+
+<h3 id="n--50-two-outlier-towards-ends">n = 50, two outlier, towards ends</h3>
+<p><img src="/assets/2017-07-02/2.png" alt="n = 50, two outlier, towards ends" /></p>
+
+<h3 id="n--50-three-outlier-towards-ends">n = 50, three outlier, towards ends</h3>
+<p><img src="/assets/2017-07-02/3.png" alt="n = 50, three outlier, towards ends" /></p>
+
+<h3 id="n--50-one-outlier-towards-center">n = 50, one outlier, towards center</h3>
+<p><img src="/assets/2017-07-02/4.png" alt="n = 50, one outlier, towards center" /></p>
+
+<h3 id="n--50-two-outlier-opposite-ends">n = 50, two outlier, opposite ends</h3>
+<p><img src="/assets/2017-07-02/5.png" alt="n = 50, two outlier, opposite ends" /></p>
+
+<h3 id="n--100-one-outlier-towards-center">n = 100, one outlier, towards center</h3>
+<p><img src="/assets/2017-07-02/6.png" alt="n = 100, one outlier, towards center" /></p>
+
+<h3 id="n--100-two-outlier-towards-center">n = 100, two outlier, towards center</h3>
+<p><img src="/assets/2017-07-02/7.png" alt="n = 100, two outlier, towards center" /></p>
+
+<h3 id="n--100-three-outlier-towards-center">n = 100, three outlier, towards center</h3>
+<p><img src="/assets/2017-07-02/8.png" alt="n = 100, three outlier, towards center" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Minimizing the sum-of-squares creates a model that is a compromise between the outlier and the data. The line from the sum-of-squares minimization is slightly effected by the outlier, as the lines move slightly from the true trend. Minimizing the Fréchet distance is strongly susceptible to outliers. In this example minimizing the Fréchet distance appears to be analogous to minimizing the maximum absolute error. I was surprised to find that minimizing the DTW or area between curves produced the same results. Both the DTW and area metrics completely ignore outliers and find the true line.</p>
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="/about">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Charles Jekel</span>
+            <span>Mechanical Engineer. Numerical Modeling. Optimization.</span>
+            <span>cj@jekel.me</span>
+
+            <span><a href="/">Home </a><a href="/cv"> CV </a></span>
+        </div>
+    </a>
+
+    <!-- Remove Sharing links for now:<section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://jekel.me/2017/Comparing-measures-of-similarity-between-curves/ - Comparing measures of similarity between curves by @"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>-->
+</footer>
+
+<!-- Disqus comments -->
+
+    <div class="archive readmore">
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = 'http://localhost:4000/2017/Comparing-measures-of-similarity-between-curves/';
+            this.page.identifier = '/2017/Comparing-measures-of-similarity-between-curves';
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//cjekel.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+
+    </div>
+
+
+<!-- Archive post list -->
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-67542734-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

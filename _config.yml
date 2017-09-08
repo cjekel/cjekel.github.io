@@ -1,0 +1,44 @@
+name: Charles Jekel - jekel.me
+description: Mechanical Engineer. Numerical Modeling. Optimization.
+meta_description: "Charles Jekel is a mechanical engineer who may sometimes blog usefull stuff about modeling, materials, or optimization"
+email: cj@jekel.me
+
+aboutPage: true
+cvPage: true
+
+markdown: kramdown
+highlighter: rouge
+
+plugins: [jekyll-paginate,jekyll-github-metadata]
+paginate: 20
+domain_name: 'http://jekel.me'
+google_analytics: 'UA-67542734-1'
+disqus: true
+disqus_shortname: 'cjekel'
+
+# Details for the RSS feed generator
+url:            'http://jekel.me'
+author:         'Charles Jekel'
+# I don't Tweet authorTwitter:  'YourTwitterUsername'
+
+permalink:       /:year/:title/
+
+defaults:
+    -
+        scope:
+            path: "" # empty string for all files
+            type: pages
+        values:
+            layout: default
+    -
+        scope:
+            path: "" # empty string for all files
+            type: posts
+        values:
+            layout: post
+    -
+        scope:
+            path: ""
+            type: drafts
+        values:
+            layout: post

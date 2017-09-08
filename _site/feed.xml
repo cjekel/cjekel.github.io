@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Charles Jekel - jekel.me</title>
+    <description>Mechanical Engineer. Numerical Modeling. Optimization.</description>
+    <link>http://localhost:4000</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Comparing measures of similarity between curves</title>
+        
+        
+          <description>&lt;p&gt;A simple regression problem is set up to compare the effect of minimizing the sum-of-squares, discrete Fréchet distance, dynamic time warping (DTW) distance, and the area between two curves. The sum-of-squares is minimized with a traditional least squares fit. The discrete Fréchet distance is an approximation of the Fréchet distance which measures the similarity between two curves.  The Fréchet distance is famously described with the walking dog analogy. For more on the Fréchet distance, check out this &lt;a href=&quot;https://en.wikipedia.org/wiki/Fr%C3%A9chet_distance&quot;&gt;wiki&lt;/a&gt;. Dynamic time warping (DTW) has been used famously for speech recognition, and essentially calculates a metric of the similarity between two curves. The wiki page on &lt;a href=&quot;https://en.wikipedia.org/wiki/Dynamic_time_warping&quot;&gt;DTW&lt;/a&gt; is pretty useful. I’ve create an algorithm to calculate the area between two curves. The area between two curves can be used as another metric of similarity.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 02 Jul 2017 07:11:00 -0400</pubDate>
+        <link>http://localhost:4000/2017/Comparing-measures-of-similarity-between-curves/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/Comparing-measures-of-similarity-between-curves/</guid>
+      </item>
+    
+      <item>
+        <title>Detect faces using facenet in Python</title>
+        
+        
+          <description>&lt;p&gt;&lt;em&gt;Edit 2017 September 8, I fixed the images BGR issue as recommended by Jason Taylor&lt;/em&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 01 May 2017 07:11:00 -0400</pubDate>
+        <link>http://localhost:4000/2017/How-to-detect-faces-using-facenet/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/How-to-detect-faces-using-facenet/</guid>
+      </item>
+    
+      <item>
+        <title>Fitting a piecewise linear function to data</title>
+        
+        
+          <description>&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;/h2&gt;
+&lt;p&gt;I created a Python library, called &lt;a href=&quot;https://github.com/cjekel/piecewiseLinearFitPython&quot;&gt;pwlf&lt;/a&gt;, for fitting a continuous piecewise linear function to data. What makes this library unique is that it allows the user to specify the desired number of line segments when performing piecewise linear fits. A global (heuristic) optimization algorithm is then used to find the best piecewise linear fit that uses the user-specified number of line segments.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 01 Apr 2017 07:11:00 -0400</pubDate>
+        <link>http://localhost:4000/2017/Fit-a-piecewise-linear-function-to-data/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/Fit-a-piecewise-linear-function-to-data/</guid>
+      </item>
+    
+      <item>
+        <title>Lack of Fit Test for Linear Regression</title>
+        
+        
+          <description>&lt;p&gt;Myers et al. [1] provides a derivation for a simple lack of fit test in section 2.7. The derivation  looks at whether or not a linear model of form&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 18 Mar 2017 16:53:00 -0400</pubDate>
+        <link>http://localhost:4000/2017/Lack-of-fit-test-linear-regression/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/Lack-of-fit-test-linear-regression/</guid>
+      </item>
+    
+      <item>
+        <title>Automating Tinder Likes with Support Vector Machine Learning</title>
+        
+        
+          <description>&lt;h3 id=&quot;update&quot;&gt;Update&lt;/h3&gt;
+&lt;p&gt;After some careful consideration, the method described here doesn’t work. Instead of focusing on the prediction accuracy for the entire sample, I should actually focus on the Like accruacy for model selection. The reason is that if the number of &lt;em&gt;Dislikes&lt;/em&gt; are much greater than the number of &lt;em&gt;Likes&lt;/em&gt; then the modeling process will have bias towards &lt;em&gt;Dislikes&lt;/em&gt; and be more likely to get would be &lt;em&gt;Likes&lt;/em&gt; incorrect. I’ll work more on this and post an update when ready.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 19 Dec 2016 12:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2016/Automating-Tinder-Likes-with-Support-Vector-Machine-Learning/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/Automating-Tinder-Likes-with-Support-Vector-Machine-Learning/</guid>
+      </item>
+    
+      <item>
+        <title>Maximum Likelihood Estimation is Sensitive to Starting Points</title>
+        
+        
+          <description>&lt;p&gt;In my &lt;a href=&quot;/2016/Maximum-Likelihood-Linear-Regression&quot;&gt;previous post&lt;/a&gt;, I derive a formulation to use maximum likelihood estimation (MLE) in a simple linear regression case. Looking at the formulation for MLE, I had the suspicion that the MLE will be much more sensitive to the starting points of a gradient optimization than other linear regression methods. To demonstrate the sensitivity to the starting points, I ran 10,000 linear regressions. For each starting point I ran a MLE and a root mean square minimization to determine the optimum quadratic parameters to fit a polynomial to the data. As it turns out, the root mean square optimizations were just as good, or better than the MLE for every case. All of the code for this comparison is available &lt;a href=&quot;https://github.com/cjekel/cjekel.github.io/tree/master/assets/2016-10-21&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 21 Oct 2016 11:20:00 -0400</pubDate>
+        <link>http://localhost:4000/2016/Maximum-Likelihood-vs-Root-Mean-Square-Error/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/Maximum-Likelihood-vs-Root-Mean-Square-Error/</guid>
+      </item>
+    
+      <item>
+        <title>Maximum Likelihood Estimation Linear Regression</title>
+        
+        
+          <description>&lt;p&gt;&lt;em&gt;Edit October 19, 2016. There was an error in my code, where I took the standard deviation of the true values, when I should have actually been taking the standard deviation of the residual values. I have corrected the post and the files.&lt;/em&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 15 Oct 2016 13:20:00 -0400</pubDate>
+        <link>http://localhost:4000/2016/Maximum-Likelihood-Linear-Regression/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/Maximum-Likelihood-Linear-Regression/</guid>
+      </item>
+    
+      <item>
+        <title>Gaussian Process Prediction (aka Kriging)  with Different Correlation Functions</title>
+        
+        
+          <description>&lt;p&gt;I was looking for a Python Kriging package for the longest time, and somehow I overlooked &lt;a href=&quot;http://scikit-learn.org/&quot;&gt;scikit-learn&lt;/a&gt;. Honestly I didn’t understand that Kriging is a Gaussian process prediction (see the &lt;a href=&quot;https://en.wikipedia.org/wiki/Gaussian_process#Gaussian_process_prediction.2C_or_kriging&quot;&gt;wiki&lt;/a&gt;).This post will demonstrate how to use scikit-learn to create a Kriging model (Gaussian process prediction) for a single independent variable.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 15 Sep 2016 15:20:00 -0400</pubDate>
+        <link>http://localhost:4000/2016/Guassian-Process-Prediction-aka-Kriging/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/Guassian-Process-Prediction-aka-Kriging/</guid>
+      </item>
+    
+      <item>
+        <title>USA GDP and GNI per capita adjusted for inflation 1960 - 2014</title>
+        
+        
+          <description>&lt;p&gt;Has the overall economic situation for people living in the United States of America improved since 1960? Or is the economic situation the same now as it was in 1960? You can’t spend too much time thinking about these situations without considering the scary alternative. Are people living in the USA now worse off than they were in the 1960s?&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 31 May 2016 19:30:00 -0400</pubDate>
+        <link>http://localhost:4000/2016/USA-GDP-and-GNI-per-capita-adjusted-for-inflation/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/USA-GDP-and-GNI-per-capita-adjusted-for-inflation/</guid>
+      </item>
+    
+      <item>
+        <title>World Population Density Plots</title>
+        
+        
+          <description>&lt;p&gt;I enjoy to peruse the &lt;a href=&quot;https://www.cia.gov/library/publications/resources/the-world-factbook/&quot;&gt;CIA World Factbook&lt;/a&gt; from time to time. It reminds me of digging though a country specific atlas or encyclopedia. The other day I was looking at their &lt;a href=&quot;https://www.cia.gov/library/publications/resources/the-world-factbook/rankorder/rankorderguide.html&quot;&gt;country comparison&lt;/a&gt; feature and noticed they didn’t have population density available, despite having estimates for country population and area. I went ahead and calculated the population density for the countries, and then made pretty plots (check out the full &lt;a href=&quot;http://imgur.com/a/Pb1i6&quot;&gt;imgur&lt;/a&gt; gallery) with various color maps of the world’s population density.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 06 Apr 2016 10:20:00 -0400</pubDate>
+        <link>http://localhost:4000/2016/Population-Density-Plots/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/Population-Density-Plots/</guid>
+      </item>
+    
+  </channel>
+</rss>

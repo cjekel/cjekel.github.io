@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Charles Jekel">
+  <meta name="description" content="Using maximum likelihood to fit a polynomial to data as opposed to a least squares fit">
+  
+  <meta name="keywords" content="maximum likelihood,maximum likelihood estimation,linear regression,least squares,Python,scikit-learn">
+  
+  
+  <title>Charles Jekel - jekel.me - Maximum Likelihood Estimation Linear Regression</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+            <a href="/about">About </a>
+    
+
+    
+            <a href="/cv">CV </a>
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Maximum Likelihood Estimation Linear Regression</h1>
+        <h2 class="headline">October 15, 2016</h2>
+    </header>
+    <section id="post-body">
+        <p><em>Edit October 19, 2016. There was an error in my code, where I took the standard deviation of the true values, when I should have actually been taking the standard deviation of the residual values. I have corrected the post and the files.</em></p>
+
+<p><em>Edit2 October 20, 2016. I was passing the integer length of the data set, instead of the floating point length, which messed up the math. I’ve corrected this and updated the code.</em></p>
+
+<p>I am going to use maximum likelihood estimation (MLE) to fit a linear (polynomial) model to some data points. A simple case is presented to create an understanding of how model parameters can be identified by maximizing the likelihood as opposed to minimizing the sum of the squares (least squares). The likelihood equation is derived for a simple case, and gradient optimization is used to determine the coefficients of a polynomial which maximize the likelihood with the sample. The polynomial that results from maximizing the likelihood should be the same as a polynomial from a least squares fit, if we assume a normal (Gaussian) distribution and that the data is independent and identically distributed. Thus the maximum likelihood parameters will be compared to the least squares parameters. All of the Python code used in this comparison will be available <a href="https://github.com/cjekel/cjekel.github.io/tree/master/assets/2016-10-16">here</a>.</p>
+
+<p>So let’s generate the data points that we’ll be fitting a polynomial to. I assumed the data is from some second order polynomial, of which I added some noise to make the linear regression a bit more interesting.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.5</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span> 
+
+<span class="c">#   let's add noise to the data</span>
+<span class="c">#   np.random.normal(mean, standardDeviation, num)</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">+</span><span class="n">noise</span></code></pre></figure>
+
+</div>
+
+<p>The Python code gives us the following data points.</p>
+
+<p><img src="/assets/2016-10-16/myData.png" alt="Image of the polynomial based data points with noise." /></p>
+
+<p>Now onto the formulation of the likelihood equation that we’ll use to determine coefficients of a fitted polynomial.</p>
+
+<p>Linear regression is generally of some form</p>
+<div>
+$$
+\mathbf{Y} = \mathbf{X}\mathbf{\beta} + \mathbf{r}
+$$
+</div>
+<p>for a true function <span>\( \mathbf{Y} \)</span>, the matrix of independent variables <span>\( \mathbf{X} \)</span>, the model coefficients <span>\( \mathbf{\beta} \)</span>, and some residual difference between the true data and the model <span>\( \mathbf{r} \)</span>. For a second order polynomial, <span>\( \mathbf{X} \)</span> is of the form <span>\( \mathbf{X} = [\mathbf{1}, \mathbf{x}, \mathbf{x^2}]\)</span>. We can rewrite the equation of linear regression as</p>
+<div>
+$$
+\mathbf{r} = \mathbf{Y} - \mathbf{X}\mathbf{\beta} 
+$$
+</div>
+<p>where the residuals <span>\( \mathbf{r} \)</span> are expressed as the difference between the true model (<span>\( \mathbf{Y} \)</span>) and the linear model (<span>\( \mathbf{X}\mathbf{\beta} \)</span>). If we assume the data to be of an independent and identically distributed sample, and that the residual <span>\( \mathbf{r} \)</span> is from a normal (Gaussian) distribution, then we’ll get the following probability density function <span>\( f \)</span>.</p>
+<div>
+$$
+f(x|\mu , \sigma^2) = (2 \pi \sigma^2)^{-\frac{n}{2}} \text{exp}(- \frac{(x-\mu)^2}{2\sigma^2})
+$$
+</div>
+<p>The probability density function <span>\( f(x|\mu , \sigma^2) \)</span> is for a point <span>\( x \)</span>, with a mean <span>\( \mu \)</span>, and standard deviation <span>\( \sigma \)</span>. If we substitute the residual into the equation, and assume that the residual will have a mean of zero (<span>\( \mu = 0 \)</span>) we get</p>
+<div>
+$$
+f(r|0 , \sigma^2) = (2 \pi \sigma^2)^{-\frac{n}{2}} \text{exp}(- \frac{(y - x\beta)^2}{2\sigma^2})
+$$
+</div>
+<p>which defines the probability density function for a given point. The likelihood function <span>\( L \)</span> is defined as</p>
+<div>
+$$
+L(\beta | x_1, x_2, \cdots, x_n) = \prod_{i=1}^{n}f(x_i | \beta)
+$$
+</div>
+<p>the multiplication of all probability densities at each <span>\( x_i \)</span>  point. When we substitute the probability density function into the definition of the maximum likelihood function, we have the following.</p>
+<div>
+$$
+L(\beta | x_1, x_2, \cdots, x_n) = (2 \pi \sigma^2)^{\frac{n}{2}} \text{exp}(- \frac{(\mathbf{Y} - \mathbf{X}\mathbf{\beta})^{\text{T}}(\mathbf{Y} - \mathbf{X}\mathbf{\beta} ) }{2\sigma^2})
+$$
+</div>
+<p>It is practical to work with the log-likelihood as opposed to the likelihood equation as the likelihood equation can be nearly zero. In Python we have created a function which returns the log-likelihood value given a set of ‘true’ values (<span>\( \mathbf{Y} \)</span>) and a set of ‘guess’ values <span>\( \mathbf{X}\mathbf{\beta} \)</span>.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c">#   define a function to calculate the log likelihood</span>
+<span class="k">def</span> <span class="nf">calcLogLikelihood</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">true</span><span class="o">-</span><span class="n">guess</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">((</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">sigma</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">error</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span><span class="o">*</span><span class="n">sigma</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p>Optimization is used to determine which parameters <span>\( \mathbf{\beta} \)</span> maximize the log-likelihood function. The optimization problem is expressed below.</p>
+<div>
+$$
+\{ \hat{\beta}_{\text{MLE}} \} \subseteq \{ \text{arg max}  \ln \bigg ( L(\beta | x_1, x_2, \cdots, x_n) \bigg )\}
+$$
+</div>
+
+<p>So since our data originates from a second order polynomial, let’s fit a second order polynomial to the data. First we’ll have to define a function which will calculate the log likelihood value of the second order polynomial for three different coefficients (‘var’).</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c">#   define my function which will return the objective function to be minimized</span>
+<span class="k">def</span> <span class="nf">myFunction</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+    <span class="c">#   load my  data</span>
+    <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">'myData.npy'</span><span class="p">)</span>
+    <span class="n">yGuess</span> <span class="o">=</span> <span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">var</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">calcLogLikelihood</span><span class="p">(</span><span class="n">yGuess</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yGuess</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">f</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p>We can then use gradient-based optimization to find which polynomial coefficients maximize the log-likelihood. I used scipy and the BFGS algorithm, but other algorithms and optimization methods should work well for this simple problem. I picked some random variable values to start the optimization. The Python code to run the scipy optimizer is presented in the following lines. Note that maximizing the likelihood is the same as minimizing minus 1 times the likelihood.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c">#  Let's pick some random starting points for the optimization    </span>
+<span class="n">nvar</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nvar</span><span class="p">)</span>
+<span class="n">var</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">15.5</span>
+<span class="n">var</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">19.5</span>
+<span class="n">var</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
+<span class="c">#   let's maximize the likelihood (minimize -1*max(likelihood)</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">myFunction</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">'BFGS'</span><span class="p">,</span>
+                <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s">'disp'</span><span class="p">:</span> <span class="bp">True</span><span class="p">})</span></code></pre></figure>
+
+</div>
+
+<p>As it turns out, with the assumptions we have made (Gaussian distribution, independent and identically distributed, <span>\( \mu = 0 \)</span>) the result of maximizing the likelihood should be the same as performing a least squares fit. So let’s go ahead and perform a least squares fit to determine the coefficients of a second order polynomial from the data points. This can be done with scikit-learn easily with the following lines of Python code.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c">#   perform least squares fit using scikitlearn</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s">'poly'</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s">'linear'</span><span class="p">,</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">))])</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">coefs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s">'linear'</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span></code></pre></figure>
+
+</div>
+
+<p>I’ve made a plot of the data points, the polynomial from maximizing the log-likelihood, and the least squares fit all on the same graph. We can clearly see that maximizing the likelihood was equivalent to performing a least squares fit for this data set. This was intended to be a simple example, as I hope to transition a maximum likelihood estimation to non-linear regression in the future. Obviously this example doesn’t highlight or explain why someone would prefer to use a maximum likelihood estimation, but hopefully in the future I can explain the difference on a sample where the MLE gives a different result than the least squares optimization.</p>
+
+<p><img src="/assets/2016-10-16/maxLikelihoodComp.png" alt="Image of the fitted polynomials and the data points." /></p>
+
+<p>A few notes from implementing this simple MLE:</p>
+
+<ul>
+  <li>
+    <p>It appears that the MLE performs poorly from bad starting points. I suspect that with a poor starting point it may be beneficial to first run a sum of squares optimization to obtain a starting point of which a MLE can be performed from.  <em>Edit October 19, 2016. I re ran optimizations from random starting points by minimizing the root mean square error, and it actually appears that the MLE is a better optimization problem than the RMS error.</em> <em>Edit2 October 26, 2016. This lead to a follow up post <a href="/2016/Maximum-Likelihood-vs-Root-Mean-Square-Error/">here</a>, where I show that actually MLE is a more difficult gradient optimization problem.</em></p>
+  </li>
+  <li>
+    <p>I’m not sure about how to select an appropriate probability density function. I’m not sure what the benefit of using MLE over least squares if I always assume Gaussian… I guess I’ll always know the standard deviation, and that the mean may not always be zero.</p>
+  </li>
+</ul>
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="/about">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Charles Jekel</span>
+            <span>Mechanical Engineer. Numerical Modeling. Optimization.</span>
+            <span>cj@jekel.me</span>
+
+            <span><a href="/">Home </a><a href="/cv"> CV </a></span>
+        </div>
+    </a>
+
+    <!-- Remove Sharing links for now:<section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://jekel.me/2016/Maximum-Likelihood-Linear-Regression/ - Maximum Likelihood Estimation Linear Regression by @"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>-->
+</footer>
+
+<!-- Disqus comments -->
+
+    <div class="archive readmore">
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = 'http://localhost:4000/2016/Maximum-Likelihood-Linear-Regression/';
+            this.page.identifier = '/2016/Maximum-Likelihood-Linear-Regression';
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//cjekel.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+
+    </div>
+
+
+<!-- Archive post list -->
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-67542734-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

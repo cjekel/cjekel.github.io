@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Charles Jekel">
+  <meta name="description" content="Quick comparison of maximum likelihood estimation vs root mean square error for linear regression from random tarting points">
+  
+  <meta name="keywords" content="maximum likelihood,maximum likelihood estimation,linear regression,root mean square error,Python">
+  
+  
+  <title>Charles Jekel - jekel.me - Maximum Likelihood Estimation is Sensitive to Starting Points</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+            <a href="/about">About </a>
+    
+
+    
+            <a href="/cv">CV </a>
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Maximum Likelihood Estimation is Sensitive to Starting Points</h1>
+        <h2 class="headline">October 21, 2016</h2>
+    </header>
+    <section id="post-body">
+        <p>In my <a href="/2016/Maximum-Likelihood-Linear-Regression">previous post</a>, I derive a formulation to use maximum likelihood estimation (MLE) in a simple linear regression case. Looking at the formulation for MLE, I had the suspicion that the MLE will be much more sensitive to the starting points of a gradient optimization than other linear regression methods. To demonstrate the sensitivity to the starting points, I ran 10,000 linear regressions. For each starting point I ran a MLE and a root mean square minimization to determine the optimum quadratic parameters to fit a polynomial to the data. As it turns out, the root mean square optimizations were just as good, or better than the MLE for every case. All of the code for this comparison is available <a href="https://github.com/cjekel/cjekel.github.io/tree/master/assets/2016-10-21">here</a>.</p>
+
+<p>Perhaps one of the simplest and most commonly used alternative objective functions for linear regression is the root mean square error (RMSE). RMSE is the square root of the mean square error, and mean square error is the average of the square residuals <span>\( r \)</span>. For this purpose, RMSE is defined in the following equation.</p>
+
+<div>
+$$
+RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^n r^2}
+$$
+</div>
+
+<p>The goal of the linear regression would be to find which parameters minimize the RMSE. As it turns out for my particular model and dataset, the optimum of the MLE will be the optimum of minimizing the RMSE. With this in mind I generated 10,000 random starting points. From each starting point I ran a MLE and a minimizing RMSE using gradient optimizations.</p>
+
+<p>It turns out that for the BFGS algorithm, MLE is more sensitive to starting points than minimizing RMSE. I concluded this because of my 10,000 runs the RMSE performed better 7,668 times. Interesting enough the MLE and RMSE were equivalent 2,332 times, and never did the MLE produce a better match than the RMSE method. I’ve included pie chart which helps to visualize the results.</p>
+
+<p><img src="/assets/2016-10-21/maxLikelihoodComp.png" alt="MLE and RMSE equivalent 23.3% of time. RMSE was better 76.7% of the time. Never was MLE better." /></p>
+
+<p>A bit of disclaimer, these results are very model dependent. What happens with my log-likelihood equation is that it has a tendency to go to infinity with a poor starting point, which creates problems with the gradient optimization method.</p>
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="/about">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Charles Jekel</span>
+            <span>Mechanical Engineer. Numerical Modeling. Optimization.</span>
+            <span>cj@jekel.me</span>
+
+            <span><a href="/">Home </a><a href="/cv"> CV </a></span>
+        </div>
+    </a>
+
+    <!-- Remove Sharing links for now:<section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://jekel.me/2016/Maximum-Likelihood-vs-Root-Mean-Square-Error/ - Maximum Likelihood Estimation is Sensitive to Starting Points by @"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>-->
+</footer>
+
+<!-- Disqus comments -->
+
+    <div class="archive readmore">
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = 'http://localhost:4000/2016/Maximum-Likelihood-vs-Root-Mean-Square-Error/';
+            this.page.identifier = '/2016/Maximum-Likelihood-vs-Root-Mean-Square-Error';
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//cjekel.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+
+    </div>
+
+
+<!-- Archive post list -->
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-67542734-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Charles Jekel">
+  <meta name="description" content="The TensorFlow implementation of facenet is an extremely powerful deep face recognition libarary. You can download pre-trained models with a LFW accuracy of 0.993. This post demonstrates how you can use the facenet library to detect faces in images using Python.">
+  
+  <meta name="keywords" content="facenet,how to use facenet,facenet detect faces,facial recognition python">
+  
+  
+  <title>Charles Jekel - jekel.me - Detect faces using facenet in Python</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+            <a href="/about">About </a>
+    
+
+    
+            <a href="/cv">CV </a>
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Detect faces using facenet in Python</h1>
+        <h2 class="headline">May 1, 2017</h2>
+    </header>
+    <section id="post-body">
+        <p><em>Edit 2017 September 8, I fixed the images BGR issue as recommended by Jason Taylor</em></p>
+
+<p>This post will show how to detect faces using the <a href="https://github.com/davidsandberg/facenet">facenet</a> library, as it is not exactly clear from the wiki on how to use functions within the library. I’ve found that the facial detection implmenation in facenet to be much better than the standard <a href="http://opencv.org/">OpenCV</a> haarcascade frontalface detection method.</p>
+
+<p>The <a href="https://github.com/davidsandberg/facenet">facenet</a> library is a TensorFlow implementation of the <a href="https://arxiv.org/abs/1503.03832">FaceNet</a> paper. You can download some of the pre-trained models, which have an accuracy of 0.993 with the LFW dataset. This accuracy is certainly impressive. So what are you waiting for, go clone and fork this library!</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>git clone https://github.com/davidsandberg/facenet.git</code></pre></figure>
+
+</div>
+
+<p>And now install. <em>Edit: It appears that setup.py isn’t configured properly. Rather add facenet/src to your PYTHONPATH.</em></p>
+<div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd </span>facenet
+<span class="gp">$ </span>sudo python setup.py install</code></pre></figure>
+
+</div>
+
+<p>First you must be sure that you have all have  installed all of the Python requirements which are: tensorflow==1.0, scipy, scikit-learn, opencv-python, h5py, matplotlib, Pillow,  requests, and psutil. I’m running the latest tensorflow=1.1.0-rc2 and facenet appears to be working with no problems. Now you should validate facenet using the LFW dataset to verify that your installation is working  properly. You can follow <a href="https://github.com/davidsandberg/facenet/wiki/Validate-on-lfw">these</a> instructions.</p>
+
+<p>The facenet library uses a pre-trained <a href="https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html">MTCNN</a> to detect faces. This appears to be a really good facial detection implmenation. With my particular dataset, the MTCNN facial detection implementation is working much better than the standard haarcascade frontalface detection typically done with OpenCV.</p>
+
+<p>Here is a simple script to detect faces using the facenet implmenation:</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c">#   import facenet libraires</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">align.detect_face</span>
+
+<span class="c">#  import other libraries</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c">#   setup facenet parameters</span>
+<span class="n">gpu_memory_fraction</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">minsize</span> <span class="o">=</span> <span class="mi">50</span> <span class="c"># minimum size of face</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.7</span> <span class="p">]</span>  <span class="c"># three steps's threshold</span>
+<span class="n">factor</span> <span class="o">=</span> <span class="mf">0.709</span> <span class="c"># scale factor</span>
+
+<span class="c">#   fetch images</span>
+<span class="n">image_dir</span> <span class="o">=</span> <span class="s">'presidents/'</span>
+
+<span class="c">#   create a list of your images</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">image_dir</span><span class="p">)</span>
+
+<span class="c">#   Start code from facenet/src/compare.py</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Creating networks and loading parameters'</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+    <span class="n">gpu_options</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">GPUOptions</span><span class="p">(</span>
+        <span class="n">per_process_gpu_memory_fraction</span><span class="o">=</span><span class="n">gpu_memory_fraction</span><span class="p">)</span>
+    <span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="n">gpu_options</span><span class="o">=</span><span class="n">gpu_options</span><span class="p">,</span>
+        <span class="n">log_device_placement</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+    <span class="k">with</span> <span class="n">sess</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+        <span class="n">pnet</span><span class="p">,</span> <span class="n">rnet</span><span class="p">,</span> <span class="n">onet</span> <span class="o">=</span> <span class="n">align</span><span class="o">.</span><span class="n">detect_face</span><span class="o">.</span><span class="n">create_mtcnn</span><span class="p">(</span>
+            <span class="n">sess</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="c">#   end code from facenet/src/compare.py</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">image_dir</span> <span class="o">+</span> <span class="n">i</span><span class="p">))</span>
+        <span class="c">#   run detect_face from the facenet library</span>
+        <span class="n">bounding_boxes</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">align</span><span class="o">.</span><span class="n">detect_face</span><span class="o">.</span><span class="n">detect_face</span><span class="p">(</span>
+                <span class="n">img</span><span class="p">,</span> <span class="n">minsize</span><span class="p">,</span> <span class="n">pnet</span><span class="p">,</span>
+                <span class="n">rnet</span><span class="p">,</span> <span class="n">onet</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span>
+
+        <span class="c">#   for each box</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span> <span class="ow">in</span> <span class="n">bounding_boxes</span><span class="p">:</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="n">x2</span><span class="o">-</span><span class="n">x1</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">y2</span><span class="o">-</span><span class="n">y1</span>
+            <span class="c">#   plot the box using cv2</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">img</span><span class="p">,(</span><span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">)),(</span><span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="o">+</span><span class="n">w</span><span class="p">),</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="o">+</span><span class="n">h</span><span class="p">)),(</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s">'Accuracy score'</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+        <span class="c">#   save a new file with the boxed face</span>
+        <span class="n">misc</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="s">'faceBoxed'</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+        <span class="c">#   show the boxed face</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+</div>
+
+<p>The long lines may mess up your code if you copy and paste from the above source. So I recommend that you download <a href="https://github.com/cjekel/cjekel.github.io/blob/master/assets/2017-05-01/faceDetect.py">faceDetect.py</a> and the <a href="https://github.com/cjekel/cjekel.github.io/blob/master/assets/2017-05-01/presidents/">presdients</a> folder of images from <a href="https://github.com/cjekel/cjekel.github.io/blob/master/assets/2017-05-01/">here</a>.</p>
+
+<p>Now just run faceDetect.py to watch the MTCNN box the location of faces around the sample presidents.</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>python faceDetect.py</code></pre></figure>
+
+</div>
+
+<p>The code should create the following images.</p>
+
+<p><img src="https://raw.githubusercontent.com/cjekel/cjekel.github.io/master/assets/2017-05-01/faceBoxed357px-Obama_portrait_crop.jpg" alt="Obama boxed face." />
+<img src="https://raw.githubusercontent.com/cjekel/cjekel.github.io/master/assets/2017-05-01/faceBoxed360px-Donald_Trump_official_portrait.jpg" alt="Trump boxed face." />
+<img src="https://raw.githubusercontent.com/cjekel/cjekel.github.io/master/assets/2017-05-01/faceBoxed363px-George-W-Bush.jpeg" alt="Bush boxed face." />
+<img src="https://raw.githubusercontent.com/cjekel/cjekel.github.io/master/assets/2017-05-01/faceBoxed368px-Bill_Clinton.jpg" alt="Clinton boxed face." /></p>
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="/about">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Charles Jekel</span>
+            <span>Mechanical Engineer. Numerical Modeling. Optimization.</span>
+            <span>cj@jekel.me</span>
+
+            <span><a href="/">Home </a><a href="/cv"> CV </a></span>
+        </div>
+    </a>
+
+    <!-- Remove Sharing links for now:<section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://jekel.me/2017/How-to-detect-faces-using-facenet/ - Detect faces using facenet in Python by @"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>-->
+</footer>
+
+<!-- Disqus comments -->
+
+    <div class="archive readmore">
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = 'http://localhost:4000/2017/How-to-detect-faces-using-facenet/';
+            this.page.identifier = '/2017/How-to-detect-faces-using-facenet';
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//cjekel.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+
+    </div>
+
+
+<!-- Archive post list -->
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-67542734-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
