@@ -5,7 +5,7 @@ profile: true
 ---
 
 # About Me
-I'm a semi-pro traveler, burrito aficionado, Python scripter, and problem solver. Currently I'm pursuing a PhD in Mechanical Engineering at the University of Florida and Stellenbosch University. Take a look at my [CV](/cv). Some of my interests include:
+I'm a semi-pro traveler, burrito aficionado, Python scripter, and problem solver. Currently I'm pursuing a PhD in Mechanical Engineering at the University of Florida and Stellenbosch University. Take a look at my [CV](/cv) or [Google Scholar](https://scholar.google.com/citations?user=pSIRTswAAAAJ&hl=en&oi=sra). Some of my interests include:
 
 - numerical modeling
 - high performance computing
