@@ -194,7 +194,7 @@ On both of my machines a single threaded Numba run was on average faster than co
 | i5-6300u    |   100,000,000 | 0.10023 | 0.10142 |
 | i5-6300u    | 1,000,000,000 | 0.94956 | 1.03110  |
 
- I wasn't expecting this -- and I'm not sure how this black magic called Numba works... [JIT](https://en.wikipedia.org/wiki/Just-in-time_compilation) compilation still seems like magic, and I still need to do some more research into what Numba is actually doing. The speed ranks from Slowest to Fastest on the AMD-FX870: MATLAB, NumPy, gfortran, Numba single thread, gfortran -O2, Numba parallel. With the i5-6300U there is less discrepancy between MATLAB times and NumPy times (they are basically the same).
+ I wasn't expecting this -- and I'm not sure how this black magic called Numba works... I need to do some more research into what Numba is actually doing with the [JIT](https://en.wikipedia.org/wiki/Just-in-time_compilation) compilation. The speed ranks from Slowest to Fastest on the AMD-FX870: MATLAB, NumPy, gfortran, Numba single thread, gfortran -O2, Numba parallel. With the i5-6300U there is less discrepancy between MATLAB times and NumPy times (they are basically the same).
 
 I was also surprised to see with the i5-6300u that NumPy and Fortran ran at nearlly the same speed. For the 1,000,000,000 element arrays, the Fortran code was only 3.7% faster than the NumPy code.
 
