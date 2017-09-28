@@ -8,14 +8,13 @@ import time as time
 # when performing the math.
 
 runs = 10
-
 #100 loops, run time 3.9 seconds
 n = int(1e9)
 time_np_add = np.zeros(runs)
 for i in range(runs):
     # Fastest
-    X = np.ones(n, dtype=np.float)
-    Y = np.ones(n, dtype=np.float)
+    X = np.ones(n, dtype=np.int)
+    Y = np.ones(n, dtype=np.int)
     t0 = time.time()
     np.add(X, Y, out=X); np.add(X, Y, out=X)
     t1 = time.time()
@@ -23,8 +22,8 @@ for i in range(runs):
 time_2x = np.zeros(runs)
 for i in range(runs):
     # Fastest
-    X = np.ones(n, dtype=np.float)
-    Y = np.ones(n, dtype=np.float)
+    X = np.ones(n, dtype=np.int)
+    Y = np.ones(n, dtype=np.int)
     t0 = time.time()
     X = X + 2.0 * Y
     t1 = time.time()
@@ -32,8 +31,8 @@ for i in range(runs):
 time_plus_eq = np.zeros(runs)
 for i in range(runs):
     # Fastest
-    X = np.ones(n, dtype=np.float)
-    Y = np.ones(n, dtype=np.float)
+    X = np.ones(n, dtype=np.int)
+    Y = np.ones(n, dtype=np.int)
     t0 = time.time()
     X += Y; X += Y
     # np.add(X, Y, out=X); np.add(X, Y, out=X)

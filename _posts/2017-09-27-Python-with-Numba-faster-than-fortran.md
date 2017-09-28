@@ -9,6 +9,8 @@ TL;DR; Python Numba acceleration is really fast.
 
 Like faster than *Fortan fast*.
 
+*Edit September 28, 2017: I've updated the benchmark to include runs with gfortran -O2.*
+
 ![Pulls out popcorn](https://media.giphy.com/media/tFK8urY6XHj2w/giphy.gif)
 
 ### Preface
@@ -139,9 +141,60 @@ Application versions:
 | MATLAB   | R2015a        |
 | GNU Fortran | 4.8.5      |
 
+[Python folder](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27/Python) and execution:
+<div>
+{% highlight bash %}
+> python numpy_bench.py
+> python numba_bench_single.py
+> python numba_bench_par.py
+{% endhighlight %}
+</div>
+
+[MATLAB folder](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27/MATLAB) and execution:
+<div>
+{% highlight bash %}
+> matlab -nodesktop -nodisplay -r "run speedTest.m"
+{% endhighlight %}
+</div>
+
+[Fortran folder](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27/Fortran) and execution:
+<div>
+{% highlight bash %}
+> gfortran -mcmodel=medium speed1e9.f
+> ./a.out
+> gfortran speed1e8.f
+> ./a.out
+> gfortran speed1e7.f
+> ./a.out
+> gfortran speed1e6.f
+> ./a.out
+> gfortran -O2 -mcmodel=medium speed1e9.f
+> ./a.out
+> gfortran -O2 speed1e8.f
+> ./a.out
+> gfortran -O2 speed1e7.f
+> ./a.out
+> gfortran -O2 speed1e6.f
+> ./a.out
+{% endhighlight %}
+</div>
+
 ### Results
 
-On both of my machines a single threaded Numba run was on average faster than compiled Fortran code. I wasn't expecting this -- and I'm not sure how this black magic called Numba works... The speed ranks from Slowest to Fastest on the AMD-FX870: MATLAB, NumPy, Fortran, Numba single thread, Numba parallel. With the i5-6300U there is less discrepancy between MATLAB times and NumPy times (they are basically the same).
+On both of my machines a single threaded Numba run was on average faster than compiled Fortran code (without the -O2 optimization level). With the -O2 optimization level it appears the that Fortan is faster than numba single threaded, but by a very narrow margin. Below you'll see the mean run times in seconds between gfortran -O2 and the single threaded Python Numba.
+
+| CPU | array elements | gfortran -O2|  Python Numba single  |
+|----------:|:-------------:|:-------------:|:-------------:|
+| AMD FX-8370 |     1,000,000 | 0.00225 | 0.00202 |
+| AMD FX-8370 |    10,000,000 | 0.01952 | 0.01946 |
+| AMD FX-8370 |   100,000,000 | 0.19258 | 0.18895|
+| AMD FX-8370 | 1,000,000,000 | 1.90781 | 1.91261|
+| i5-6300u    |     1,000,000 | 0.00128 | 0.00098 |
+| i5-6300u    |    10,000,000 | 0.00996 | 0.01041 |
+| i5-6300u    |   100,000,000 | 0.10023 | 0.10142 |
+| i5-6300u    | 1,000,000,000 | 0.94956 | 1.03110  |
+
+ I wasn't expecting this -- and I'm not sure how this black magic called Numba works... [JIT](https://en.wikipedia.org/wiki/Just-in-time_compilation) compilation still seems like magic, and I still need to do some more research into what Numba is actually doing. The speed ranks from Slowest to Fastest on the AMD-FX870: MATLAB, NumPy, gfortran, Numba single thread, gfortran -O2, Numba parallel. With the i5-6300U there is less discrepancy between MATLAB times and NumPy times (they are basically the same).
 
 I was also surprised to see with the i5-6300u that NumPy and Fortran ran at nearlly the same speed. For the 1,000,000,000 element arrays, the Fortran code was only 3.7% faster than the NumPy code.
 
@@ -158,10 +211,12 @@ The figures bellow show the benchmarks results of the average run times on a log
 ![Machine 2 times slower]({{ "/" | relative_url  }}assets/2017-09-27/Machine2_per.png)
 
 ### Discusion about memory usage
-You can't perform this benchmark without mentioning that this Python example is a Memory HOG wen compared to Fortran and MATLAB. Python will peak at 24 GB of RAM to do the math with the 1,000,000,000 element arrays, regardless of if you use Numba or pure NumPy. This is horribly inefficient -- since Python is only storing 16 GB of data in RAM after and before the operation. MATLAB and Fortran solve this problem with a peak memory usage of 16 GB of RAM. This is 33% more RAM required to perform the array operation with Python than MATLAB or Fortran.
+You can't perform this benchmark without mentioning that this Python example is a Memory HOG wen compared to Fortran and MATLAB. Python will peak at 24 GB of RAM to do the math with the 1,000,000,000 element arrays, regardless of if you use Numba or pure NumPy. This is horribly inefficient -- since Python is only storing 16 GB of data in RAM after and before the operation. MATLAB and Fortran solve this problem with a peak memory usage of 16 GB of RAM. This is 33% more RAM required to perform the array operation with Python than MATLAB or Fortran. (Peak RAM usage was estimated using GNU time /usr/bin/time -v)
 
 ### Conclusion
 
-Wow Numba is Fast. I would have never expected to see a Python NumPy Numba array combination faster than compiled Fortran code. The cost is obviously that it takes time to port your already existing Python NumPy code to Numba. For this example, it's clear that you wouldn't benefit from porting your Python code to Fortran (well that is unless you run out of RAM). Numba's parallel acceleration worked really well on this problem, and with the 8 core AMD-FX870 Numba parallel ran 4 times faster than MATLAB code.
+Wow Numba is Fast. I would have never expected to see a Python NumPy Numba array combination as fast as compiled Fortran code. The cost is obviously that it takes time to port your already existing Python NumPy code to Numba. Numba's parallel acceleration worked really well on this problem, and with the 8 core AMD-FX870 Numba parallel ran 4 times faster than MATLAB code.
 
 Is there anything I missed? I'm looking forward to playing with Numba GPU acceleration in the future. You can take a look at the code I used to run the benchmark [here](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27).
+
+It's worthwhile to note that I did not do this benchmark with  [ATLAS](http://math-atlas.sourceforge.net/), and that using ATLAS may seriously speed up the Fortran execution of this problem (and likely speed up the Numpy and Numba execution as well).
