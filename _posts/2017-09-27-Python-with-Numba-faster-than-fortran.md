@@ -1,7 +1,7 @@
 ---
 title:  "Comparison of performance: Python NumPy and Numba, MATLAB, and Fortran"
 date:   2017-09-27 19:11:00
-description: The time it takes to perform an array math operation is compared in Python NumPy, Python NumPy with Numba accleration, MATLAB, and Fortran. The arrays are large, with one million to one billion elements. Numba is a great choice for parallel acceleration with Python and NumPy.
+description: The time it takes to perform an array operation is compared in Python NumPy, Python NumPy with Numba accleration, MATLAB, and Fortran. The arrays are large, with one million to one billion elements. Numba is a great choice for parallel acceleration of Python and NumPy.
 keywords: [Python parallel processing, NumPy vs MATLAB vs Fortran, Python vs Fortan, Python vs MATLAB, Numba NumPy acceleration, Python NumPy faster]
 ---
 
@@ -164,4 +164,4 @@ You can't perform this benchmark without mentioning that this Python example is 
 
 Wow Numba is Fast. I would have never expected to see a Python NumPy Numba array combination faster than compiled Fortran code. The cost is obviously that it takes time to port your already existing Python NumPy code to Numba. For this example, it's clear that you wouldn't benefit from porting your Python code to Fortran (well that is unless you run out of RAM). Numba's parallel acceleration worked really well on this problem, and with the 8 core AMD-FX870 Numba parallel ran 4 times faster than MATLAB code.
 
-Is there anything I missed? I'm looking forward to playing with Numba GPU acceleration in the future. You can take a look at the code I used to run the benchmark here.
+Is there anything I missed? I'm looking forward to playing with Numba GPU acceleration in the future. You can take a look at the code I used to run the benchmark [here](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27).
