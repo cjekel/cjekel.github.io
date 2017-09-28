@@ -150,7 +150,7 @@ Application versions:
 {% endhighlight %}
 </div>
 
-[MATLAB folder](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27/MATLAB) and execution:
+[MATLAB folder](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27/Matlab) and execution:
 <div>
 {% highlight bash %}
 > matlab -nodesktop -nodisplay -r "run speedTest.m"
@@ -183,7 +183,7 @@ Application versions:
 
 On both of my machines a single threaded Numba run was on average faster than compiled Fortran code (without the -O2 optimization level). With the -O2 optimization level it appears the that Fortan is faster than numba single threaded, but by a very narrow margin. Below you'll see the mean run times in seconds between gfortran -O2 and the single threaded Python Numba.
 
-| CPU | array elements | gfortran -O2|  Python Numba single  |
+| CPU | array elements | gfortran -O2 (s)|  Python Numba single (s)  |
 |----------:|:-------------:|:-------------:|:-------------:|
 | AMD FX-8370 |     1,000,000 | 0.00225 | 0.00202 |
 | AMD FX-8370 |    10,000,000 | 0.01952 | 0.01946 |
