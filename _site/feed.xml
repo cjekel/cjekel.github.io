@@ -7,6 +7,19 @@
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Comparison of performance: Python NumPy and Numba, MATLAB, and Fortran</title>
+        
+        
+          <description>&lt;p&gt;TL;DR; Python Numba acceleration is really fast.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 27 Sep 2017 15:11:00 -0400</pubDate>
+        <link>http://localhost:4000/2017/Python-with-Numba-faster-than-fortran/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/Python-with-Numba-faster-than-fortran/</guid>
+      </item>
+    
+      <item>
         <title>Comparing measures of similarity between curves</title>
         
         
@@ -123,19 +136,6 @@
         <pubDate>Tue, 31 May 2016 19:30:00 -0400</pubDate>
         <link>http://localhost:4000/2016/USA-GDP-and-GNI-per-capita-adjusted-for-inflation/</link>
         <guid isPermaLink="true">http://localhost:4000/2016/USA-GDP-and-GNI-per-capita-adjusted-for-inflation/</guid>
-      </item>
-    
-      <item>
-        <title>World Population Density Plots</title>
-        
-        
-          <description>&lt;p&gt;I enjoy to peruse the &lt;a href=&quot;https://www.cia.gov/library/publications/resources/the-world-factbook/&quot;&gt;CIA World Factbook&lt;/a&gt; from time to time. It reminds me of digging though a country specific atlas or encyclopedia. The other day I was looking at their &lt;a href=&quot;https://www.cia.gov/library/publications/resources/the-world-factbook/rankorder/rankorderguide.html&quot;&gt;country comparison&lt;/a&gt; feature and noticed they didn’t have population density available, despite having estimates for country population and area. I went ahead and calculated the population density for the countries, and then made pretty plots (check out the full &lt;a href=&quot;http://imgur.com/a/Pb1i6&quot;&gt;imgur&lt;/a&gt; gallery) with various color maps of the world’s population density.&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Wed, 06 Apr 2016 10:20:00 -0400</pubDate>
-        <link>http://localhost:4000/2016/Population-Density-Plots/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/Population-Density-Plots/</guid>
       </item>
     
   </channel>

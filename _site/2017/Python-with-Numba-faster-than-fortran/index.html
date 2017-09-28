@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Charles Jekel">
+  <meta name="description" content="The time it takes to perform an array math operation is compared in Python NumPy, Python NumPy with Numba accleration, MATLAB, and Fortran. The arrays are large, with one million to one billion elements. Numba is a great choice for parallel acceleration with Python and NumPy.">
+  
+  <meta name="keywords" content="Python parallel processing,NumPy vs MATLAB vs Fortran,Python vs Fortan,Python vs MATLAB,Numba NumPy acceleration,Python NumPy faster">
+  
+  
+  <title>Charles Jekel - jekel.me - Comparison of performance: Python NumPy and Numba, MATLAB, and Fortran</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+            <a href="/about">About </a>
+    
+
+    
+            <a href="/cv">CV </a>
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>Comparison of performance: Python NumPy and Numba, MATLAB, and Fortran</h1>
+        <h2 class="headline">September 27, 2017</h2>
+    </header>
+    <section id="post-body">
+        <p>TL;DR; Python Numba acceleration is really fast.</p>
+
+<p>Like faster than <em>Fortan fast</em>.</p>
+
+<p><img src="https://media.giphy.com/media/tFK8urY6XHj2w/giphy.gif" alt="Pulls out popcorn" /></p>
+
+<h3 id="preface">Preface</h3>
+<p>So this post was inspired by a HN comment by <a href="https://news.ycombinator.com/item?id=15123559">CS207</a> about NumPy performance. The post demonstrates a <em>trick</em> that you can use to increase NumPy’s peformance with integer arrays. Unfortunately the performance gain greatly diminishes when working with double precision floats (though it is still always faster on average). The demo and conversation that follows was interesting, and I got my first taste of <a href="https://numba.pydata.org/">Numba</a> (high performance Python acceleration libarary – which has a seamless integration with NumPy).</p>
+
+<h3 id="introudction">Introudction</h3>
+<p>I’m going to benchmark adding big arrays together in NumPy, Numba, MATLAB, and Fortran. It’ll be interesting to see what Numba’s acceleration has to offer since the majoriy of my numerical work is done with NumPy. Many of my colleges still use MATLAB (hopefully my class on Python and this post may convince them to seriously consider Python as an alternative.) Now everyone already knows that Python and MATLAB are <em>slow</em> languages, but NumPy and MATLAB are optimized for array calculations which is what Fortran is all about. And Fortran is <em>fast</em>, so a fair comparison of array operations in Numpy and MATALAB should also consider Fortran.</p>
+
+<h3 id="the-benchmark">The Benchmark</h3>
+<p>The benchmark is going to solve the following equation</p>
+<div>
+$$
+X = X + 2.0 Y
+$$
+</div>
+<p>where <span>\( X, Y  \)</span> are double precision floating point arrays with a lot of elements. I’m going to benchmark this problem for arrays between 1,000,000 and and 1,000,000,000 elements (the most I can fit into my RAM). So essentially I’m going to run functionally equivalent code in Python (either NumPy or NumPy + Numba), MATLAB, and Fortran on two different machines. Machine 1: AMD FX-8370 Eight-Core @ 4.0 GHz with 32 GB DDR3 RAM. Machine 2: ThinkPad 13 <a href="https://ark.intel.com/products/88190/Intel-Core-i5-6300U-Processor-3M-Cache-up-to-3_00-GHz">i5-6300U</a> with 32 GB DDR4 RAM. I’m not going to touch GPU acceleration in this benchmark, but I think it will be worthwhile to do so sometime.</p>
+
+<p>The benchmark will run <span>\( X = X + 2.0 Y  \)</span> 10 times, and return the average run time for 1 dimensional array sizes of 1,000,000, 10,000,000, 100,000,000, and 1,000,000,000 elements. The sample code for one run in each language is provided below.</p>
+
+<p>NumPy code:</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span> <span class="kn">as</span> <span class="nn">time</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e9</span><span class="p">))</span><span class="c"># number of data points</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">+=</span> <span class="n">Y</span><span class="p">;</span> <span class="n">X</span> <span class="o">+=</span> <span class="n">Y</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">run_time</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span></code></pre></figure>
+
+</div>
+
+<p>NumPy + Numba single threaded code (inspired by <a href="https://news.ycombinator.com/item?id=15123846">jzwinck</a>):</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numba</span>
+<span class="kn">import</span> <span class="nn">time</span> <span class="kn">as</span> <span class="nn">time</span>
+
+<span class="nd">@numba.vectorize</span><span class="p">([</span><span class="s">"float64(float64,float64)"</span><span class="p">],</span>
+    <span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">target</span><span class="o">=</span><span class="s">'cpu'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add2_par</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">y</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e9</span><span class="p">))</span><span class="c"># number of data points</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">add2_par</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">X</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">run_time</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span></code></pre></figure>
+
+</div>
+
+<p>NumPy + Numba parallel code:</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numba</span>
+<span class="kn">import</span> <span class="nn">time</span> <span class="kn">as</span> <span class="nn">time</span>
+
+<span class="nd">@numba.vectorize</span><span class="p">([</span><span class="s">"float64(float64,float64)"</span><span class="p">],</span>
+    <span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">target</span><span class="o">=</span><span class="s">'parallel'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add2_par</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">y</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e9</span><span class="p">))</span><span class="c"># number of data points</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">add2_par</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">X</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">run_time</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span></code></pre></figure>
+
+</div>
+
+<p>MATLAB Code:</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="nb">clear</span><span class="p">;</span> <span class="nb">clc</span><span class="p">;</span>
+<span class="c1">% --- single threaded run ---</span>
+<span class="n">X</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="mf">1e9</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="mf">1e9</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">t</span> <span class="o">=</span> <span class="nb">cputime</span><span class="p">;</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">Y</span><span class="p">;</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nb">cputime</span><span class="o">-</span><span class="n">t</span><span class="p">;</span></code></pre></figure>
+
+</div>
+
+<p>Fortran code:</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-fortran" data-lang="fortran"><span class="w">    </span><span class="k">program</span><span class="w"> </span><span class="n">main</span><span class="w">
+</span><span class="n">c</span><span class="w"> </span><span class="n">compile</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">GNU</span><span class="w"> </span><span class="n">Fortran</span><span class="w"> </span><span class="n">as</span><span class="w">
+</span><span class="n">c</span><span class="w"> </span><span class="n">gfortran</span><span class="w"> </span><span class="o">-</span><span class="n">mcmodel</span><span class="o">=</span><span class="n">medium</span><span class="w"> </span><span class="n">demo</span><span class="err">.</span><span class="n">f</span><span class="w">
+</span><span class="n">c</span><span class="w">
+</span><span class="n">c</span><span class="w"> </span><span class="o">-</span><span class="n">mcmodel</span><span class="o">=</span><span class="n">medium</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="n">needed</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">billion</span><span class="w"> </span><span class="n">elements</span><span class="w">
+</span><span class="n">c</span><span class="w">
+</span><span class="n">c</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">execture</span><span class="w"> </span><span class="k">program</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="err">.</span><span class="p">/</span><span class="n">a</span><span class="err">.</span><span class="k">out</span><span class="w">
+    </span><span class="k">implicit</span><span class="w"> </span><span class="k">none</span><span class="w">
+    </span><span class="kt">real</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(</span><span class="mi">1000000000</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">X</span><span class="w">
+    </span><span class="kt">real</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(</span><span class="mi">1000000000</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">Y</span><span class="w">
+    </span><span class="kt">double</span><span class="w"> </span><span class="kt">precision</span><span class="w"> </span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">t2</span><span class="w">
+    </span><span class="n">X</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="n">Y</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="k">call</span><span class="w"> </span><span class="nb">cpu_time</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="p">)</span><span class="w">
+    </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">Y</span><span class="w">
+    </span><span class="k">call</span><span class="w"> </span><span class="nb">cpu_time</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="p">)</span><span class="w">
+    </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s1">'(a)'</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="s1">'run time  in seconds: '</span><span class="w">
+    </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="w">
+    </span><span class="k">stop</span><span class="w">
+    </span><span class="k">end</span></code></pre></figure>
+
+</div>
+
+<p>Application versions:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Program</th>
+      <th style="text-align: center">Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Python</td>
+      <td style="text-align: center">2.7.13</td>
+    </tr>
+    <tr>
+      <td>NumPy</td>
+      <td style="text-align: center">1.13.1</td>
+    </tr>
+    <tr>
+      <td>Numba</td>
+      <td style="text-align: center">0.35.0</td>
+    </tr>
+    <tr>
+      <td>MATLAB</td>
+      <td style="text-align: center">R2015a</td>
+    </tr>
+    <tr>
+      <td>GNU Fortran</td>
+      <td style="text-align: center">4.8.5</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="results">Results</h3>
+
+<p>On both of my machines a single threaded Numba run was on average faster than compiled Fortran code. I wasn’t expecting this – and I’m not sure how this black magic called Numba works… The speed ranks from Slowest to Fastest on the AMD-FX870: MATLAB, NumPy, Fortran, Numba single thread, Numba parallel. With the i5-6300U there is less discrepancy between MATLAB times and NumPy times (they are basically the same).</p>
+
+<p>I was also surprised to see with the i5-6300u that NumPy and Fortran ran at nearlly the same speed. For the 1,000,000,000 element arrays, the Fortran code was only 3.7% faster than the NumPy code.</p>
+
+<p>The parallel Numba code really shines with the 8-cores of the AMD-FX870, which was about 4 times faster than MATLAB, and 3 times faster than Numpy. However the parallel Numba code was only about two times faster than Numpy with the i5-6300u, but this makes sences since this is only a two core (4 threads) processor.</p>
+
+<p>The figures bellow show the benchmarks results of the average run times on a log-log scale. Another figure shows how much slower the implementation was when compared to the Numba parallel run average.</p>
+
+<p><img src="/assets/2017-09-27/Machine1_res.png" alt="Machine 1 time results" /></p>
+
+<p><img src="/assets/2017-09-27/Machine1_per.png" alt="Machine 1 times slower" /></p>
+
+<p><img src="/assets/2017-09-27/Machine2_res.png" alt="Machine 2 time results" /></p>
+
+<p><img src="/assets/2017-09-27/Machine2_per.png" alt="Machine 2 times slower" /></p>
+
+<h3 id="discusion-about-memory-usage">Discusion about memory usage</h3>
+<p>You can’t perform this benchmark without mentioning that this Python example is a Memory HOG wen compared to Fortran and MATLAB. Python will peak at 24 GB of RAM to do the math with the 1,000,000,000 element arrays, regardless of if you use Numba or pure NumPy. This is horribly inefficient – since Python is only storing 16 GB of data in RAM after and before the operation. MATLAB and Fortran solve this problem with a peak memory usage of 16 GB of RAM. This is 33% more RAM required to perform the array operation with Python than MATLAB or Fortran.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Wow Numba is Fast. I would have never expected to see a Python NumPy Numba array combination faster than compiled Fortran code. The cost is obviously that it takes time to port your already existing Python NumPy code to Numba. For this example, it’s clear that you wouldn’t benefit from porting your Python code to Fortran (well that is unless you run out of RAM). Numba’s parallel acceleration worked really well on this problem, and with the 8 core AMD-FX870 Numba parallel ran 4 times faster than MATLAB code.</p>
+
+<p>Is there anything I missed? I’m looking forward to playing with Numba GPU acceleration in the future. You can take a look at the code I used to run the benchmark here.</p>
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="/about">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Charles Jekel</span>
+            <span>Mechanical Engineer. Numerical Modeling. Optimization.</span>
+            <span>cj@jekel.me</span>
+
+            <span><a href="/">Home </a><a href="/cv"> CV </a></span>
+        </div>
+    </a>
+
+    <!-- Remove Sharing links for now:<section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://jekel.me/2017/Python-with-Numba-faster-than-fortran/ - Comparison of performance: Python NumPy and Numba, MATLAB, and Fortran by @"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>-->
+</footer>
+
+<!-- Disqus comments -->
+
+    <div class="archive readmore">
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = 'http://localhost:4000/2017/Python-with-Numba-faster-than-fortran/';
+            this.page.identifier = '/2017/Python-with-Numba-faster-than-fortran';
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//cjekel.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+
+    </div>
+
+
+<!-- Archive post list -->
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-67542734-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
