@@ -31,7 +31,7 @@ Jekel CF, Venter G (2014), **An Inverse Method for Generating Polymer Properties
 ## Courses Taught
 2017: [Python Programming]({{ "/" | relative_url  }}assets/PythonProgrammingEML6934.pdf) - 1 credit hour graduate course - [Syllabus]({{ "/" | relative_url  }}assets/eml6934_Python_Syllabus.pdf)
 
-Created from scratch (and taught) the first Python Programming course in the MAE department at the University of Florida. The course goes from the basics of Python to covering the most popular scientific Python libraries in an effort to prepare graduate students for performing research in Python.
+Created and taught the first Python Programming course in the MAE department at the University of Florida. The course goes from the basics of Python to covering the most popular scientific Python libraries in an effort to prepare graduate students for performing research in Python.
 
 ## UTC Aerospace Systems
 2013 - 2014: Manufacturing Engineer  
