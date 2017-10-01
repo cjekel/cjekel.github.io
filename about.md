@@ -11,11 +11,13 @@ I'm a semi-pro traveler, burrito aficionado, Python scripter, and problem solver
 - high performance computing
 - multidiscipline optimization
 - non-linear finite element analysis
-- material models 
+- material models
 - inflatable structures
 
 <br />
-My technical skill set, determination, and easy going personality all combine to make me one exceptional team player. 
+I'm currently teaching a 1 credit hour course on Python Programming. Take a look at the [Syllabus]({{ "/" | relative_url  }}assets/eml6934_Python_Syllabus.pdf). Since I've been at UF many graduate students have expressed their desire to learn Python, however there are very few opportunities in my college to learn Python. Why do so many people want to learn Python? because there have been so many state-of-the-art scientific libraries developed in Python recently! This course was created to help my fellow graduate students pick up Python for their research.
+
+My technical skill set, determination, and easy going personality all combine to make me one exceptional team player.
 Send me an email at [{{site.email}}](mailto:{{ site.email }}) and let's work together on some thought-provoking problems.
 
 I use PGP. My public key is [here](https://raw.githubusercontent.com/cjekel/cjekel.github.io/master/assets/Charles.Jekel.asc).
