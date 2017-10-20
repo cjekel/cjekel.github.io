@@ -5,7 +5,7 @@ description: A Python library to fit continuous piecewise linear functions to da
 keywords: [piecewise linear fit, continuous piecewise fit, piece-wise linear fit, Python piecwise linear fit, how to fit a piecewise linear function Python]
 ---
 ##  Abstract
-I created a Python library, called [pwlf](https://github.com/cjekel/piecewiseLinearFitPython), for fitting a continuous piecewise linear function to data. What makes this library unique is that it allows the user to specify the desired number of line segments when performing piecewise linear fits. A global (heuristic) optimization algorithm is then used to find the best piecewise linear fit that uses the user-specified number of line segments.
+I created a Python library, called [pwlf](https://github.com/cjekel/piecewise_linear_fit_py), for fitting a continuous piecewise linear function to data. What makes this library unique is that it allows the user to specify the desired number of line segments when performing piecewise linear fits. A global (heuristic) optimization algorithm is then used to find the best piecewise linear fit that uses the user-specified number of line segments.
 
 
 ##  Introduction
@@ -13,15 +13,15 @@ So let's say we have data that exists in two dimensional space, where each point
 
 I took the least squares approach and coupled it to a global optimization algorithm ([differential evolution](https://docs.scipy.org/doc/scipy-0.17.0/reference/generated/scipy.optimize.differential_evolution.html)) such that a user can specify the number of line segments to fit the data with. The routine finds the best location for the line segments by minimizing the sum of the square of the residuals. The result is the optimal continuous piecewise linear function for the specified number of line segments.
 
-Feel free to download the [library](https://github.com/cjekel/piecewiseLinearFitPython).
+Feel free to download the [library](https://github.com/cjekel/piecewise_linear_fit_py).
 
 A few examples of the fits are provided bellow.
 
-![Example of a continuous piecewise linear fit to a data set.](https://raw.githubusercontent.com/cjekel/piecewiseLinearFitPython/master/examples/examplePiecewiseFit.png)
+![Example of a continuous piecewise linear fit to a data set.](https://raw.githubusercontent.com/cjekel/piecewise_linear_fit_py/master/examples/examplePiecewiseFit.png)
 
-![Example of a continuous piecewise linear fit to a sin wave](https://raw.githubusercontent.com/cjekel/piecewiseLinearFitPython/master/examples/sinWaveFit.png)
+![Example of a continuous piecewise linear fit to a sin wave](https://raw.githubusercontent.com/cjekel/piecewise_linear_fit_py/master/examples/sinWaveFit.png)
 
-![Example of a continuous piecewise linear fit to a sin wave](https://raw.githubusercontent.com/cjekel/piecewiseLinearFitPython/master/examples/sinWaveFit16.png)
+![Example of a continuous piecewise linear fit to a sin wave](https://raw.githubusercontent.com/cjekel/piecewise_linear_fit_py/master/examples/sinWaveFit16.png)
 
 
 ## Sample data
@@ -119,8 +119,8 @@ myPWLF.fitWithBreaks(x0)
 
 ## Conclusion
 
-A library was created for fitting a continuous piecewise linear function. What makes this library unique is it allows the user to perform the fit by specifying the number of line segments to use. Feel free to check out the [code](https://github.com/cjekel/piecewiseLinearFitPython) and the [examples](https://github.com/cjekel/piecewiseLinearFitPython/tree/master/examples).
+A library was created for fitting a continuous piecewise linear function. What makes this library unique is it allows the user to perform the fit by specifying the number of line segments to use. Feel free to check out the [code](https://github.com/cjekel/piecewise_linear_fit_py) and the [examples](https://github.com/cjekel/piecewise_linear_fit_py/tree/master/examples).
 
-This can be a very difficult optimization problem. I've included [an example](https://github.com/cjekel/piecewiseLinearFitPython/blob/master/examples/useCustomOptimizationRoutine.py) if you wanted to use your own/custom optimization algorithm. For problems with large amounts of data and line segments, the optimum may take awhile to find.
+This can be a very difficult optimization problem. I've included [an example](https://github.com/cjekel/piecewise_linear_fit_py/blob/master/examples/useCustomOptimizationRoutine.py) if you wanted to use your own/custom optimization algorithm. For problems with large amounts of data and line segments, the optimum may take awhile to find.
 
 If you need help using the library or have any suggestions please let me know!
