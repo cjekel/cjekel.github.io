@@ -5,7 +5,7 @@ profile: true
 ---
 
 ### Education
-2016 - 2020: University of Florida and Stellenbosch University  
+2016 - 2019: University of Florida and Stellenbosch University  
 PhD Mechanical Engineering: surrogate models and inverse analysis to characterize material parameters
 
 
@@ -44,5 +44,15 @@ platforms.
 2010 - 2013: Student Assistant IV
 
 All-purpose IT wizard. Graphic design guru.
+
+### Honors and Awards
+2016: University of Florida GSFA - four year graduate school fellowship    
+2016: Stellenbosch departmental bursary - three year PhD funding   
+2016: MEng obtained cum laude   
+2014: Wilhelm Frank Trust - research project funding (secured with team)   
+2013: Bsc obtained with honor - graduated third in class   
+2010: Reisher Family Scholarship - three year award   
+2009: Braxton Technologies Scholarship - four year award   
+
 
 {% include footer.html %}
