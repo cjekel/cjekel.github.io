@@ -20,12 +20,12 @@ $ git clone https://github.com/davidsandberg/facenet.git
 And now install.
 
 *Edit:* It appears that setup.py isn't configured properly. Rather add facenet/src to your [PYTHONPATH](https://docs.python.org/2/using/cmdline.html#envvar-PYTHONPATH).
-<div>
+<!--<div>
 {% highlight bash %}
 $ cd facenet
 $ sudo python setup.py install
 {% endhighlight %}
-</div>
+</div>-->
 
 First you must be sure that you have all have  installed all of the Python requirements which are: tensorflow==1.0, scipy, scikit-learn, opencv-python, h5py, matplotlib, Pillow,  requests, and psutil. I'm running the latest tensorflow=1.1.0-rc2 and facenet appears to be working with no problems. Now you should validate facenet using the LFW dataset to verify that your installation is working  properly. You can follow [these](https://github.com/davidsandberg/facenet/wiki/Validate-on-lfw) instructions.
 
