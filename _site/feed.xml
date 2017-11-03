@@ -49,8 +49,7 @@
         <title>Fitting a piecewise linear function to data</title>
         
         
-          <description>&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;/h2&gt;
-&lt;p&gt;I created a Python library, called &lt;a href=&quot;https://github.com/cjekel/piecewiseLinearFitPython&quot;&gt;pwlf&lt;/a&gt;, for fitting a continuous piecewise linear function to data. What makes this library unique is that it allows the user to specify the desired number of line segments when performing piecewise linear fits. A global (heuristic) optimization algorithm is then used to find the best piecewise linear fit that uses the user-specified number of line segments.&lt;/p&gt;
+          <description>&lt;p&gt;&lt;em&gt;Edit&lt;/em&gt; 2017-11-03 Now you can install with pip!&lt;/p&gt;
 
 </description>
         
