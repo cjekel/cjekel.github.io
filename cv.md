@@ -17,9 +17,9 @@ Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyes
 Bsc Mechanical Engineering: 3.72/4.00 with honor
 
 ### Publications
-Charles F. Jekel, Gerhard Venter, Martin P. Venter, **Modeling PVC-coated polyester as a hypoelastic non-linear orthotropic material**, *Composite Structures*, Volume 161, 1 February 2017, Pages 51-64, ISSN 0263-8223, [doi:10.1016/j.compstruct.2016.11.019](http://dx.doi.org/10.1016/j.compstruct.2016.11.019).
+Charles F. Jekel, Gerhard Venter, Martin P. Venter, **Modeling PVC-coated polyester as a hypoelastic non-linear orthotropic material**, *Composite Structures*, Volume 161, 1 February 2017, Pages 51-64, ISSN 0263-8223, [doi:10.1016/j.compstruct.2016.11.019](http://dx.doi.org/10.1016/j.compstruct.2016.11.019). [View pdf]({{ "/" | relative_url  }}assets/papers/JekelModelingPVC-CoatedPolyester.pdf).
 
-Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining a hyperelastic non-linear orthotropic material model via inverse bubble inflation analysis**, *Structural and Multidisciplinary Optimization*, pages 1-9, 2016, ISSN 1615-1488, [doi:10.1007/s00158-016-1456-8](http:////dx.doi.org/10.1007/s00158-016-1456-8).
+Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining a hyperelastic non-linear orthotropic material model via inverse bubble inflation analysis**, *Structural and Multidisciplinary Optimization*, pages 1-9, 2016, ISSN 1615-1488, [doi:10.1007/s00158-016-1456-8](http:////dx.doi.org/10.1007/s00158-016-1456-8). [View pdf]({{ "/" | relative_url  }}assets/papers/JekelInverseBubbleInflationFinal.pdf).
 
 ### Conference Presentations
 Jekel CF, Venter G, Venter MP (2015), **Obtaining Material Models for use in Finite Element Analyses of PVC-coated polyester via an Inverse Bubble Inflation Method** [abstract], CIMNE VII International Conference on Textile Composites and Inflatable Structures, Barcelona, Spain.
