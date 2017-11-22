@@ -129,7 +129,7 @@ $$
     <span class="n">A</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">spY</span><span class="o">*</span><span class="mi">2</span>
     <span class="n">A</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">spZ</span><span class="o">*</span><span class="mi">2</span>
     <span class="n">A</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    
+
     <span class="c">#   Assemble the f matrix</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">spX</span><span class="p">),</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">f</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">spX</span><span class="o">*</span><span class="n">spX</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">spY</span><span class="o">*</span><span class="n">spY</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">spZ</span><span class="o">*</span><span class="n">spZ</span><span class="p">)</span>
@@ -138,7 +138,7 @@ $$
     <span class="c">#   solve for the radius</span>
 	<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">+</span><span class="n">C</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
     <span class="n">radius</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    
+
     <span class="k">return</span> <span class="n">radius</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span></code></pre></figure>
 
 <p>We can easily fit a sphere to our original data set using this function. The resulting sphere of best fit plotted with the original data points can be seen in the following image.</p>
@@ -149,7 +149,7 @@ $$
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
 <span class="n">rcParams</span><span class="p">[</span><span class="s">'font.family'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'serif'</span>
-<span class="c">#   3D plot of the </span>
+<span class="c">#   3D plot of the</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="n">r</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span> <span class="o">=</span> <span class="n">sphereFit</span><span class="p">(</span><span class="n">correctX</span><span class="p">,</span><span class="n">correctY</span><span class="p">,</span><span class="n">correctZ</span><span class="p">)</span>
@@ -177,6 +177,22 @@ $$
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">'steelBallFitted.pdf'</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">'pdf'</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_extra_artists</span><span class="o">=</span><span class="p">[</span><span class="n">zlabel</span><span class="p">],</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">'tight'</span><span class="p">)</span></code></pre></figure>
 
 <p>Please let me know if you found this post useful!</p>
+
+<p>Please cite this work as:</p>
+
+<figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex">@book{Jekel2016,
+ author = {Jekel, Charles F},
+ booktitle = {Obtaining non-linear orthotropic material
+              models for pvc-coated polyester via inverse
+              bubble inflation},
+ chapter = {Appendix A},
+ organization = {Stellenbosch University},
+ pages = {83--87},
+ title = {Digital Image Correlation on Steel Ball},
+ url = {http://hdl.handle.net/10019.1/98627},
+ year = {2016}
+}</code></pre></figure>
+
 
     </section>
 </article>

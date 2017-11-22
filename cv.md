@@ -11,7 +11,7 @@ PhD Mechanical Engineering: surrogate models and inverse analysis to characteriz
 
 2014 - 2016: Stellenbosch University  
 MEng Mechanical Engineering: cum laude  
-Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyester via inverse bubble inflation.** [http://hdl.handle.net/10019.1/98627](http://hdl.handle.net/10019.1/98627)
+Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyester via inverse bubble inflation.** [http://hdl.handle.net/10019.1/98627](http://hdl.handle.net/10019.1/98627). [View pdf]({{ "/" | relative_url  }}assets/papers/jekel_obtaining_2016.pdf).
 
 2009 - 2013: University of Colorado - Colorado Springs  
 Bsc Mechanical Engineering: 3.72/4.00 with honor

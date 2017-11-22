@@ -65,7 +65,7 @@ $$
 $$
 </div>
 
-We now have an over-determined system suitable for the least squares method of a spherical fit. The new equation is seen below. The fit determines the best <span>\\( \vec{c} \\)</span> from the data points. We can then calculate the sphere's radius using the terms in the <span>\\( \vec{c} \\)</span>. 
+We now have an over-determined system suitable for the least squares method of a spherical fit. The new equation is seen below. The fit determines the best <span>\\( \vec{c} \\)</span> from the data points. We can then calculate the sphere's radius using the terms in the <span>\\( \vec{c} \\)</span>.
 
 <div>
 $$
@@ -90,7 +90,7 @@ def sphereFit(spX,spY,spZ):
     A[:,1] = spY*2
     A[:,2] = spZ*2
     A[:,3] = 1
-    
+
     #   Assemble the f matrix
     f = np.zeros((len(spX),1))
     f[:,0] = (spX*spX) + (spY*spY) + (spZ*spZ)
@@ -99,7 +99,7 @@ def sphereFit(spX,spY,spZ):
     #   solve for the radius
 	t = (C[0]*C[0])+(C[1]*C[1])+(C[2]*C[2])+C[3]
     radius = math.sqrt(t)
-    
+
     return radius, C[0], C[1], C[2]
 {% endhighlight %}
 
@@ -111,7 +111,7 @@ The above 3D plot of the fitted sphere and data was created using the following 
 {% highlight python %}
 from matplotlib import rcParams
 rcParams['font.family'] = 'serif'
-#   3D plot of the 
+#   3D plot of the
 import matplotlib.pyplot as plt
 
 r, x0, y0, z0 = sphereFit(correctX,correctY,correctZ)
@@ -140,3 +140,19 @@ plt.savefig('steelBallFitted.pdf', format='pdf', dpi=300, bbox_extra_artists=[zl
 {% endhighlight %}
 
 Please let me know if you found this post useful!  
+
+Please cite this work as:
+{% highlight bibtex %}
+@book{Jekel2016,
+ author = {Jekel, Charles F},
+ booktitle = {Obtaining non-linear orthotropic material
+              models for pvc-coated polyester via inverse
+              bubble inflation},
+ chapter = {Appendix A},
+ organization = {Stellenbosch University},
+ pages = {83--87},
+ title = {Digital Image Correlation on Steel Ball},
+ url = {http://hdl.handle.net/10019.1/98627},
+ year = {2016}
+}
+{% endhighlight %}
