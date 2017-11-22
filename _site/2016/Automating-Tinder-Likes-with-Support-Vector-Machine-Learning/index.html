@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Charles Jekel">
+  <meta name="description" content="I recorded over 8,000 Tinder likes/dislikes so that I could use machine learning to predict whether I would like or dislike a new Tinder profile">
+  
+  <meta name="keywords" content="Automating Tinder,support vector machines,SVM Tinder,histogram SVM,image classification,Tinder machine learning,machine learning,scikit-learn,Python">
+  
+  
+  <title>Charles Jekel - jekel.me - Automating Tinder Likes with Support Vector Machine Learning</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+            <a href="/about">About </a>
+    
+
+    
+            <a href="/cv">CV </a>
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+   
+        <h1>Automating Tinder Likes with Support Vector Machine Learning</h1>
+        <h2 class="headline">December 19, 2016</h2>
+    </header>
+    <section id="post-body">
+        <h3 id="update">Update</h3>
+<p>After some careful consideration, the method described here doesn’t work. Instead of focusing on the prediction accuracy for the entire sample, I should actually focus on the Like accruacy for model selection. The reason is that if the number of <em>Dislikes</em> are much greater than the number of <em>Likes</em> then the modeling process will have bias towards <em>Dislikes</em> and be more likely to get would be <em>Likes</em> incorrect. I’ll work more on this and post an update when ready.</p>
+
+<h3 id="abstract">Abstract</h3>
+<p>A support vector machine was used to perform image classification on 8,500 Tinder profiles. Entire profiles were recorded using a custom-built application that used the <a href="https://github.com/charliewolf/pynder">pynder</a> Python library. Each profile considered has a binary choice, either a <em>Like</em> or a <em>Dislike</em>. The recorded profiles were  manually liked or disliked based on the users’s preference. Images were processed into 32 bin histograms, and the bin intensities were used as the variables for the classification problem. Using 10-fold cross validation a support vector machine was selected with an estimated prediction accuracy of 71%. The support vector machine was then introduced to the custom application such that Tinder likes and dislikes can be administered according to the user’s historical preference. The result is a bot capable of automatically liking Tinder profiles, without any user intervention, with an estimated 71% accuracy.</p>
+
+<h3 id="introduction">Introduction</h3>
+<p>Tinder is the most popular online dating application for mobile devices. Like many other online dating applications, users can set basic preferences (distance, age, gender) for which Tinder profiles they will browse. Profiles are displayed to the user one at a time, containing a cover profile image, name, age, short bio, and mutual friends. The user can choose to view additional images of the profile if desired. The user must either <em>Like</em> or <em>Dislike</em> the profile, at which point the user will be presented with another profile. The process is repeated almost indefinitely. The image below was taken from the Google Play store and demonstrates the Tinder user interface for browsing profiles. When two users <em>Like</em> each other, they will be notified and allowed to message each other if they  desire to do so. Tinder is often criticized for it’s shallow online dating selection, and has been demonized as a <em>sex app</em>.
+<img src="/assets/2016-12-19/tinderApplication.png" alt="Fair-use image demo of the Tinder application, taken from the Google Play store on 12-18-2016." /></p>
+
+<p>In my opinion Tinder is not a perfect online dating solution. Personally I would like to have access to statistical analysis of the profiles browsed. However my biggest grievance with Tinder is the amount of time required to <em>Like</em> and <em>Dislike</em> profiles. As a busy individual online dating is meant to be a time-friendly solution. However manually browsing profiles, reading short bio’s, and browsing for additional pictures takes a significant amount of time. It feels like such a waste just to <em>Like</em> a user who may not <em>Like</em> you back. It doesn’t appear that Tinder presents you with profiles that you are more likely to <em>Like</em> based on your selection history (and if Tinder is doing so then they are doing a very poor job at it!).</p>
+
+<p>A while ago, I read a very interesting 2015 blog <a href="http://crockpotveggies.com/2015/02/09/automating-tinder-with-eigenfaces.html">post</a> by Justin Long. Justin described how he created a program to completely automate everything on Tinder. The program uses artificial neural networks and eigenfaces to predict user’s likes or dislikes to a claimed 80% accuracy. I have my personal doubts about the claimed accuracy of Justin’s method. To accurately train the neural networks would require a significantly large database, and obtaining that database would require a significant time contribution from the user. Especially considering the eigenface method may introduce a large number of variables. Though Justin went even one step further and included an auto messaging bot that would automatically send a few messages to a new match. Overall I was extremely impressed with Justin’s work and saved the blog post to reference for a later date.</p>
+
+<p>I knew that If I was to ever use Tinder I would not be a standard user, and I would want to implement some form of automation using machine learning similar to Justin’s work. Additionally with online dating, I would want to perform some sort of statical analysis to determine if my online dating profile and messages were working. With this in mind, I needed to create an application that would record absolutely everything from each Tinder profile I browsed.</p>
+
+<p>There is a Python library called <a href="https://github.com/charliewolf/pynder">pynder</a> which can be used to access Tinder’s reverse engineered API. I used pynder to create a Python application to <em>Like</em> and <em>Dislike</em> Tinder profiles, recording every detail from each profile during the process. I wanted to get up to 10,000 profiles as I figured the more data I’d have, the better my classification model could be. However I only managed to browse 8,500 profiles before finding a pretty awesome girlfriend along the way. It would take me about 1 hour to go through 100 profiles. So with that estimate I spent 85 hours looking at Tinder profiles (remember I said that Tinder takes up a lot of time), over the course of five or six weeks.</p>
+
+<p>My goal was to automate the <em>Like</em> and <em>Dislike</em> process of Tinder profiles with a machine learning classification model. I wasn’t interested in creating a messaging bot, as I like to come up with a unique first message on Tinder. Image classification has been a popular field in machine learning, with a variety of techniques. I stumbled upon a 1999 article by Chapelle et al. [1] which described a process of using histograms to for support vector machines to perform image classification. As oppose to the eigienface method used by Jason, I thought the histograms would be an easier method to initially work with. Not to mention that it is possible that I would <em>Like</em> a user profile that did not have a picture of a face in it. Additionally I’ve been waiting for an interesting problem to apply support vector machines to.</p>
+
+<p>Support vector machines were used to create an image classification model to <em>Like</em> or <em>Dislike</em> Tinder profiles based on profiles recorded on a custom application. This post details how profile images were processed into 32 bin histograms. The intensity of each bin was used as the variables for the classification problem. <a href="http://scikit-learn.org">Sci-kit</a> learn by Pedregosa et al. [2] is a Python machine learning library which was used to create the <a href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC">support vector classification</a> model. The model was then implemented in the custom appellation to automatically <em>Like</em> or <em>Dislike</em> Tinder profiles with an estimated 71% accuracy.</p>
+
+<h3 id="image-processing">Image processing</h3>
+<p>The dataset that was acquired contains <em>Likes</em> and <em>Dislikes</em> for 8,500 Tinder profiles. Each profile has at least one 640x640 px image, with several profiles having multiple 640x640 px images. Thirty-two bin histograms were created for each image in the dataset using Python.</p>
+
+<p><a href="https://www.scipy.org/">Scipy</a>’s <a href="https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.misc.imread.html#scipy.misc.imread">misc.imread</a> was used to read the image files as arrays into Python. For each pixel there is red, green, and blue value that is between 0 and 255. In order to use one histogram, I converted images from RGB to grayscale such that each pixel had a unique value between 0 and 255. Then using <a href="http://www.numpy.org/">NumPy</a> it is easy to create a 32 bin histogram of the image. Why 32 bins? No reason in particular, but I figured it would be a promising starting point. Also it turns out that 32 squared was less than the number of data points in my dataset. I’ve provided some Python code to create the histograms from the collected profile images below.</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
+
+<span class="c">#	a function to convert a RGB pixel to grayscale</span>
+<span class="k">def</span> <span class="nf">rgb2gray</span><span class="p">(</span><span class="n">rgb</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">rgb</span><span class="p">[</span><span class="o">...</span><span class="p">,:</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.299</span><span class="p">,</span> <span class="mf">0.587</span><span class="p">,</span> <span class="mf">0.114</span><span class="p">])</span>
+
+<span class="c">#	histogram bin spacing</span>
+<span class="n">binSpacing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">33</span><span class="p">)</span>
+
+<span class="c">#	read the image file</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'TinderProfileImage.jpg'</span><span class="p">)</span>
+<span class="c">#	convert the image to grayscale</span>
+<span class="n">gray</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> 
+
+<span class="c">#	create a 32 bin histogram</span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">binSpacing</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p>It may not necessary be clear as to what an image looks like as a 32 bin histogram, so I’ve processed this <a href="https://www.flickr.com/photos/a_peach/8631368705/in/photolist-e9J2cP-pzme9k-keFshf-dAsmE-9pgKCb-ajibvo-9YpP1Q-bngNfo-3b8e9-8oiqjq-bATasW-bkPbyj-dbHKsY-3s48b1-apVxVv-9YmU7z-9aRtNF-apYgyS-hvv58J-7MoarF-3TA9D-9BtV9r-dp8PV-7E6H1j-9JYTEB-89PL6y-bnmdWh-752GNx-8qMXP9-e7kyTK-neKtJr-bnmeL9-6sBnu5-bcTLSk-e9VHy4-4bfpkr-3eS6VM-5iC2WD-dUwxVB-f5fGu5-NnRT7-bGTHQe-7ya8BG-5RDcj8-dvhHeG-bpvSmo-6w2BtS-2wZ1kK-bUG8aj-zczBNm">dog image</a>. 
+<img src="/assets/2016-12-19/dog.jpg" alt="Image of a Dog." />
+Which becomes the following histogram.
+<img src="/assets/2016-12-19/dogHistogram.png" alt="Histogram of the dog image." />
+As you can see, the histogram looks nothing like the image of the dog. The theory in this work is that I have enough data to find a pattern in the histograms of Tinder profiles that I have <em>Liked</em>, to successfully predict future <em>Likes</em>.</p>
+
+<p>Now an interesting problem is how to deal with the multiple photos of each Tinder profile. One simple solution would be to just take the first picture from each  user. I chose not do this, because with my custom application I saw every profile image before decided to either <em>Like</em> or <em>Dislike</em>. I thought of two different methods to combine multiple images for a single user. The first would take the average of each particular bin’s value, thus creating a resulting average histogram. The second method rather summed the values of each bin to create a single summed histogram. Both the average and sum methods were used with a support vector machine to create an image classification model, however no difference was observed between the two methods.</p>
+
+<h3 id="support-vector-machine">Support vector machine</h3>
+<p>The sci-kit learn Python library [2] was used to create the support vector machine. Separate classification models were created for the values of the histogram bins from the average and sum method, to understand if one method of dealing with multiple images was superior to the other. The variables used for the classification model are the values of the histogram bins, while the output is either a <em>Like</em> or <em>Dislike</em>.</p>
+
+<p>Sci-kit learn’s <a href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC">support vector classification</a> supports linear, polynomial, radial basis function, sigmoid, and custom kernel functions. For this initial investigation, support vector machines were created for the built-in kernel functions. It may be interesting to apply a custom kernel function to this image classification problem in the future.</p>
+
+<p>If we just fit the default support vector machine (which uses the radial basis functions) to the dataset as-is, we find that the classification model is capable of predicting over 99.9% of the Tinder profiles I’ve browsed. This was exciting news, however my model is extremely over fitting the data!</p>
+
+<p>There are two options I explored simultaneously to deal with over fitting. Scaling the variable values and fine tuning the C penalty parameter in the support vector machine. The lower the C value, the smoother the classification surface. The higher the C value, the more the model is likely to attempt to classify each individual point if possible. By scaling the variables and adjusting the C parameter, I was able to find a model that matched 90% of the Tinder profiles I browsed. However 10-fold cross validation demonstrated that the parameters for this model generalized very poorly, having a 10-fold mean prediction accuracy of 63.2% with a standard deviation of 0.99%.</p>
+
+<p>The goal of classification problems is to create a model that generalizes the entire population well. In this case instead of the entire population, we have only a limited sample of 8,500 data points. It is an ever-so-delicate balancing act to find a model that doesn’t over fit the data while being able to generalize the entire population well.</p>
+
+<p>I continued to tweak my variable scaling technique and C penalty parameter in hopes of finding a support vector classification model capable of generalizing my dataset. A differential optimization was run with a population of 20 on different kernel functions, attempting to maximize the 10-fold cross validation mean prediction accuracy. The hope was that an optimal C penalty parameter could be found.</p>
+
+<h3 id="results">Results</h3>
+<p>The results of the differential evolution optimizations demonstrated some important findings. The kernel function chosen didn’t seem to affect the accuracy of the support vector classification, mostly due to the fact that my resultant model was nearly a linear cut through the design space. Additionally it appears that the sum and mean histogram methods produce equivalent classification models. In Table 1. the average 10-fold cross validation prediction accuracy is shown, and it can be seen that all models are equivalent with 71.05% prediction accuracy. Table 2. shows the optimally determined C penalty parameters for each model, which in my case was a value in the hundreds.</p>
+
+<p>Table 1. Average 10-fold cross validation prediction accuracy in percent.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Kernel function</td>
+      <td>Average histogram</td>
+      <td>Sum histogram</td>
+    </tr>
+    <tr>
+      <td>Linear</td>
+      <td>71.05</td>
+      <td>71.05</td>
+    </tr>
+    <tr>
+      <td>Polynomial</td>
+      <td>71.05</td>
+      <td>71.05</td>
+    </tr>
+    <tr>
+      <td>Radial Basis</td>
+      <td>71.05</td>
+      <td>71.05</td>
+    </tr>
+    <tr>
+      <td>Sigmoid</td>
+      <td>71.05</td>
+      <td>71.05</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 2. Optimal determined C penalty parameter.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Kernel function</td>
+      <td>Average histogram</td>
+      <td>Sum histogram</td>
+    </tr>
+    <tr>
+      <td>Linear</td>
+      <td>633</td>
+      <td>228</td>
+    </tr>
+    <tr>
+      <td>Polynomial</td>
+      <td>825</td>
+      <td>338</td>
+    </tr>
+    <tr>
+      <td>Radial Basis</td>
+      <td>448</td>
+      <td>225</td>
+    </tr>
+    <tr>
+      <td>Sigmoid</td>
+      <td>1619</td>
+      <td>836</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It is not recommended to use differential evolution to determine the optimal C penalty parameter. In my experience the exact value of C did not greatly affect the results of the support vector classification model. Rather focus on finding what order of magnitude works as a stable C value. If finding an optimal C value is very important to you, I recommend using a gradient optimization method (BFGS). It is suspected that much fewer function evaluations would have been performed had I used BFGS instead of differential evolution. This is because gradient optimization can find a suitable search direction for a one variable problem with only two function evaluations.</p>
+
+<p>The final chosen support vector classification model was able to match 71.05% of my <em>Likes</em> and <em>Dislikes</em> of the 8,500 Tinder profiles I browsed. The model had a mean 10-fold cross validation prediction accuracy of 71.05%, with a standard deviation of 1.5%. With some very generous assumptions, my 95% confidence interval on my model’s accuracy is 71.05% ± 3%. It was assumed that the model generalizes the entire population well, since the cross validation accuracy was very similar to accuracy of the entire dataset. Though the actual accuracy of the model on the entire population will always be unknown. Implementation of the support vector machine to automatically <em>Like</em> and <em>Dislike</em> Tinder profiles based on my personal preference is simple task with the custom application.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+<p>A custom application was built using the <a href="https://github.com/charliewolf/pynder">pynder</a> Python library to record 8,500 <em>Likes</em> and <em>Dislikes</em> on Tinder profiles. Using a Histogram approach inspired by the one described in [1], support vector machines were used to perform image classification on the recorded Tinder profile images. The classification model predicts whether I’ll personally <em>Like</em> or <em>Dislike</em> a profile to about 71% accuracy. I believe that such a high prediction accuracy demonstrates that the method was successful. Very little effort is required to implement the support vector classification model into the custom application, such that the model can <em>Like</em> profiles based on my historical preference.</p>
+
+<p>This was just an initial investigation, with many avenues to explore for future work. Since the resulting support vector machine was very linear, simplifying the classification model to a very simple linear model may have great benefits. For instance, a simpler model would be quicker at training and testing.</p>
+
+<p>Variable scaling is incredibly important, and the final model wouldn’t be possible without some form of scaling. It would be interesting to perform a sensitivity analysis on the histogram bin variables, to determine which bins are the most important. Additionally it will be interesting to determine how many histogram bins is optimal for this particular image classification problem. I suspect it will be a great point o interest to investigate how many data points are required to successfully apply this method.</p>
+
+<p>I’m very interested in working with this data to create an even better model. If you have any ideas on what I could have done better, please get in touch. I’ll be very happy to share this data, and to collaborate on further research!</p>
+
+<h3 id="references">References</h3>
+<p>[1] O. Chapelle, P. Haffner and V. N. Vapnik, <strong>Support vector machines for histogram-based image classification</strong>, in <em>IEEE Transactions on Neural Networks</em>, vol. 10, no. 5, pp. 1055-1064, Sep 1999. <a href="http://dx.doi.org/10.1109/72.788646">doi: 10.1109/72.788646</a></p>
+
+<p>[2] F. Pedregosa, G. Varoquaux, A. Gramfort , V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer, R. Weiss, V. Dubourg, J. Vanderplas, A. Passos, D. Cournapeau, M. Brucher, M. Perrot, É. Duchesnay, <strong>Scikit-learn: Machine Learning in Python</strong>, <em>Journal of Machine Learning Research</em>, Volume 12, pages 2825–2830, 2011.</p>
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="/about">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Charles Jekel</span>
+            <span>Mechanical Engineer. Numerical Modeling. Optimization.</span>
+            <span>cj@jekel.me</span>
+
+            <span><a href="/">Home </a><a href="/cv"> CV </a></span>
+        </div>
+    </a>
+
+    <!-- Remove Sharing links for now:<section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://jekel.me/2016/Automating-Tinder-Likes-with-Support-Vector-Machine-Learning/ - Automating Tinder Likes with Support Vector Machine Learning by @"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>-->
+</footer>
+
+<!-- Disqus comments -->
+
+    <div class="archive readmore">
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = 'http://localhost:4000/2016/Automating-Tinder-Likes-with-Support-Vector-Machine-Learning/';
+            this.page.identifier = '/2016/Automating-Tinder-Likes-with-Support-Vector-Machine-Learning';
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//cjekel.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+
+    </div>
+
+
+<!-- Archive post list -->
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-67542734-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

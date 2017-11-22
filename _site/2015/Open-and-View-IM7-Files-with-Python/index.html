@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Charles Jekel">
+  <meta name="description" content="How to open and view LaVision DaVis IM7 files using the wrapper ReadIM and Python">
+  
+  <meta name="keywords" content="Python,LaVision,open IM7 files,how to,open IM7 files in Python">
+  
+  
+  <title>Charles Jekel - jekel.me - Open and View IM7 Files with Python</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+            <a href="/about">About </a>
+    
+
+    
+            <a href="/cv">CV </a>
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+   
+        <h1>Open and View IM7 Files with Python</h1>
+        <h2 class="headline">September 18, 2015</h2>
+    </header>
+    <section id="post-body">
+        <p>This post will describe how to open and view LaVision DaVis IM7 files in Python.</p>
+
+<p>Digital Image Correlation (DIC) is a non-intrusive optical tool for providing displacement values and strain fields. I use DIC to measure the full displacement field when I test my material samples. In my department, we use the hardware and software of <a href="http://www.lavision.de/en/index.php">LaVision</a> GMBH for all of our DIC needs. The images captured by the LaVision hardware for my DIC projects are stored in IM7 files. Unfortunately IM7 files can only be opened in DaVis (Unless you are a MATLAB user and can take advantage of <a href="http://www.lavision.de/en/news/2014/2244/">ReadIMX</a>). It would be nice to open IM7 files, to view the images stored inside, without opening the DaVis software.</p>
+
+<p>Well thanks to <a href="https://bitbucket.org/fleming79/">Alan Fleming</a>, there is now a tool to read IM7 files in Python. <a href="https://pypi.python.org/pypi/ReadIM/0.6.5">ReadIM</a> is a wrapper that works with the C++ libraries provided by LaVision GMBH. You should be able to install ReadIM with pip on Python versions 2.7, 3.3 and 3.4. If pip fails, you’ll have to follow the build instructions <a href="https://bitbucket.org/fleming79/readim">here</a>.</p>
+
+<p>To install with pip simply run the following line in your terminal.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip install ReadIM</code></pre></figure>
+
+</div>
+
+<p>I’m using Python 2.7, and the pip install was successful. We can open an IM7 file in Python with the following commands, where myDavis.im7 is the IM7 file that I’d like to open. We won’t be working with vbuff. Since Mr. Fleming informs us that memory cleanup is not automatic, we’ll have to manually delete vbuff.</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">ReadIM</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">vbuff</span><span class="p">,</span> <span class="n">vatts</span> <span class="o">=</span> <span class="n">ReadIM</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">get_Buffer_andAttributeList</span><span class="p">(</span><span class="s">'myDaVis.im7'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v_array</span><span class="p">,</span> <span class="n">vbuff</span> <span class="o">=</span> <span class="n">ReadIM</span><span class="o">.</span><span class="n">extra</span><span class="o">.</span><span class="n">buffer_as_array</span><span class="p">(</span><span class="n">vbuff</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">del</span><span class="p">(</span><span class="n">vbuff</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p>The contents of the IM7 file can now be found in the numpy array v_array. By inspecting the shape of v_array, we’ll gain some insight onto how the images are stored.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">v_array</span><span class="p">)</span>
+<span class="p">(</span><span class="il">2L</span><span class="p">,</span> <span class="il">2456L</span><span class="p">,</span> <span class="il">2058L</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p>We see the shape of v_array to be 2L, 2456L, 2058L. I use two 5-megapixel cameras in my DIC setup. So the shape of v_array is starting to make sense. ReadIM has read my IM7 file as a multidimensional numpy array. In my case the array is stored in the following arrangement: [Camera #][Pixels Y][Pixels X]. If we multiply the number of pixels in the Y and X directions, we’ll see over 5 million pixels from my 5-megapixel cameras.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="mi">2456</span> <span class="o">*</span> <span class="mi">2058</span>
+<span class="mi">5054448</span></code></pre></figure>
+
+</div>
+
+<p>We can now create a plot of the first camera image stored in the IM7 file with matplotlib in Python. Since DIC uses contrast values, it makes sense to plot the image as greyscale by setting the cmap parameter.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="kn">as</span> <span class="nn">cm</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">v_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">Greys_r</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+</div>
+
+<p>The above code generates the following image.
+<img src="/assets/2015-09-18/16bitIM7.png" alt="8bit IM7 Plotted in python with matplotlib" /></p>
+
+<p>Everything is really dark, and we can’t make out the test specimen in the generated image. Let’s take a look at v_array for the first camera image to give us a clue as to why the image is so dark.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">v_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">22</span><span class="p">,</span>  <span class="mi">31</span><span class="p">,</span>  <span class="mi">31</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span>  <span class="mi">99</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">29</span><span class="p">,</span>  <span class="mi">23</span><span class="p">,</span>   <span class="mi">9</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">143</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">42</span><span class="p">,</span>  <span class="mi">19</span><span class="p">,</span>   <span class="mi">4</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span>
+       <span class="o">...</span><span class="p">,</span>
+       <span class="p">[</span> <span class="mi">19</span><span class="p">,</span>  <span class="mi">19</span><span class="p">,</span>  <span class="mi">28</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">147</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">23</span><span class="p">,</span>  <span class="mi">26</span><span class="p">,</span>  <span class="mi">22</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">159</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">16</span><span class="p">,</span>  <span class="mi">19</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="mi">148</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">uint16</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p>We can see the intensity values for each of the X and Y pixels are stored as 16 bit integers. For recording purposes, we want the largest bit size to capture the entire intensity spectrum as best as possible. However, the 16 bit integers may make it difficult to decipher what exactly is in the image. We can convert from a 16 bit to an 8 bit integer array, and then plot the 8 bit array to view the camera image.</p>
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">img8</span> <span class="o">=</span> <span class="n">v_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'uint8'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img8</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">Greys_r</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+</div>
+
+<p>The above code creates a new 8 bit integer array from existing 16 bit integer array. By plotting the 8 bit array, we get the following image.
+<img src="/assets/2015-09-18/8bitIM7.png" alt="8bit IM7 Plotted in python with matplotlib" /></p>
+
+<p>ReadIM has allowed me to open and view my IM7 files from my DIC projects without needing to open DaVis. If I ever wanted to view all of the IM7 images of a project, I could easily create a script that could loop through all of the IM7 files in a directory. The script could then export each camera image in a traditional file format.</p>
+
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="/about">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Charles Jekel</span>
+            <span>Mechanical Engineer. Numerical Modeling. Optimization.</span>
+            <span>cj@jekel.me</span>
+
+            <span><a href="/">Home </a><a href="/cv"> CV </a></span>
+        </div>
+    </a>
+
+    <!-- Remove Sharing links for now:<section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://jekel.me/2015/Open-and-View-IM7-Files-with-Python/ - Open and View IM7 Files with Python by @"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>-->
+</footer>
+
+<!-- Disqus comments -->
+
+    <div class="archive readmore">
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = 'http://localhost:4000/2015/Open-and-View-IM7-Files-with-Python/';
+            this.page.identifier = '/2015/Open-and-View-IM7-Files-with-Python';
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//cjekel.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+
+    </div>
+
+
+<!-- Archive post list -->
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-67542734-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

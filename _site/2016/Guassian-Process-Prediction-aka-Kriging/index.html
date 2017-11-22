@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Charles Jekel">
+  <meta name="description" content="A simple one variable Kriging example utilizing scikit-learn to model a known function">
+  
+  <meta name="keywords" content="Python,scikit-learn,gaussian process,kriging how to">
+  
+  
+  <title>Charles Jekel - jekel.me - Gaussian Process Prediction (aka Kriging)  with Different Correlation Functions</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+            <a href="/about">About </a>
+    
+
+    
+            <a href="/cv">CV </a>
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+   
+        <h1>Gaussian Process Prediction (aka Kriging)  with Different Correlation Functions</h1>
+        <h2 class="headline">September 15, 2016</h2>
+    </header>
+    <section id="post-body">
+        <p>I was looking for a Python Kriging package for the longest time, and somehow I overlooked <a href="http://scikit-learn.org/">scikit-learn</a>. Honestly I didn’t understand that Kriging is a Gaussian process prediction (see the <a href="https://en.wikipedia.org/wiki/Gaussian_process#Gaussian_process_prediction.2C_or_kriging">wiki</a>).This post will demonstrate how to use scikit-learn to create a Kriging model (Gaussian process prediction) for a single independent variable.</p>
+
+<p>Let’s say we have some function <span>\( Y(X) \)</span> defined as</p>
+<div>
+$$
+Y = X \sin (X)^3 + \frac{\cos(X)}{X+0.5}
+$$
+</div>
+<p>and we would like to use Kriging to approximate the function <span>\( Y(X) \)</span> on the domain of <span>\( 0 \leq X \leq 10 \)</span> with only using 12 training points of <span>\( x \)</span>. I didn’t pick 12 for any reason, so let’s assume these 12 points have been randomly selected. We can use sci-kit learn to easily fit a Kriging model with the following lines of Python code.</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c">#   let's see how well a gaussian process can fit the data</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">gaussian_process</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c">#   full X range</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">10.0</span><span class="o">+.</span><span class="mi">1</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span>
+<span class="c">#   true function values</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">X</span><span class="o">+.</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c">#   let's pick 12 points for the training set</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.87</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">,</span> <span class="mf">6.8</span><span class="p">,</span> <span class="mf">7.7</span><span class="p">,</span> <span class="mf">8.4</span><span class="p">,</span> <span class="mf">9.3</span><span class="p">,</span> <span class="mf">9.7</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">+.</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c">#   reshape numpy arrays for scikit-learn input </span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c">#   initiate the Gaussian process</span>
+<span class="n">gp</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">GaussianProcess</span><span class="p">()</span>
+<span class="c">#   fit to our training points</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">yPred</span><span class="p">,</span> <span class="n">predMSE</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">eval_MSE</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c">#   plot X and Y</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span> <span class="s">'-k'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">r'$Y = X </span><span class="err">\</span><span class="s">sin (X)^3 + </span><span class="err">\</span><span class="s">frac{</span><span class="err">\</span><span class="s">cos(X)}{X+0.5}$'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s">'ok'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Training points'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">yPred</span><span class="p">,</span> <span class="s">'-r'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'GP prediction'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'X'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Y'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+</div>
+
+<p><img src="/assets/2016-09-15/figure1.png" alt="First Kriging fit to the training points was just okay." /></p>
+
+<p>This fit is okay, but we can certainly do better. According to the scikit-learn documentation on the <a href="http://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcess.html#sklearn.gaussian_process.GaussianProcess">Gaussian process</a> model, we notice that have a few options for the correlation function. The scikit-learn Gaussian process defaults to a squared-exponential correlation function. Let’s see what happens if we pick a different correlation function, so let’s set the correlation to absolute-exponential and see what happens.</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">gp</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">GaussianProcess</span><span class="p">(</span><span class="n">corr</span><span class="o">=</span><span class="s">'absolute_exponential'</span><span class="p">)</span> <span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">yPred</span><span class="p">,</span> <span class="n">predMSE</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">eval_MSE</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p><img src="/assets/2016-09-15/figure2.png" alt="Absolute-exponential correlation function produce a linear fit between data points." /></p>
+
+<p>Well this isn’t a much better fit. It appears that the Absolute-exponential correlation function results in a Kriging model that linearly interpolated between our training points. So let’s try the generalized-exponential correlation function and see what happens.</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">gp</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">GaussianProcess</span><span class="p">(</span><span class="n">corr</span><span class="o">=</span><span class="s">'generalized_exponential'</span><span class="p">)</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">yPred</span><span class="p">,</span> <span class="n">predMSE</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">eval_MSE</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p>Results in an error!</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">Exception</span><span class="p">:</span> <span class="n">Length</span> <span class="n">of</span> <span class="n">theta</span> <span class="n">must</span> <span class="n">be</span> <span class="mi">2</span> <span class="ow">or</span> <span class="mi">2</span></code></pre></figure>
+
+</div>
+
+<p>OOPS! It appears that in order to use the generalized-exponential correlation function, we needed to supply the Gaussian process with theta values. Let’s try that again.</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">gp</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">GaussianProcess</span><span class="p">(</span><span class="n">corr</span><span class="o">=</span><span class="s">'generalized_exponential'</span><span class="p">,</span> <span class="n">theta0</span><span class="o">=</span><span class="p">[</span><span class="mf">1e-2</span><span class="p">,</span><span class="mf">1e-2</span><span class="p">],</span>
+<span class="n">thetaL</span><span class="o">=</span><span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span><span class="mf">1e-3</span><span class="p">],</span> 
+<span class="n">thetaU</span><span class="o">=</span><span class="p">[</span><span class="mf">1e-1</span><span class="p">,</span><span class="mf">1e-1</span><span class="p">])</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">yPred</span><span class="p">,</span> <span class="n">predMSE</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">eval_MSE</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p><img src="/assets/2016-09-15/figure3.png" alt="The generalized-exponential correlation function pulls data points pulls a trend down to each individual data point." /></p>
+
+<p>This didn’t create a great fit either. It appears that with the generalized-exponential correlation function pulled the trend down to each individual training point. Let’s now try the cubic correlation function to see what happens.</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">gp</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">GaussianProcess</span><span class="p">(</span><span class="n">corr</span><span class="o">=</span><span class="s">'cubic'</span><span class="p">)</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">yPred</span><span class="p">,</span> <span class="n">predMSE</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">eval_MSE</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p><img src="/assets/2016-09-15/figure4.png" alt="We get a better fit using the cubic correlation function." /></p>
+
+<p>Well it looks like the cubic correlation function produces our best fit yet. The only correlation function left to try is the linear correlation function.</p>
+
+<div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">gp</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">GaussianProcess</span><span class="p">(</span><span class="n">corr</span><span class="o">=</span><span class="s">'linear'</span><span class="p">)</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">yPred</span><span class="p">,</span> <span class="n">predMSE</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">eval_MSE</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+</div>
+
+<p><img src="/assets/2016-09-15/figure5.png" alt="The linear correlation function produced results just like the absolute-exponential correlation function." /></p>
+
+<p>Well the linear correlation function produced a model very similar to the absolute-exponential correlation function.</p>
+
+<p>Clearly the best Kriging model used the cubic correlation function. This won’t be the case for every problem, and if you aren’t sure which correlation model to use, you could always attempt some form model selection study.</p>
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="/about">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Charles Jekel</span>
+            <span>Mechanical Engineer. Numerical Modeling. Optimization.</span>
+            <span>cj@jekel.me</span>
+
+            <span><a href="/">Home </a><a href="/cv"> CV </a></span>
+        </div>
+    </a>
+
+    <!-- Remove Sharing links for now:<section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://jekel.me/2016/Guassian-Process-Prediction-aka-Kriging/ - Gaussian Process Prediction (aka Kriging)  with Different Correlation Functions by @"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>-->
+</footer>
+
+<!-- Disqus comments -->
+
+    <div class="archive readmore">
+        <h3>Comments</h3>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = 'http://localhost:4000/2016/Guassian-Process-Prediction-aka-Kriging/';
+            this.page.identifier = '/2016/Guassian-Process-Prediction-aka-Kriging';
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//cjekel.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+
+    </div>
+
+
+<!-- Archive post list -->
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-67542734-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+
