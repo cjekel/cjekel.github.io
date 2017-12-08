@@ -18,11 +18,9 @@ I took the least squares approach and coupled it to a global optimization algori
 Feel free to download the [library](https://github.com/cjekel/piecewise_linear_fit_py).
 
 You can install the library with pip.
-<div>
-{% highlight bash %}
+```bash
 sudo pip install pwlf
-{% endhighlight %}
-</div>
+```
 
 A few examples of the fits are provided bellow.
 
@@ -36,8 +34,7 @@ A few examples of the fits are provided bellow.
 ## Sample data
 
 So let's get started by importing the libraries and using some sample data.
-<div>
-{% highlight python %}
+```python
 
 #    import our libraires
 import numpy as np
@@ -85,15 +82,13 @@ x = np.array([  0.00000000e+00,   8.82678000e-03,   3.25615100e-02,
          1.22120350e-01,   1.36931660e-01,   1.50958760e-01,
          1.65299640e-01,   1.79942720e-01])
 
-{% endhighlight %}
-</div>
+```
 
 ## Basic usage
 
 First we initialize the pwlf library with our data. Then we'll find the best piecewise linear function using 4 line segments. Once the fit has been performed, the library inculdes a prediction function which evaluates the piecewise linear model. In this example we evaluate the piecewise linear model for 10,000 different xHat locations.
 
-<div>
-{% highlight python %}
+```python
 #   initialize piecwise linear fit with your x and y data
 myPWLF = pwlf.piecewise_lin_fit(x,y)
 
@@ -104,16 +99,14 @@ res = myPWLF.fit(4)
 xHat = np.linspace(min(x), max(x), num=10000)
 yHat = myPWLF.predict(xHat)
 
-{% endhighlight %}
-</div>
+```
 
 It was intended that this syntax be simple to use.
 
 *But what if I know the locations of where the line segments should end?*
 Not a problem! This library includes the function for classic least squares fit as well. For instance you could run the following code to fit the piecewise linear function at the x0 locations.
 
-<div>
-{% highlight python %}
+```python
 #   your desired line sengment end locations
 x0 = np.array([ min(x), 0.039, 0.10, max(x)])
 
@@ -123,8 +116,7 @@ myPWLF = pwlf.piecewise_lin_fit(x,y)
 #   fit the data with the specified break points (ie the x locations of where
 #   the line segments should end
 myPWLF.fitWithBreaks(x0)
-{% endhighlight %}
-</div>
+```
 
 ## Conclusion
 

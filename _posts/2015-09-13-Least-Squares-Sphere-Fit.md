@@ -75,7 +75,7 @@ $$
 
 We can use the above equation to define a simple Python function that will fit a sphere to <span>\\( x \\)</span>, <span>\\( y \\)</span>, and <span>\\( z \\)</span> data points. The Python NumPy library includes a least squares function that is used to determine the best <span>\\( \vec{c} \\)</span>. The function then returns the radius and center coordinates of the sphere.
 
-{% highlight python %}
+```python
 import numpy as np
 #	fit a sphere to X,Y, and Z data points
 #	returns the radius and center points of
@@ -101,14 +101,14 @@ def sphereFit(spX,spY,spZ):
     radius = math.sqrt(t)
 
     return radius, C[0], C[1], C[2]
-{% endhighlight %}
+```
 
 We can easily fit a sphere to our original data set using this function. The resulting sphere of best fit plotted with the original data points can be seen in the following image.
 
 ![fitted data points in three dimensions]({{ "/" | relative_url  }}assets/2015-09-13/fittedPointsIn3DSpace.png)
 
 The above 3D plot of the fitted sphere and data was created using the following code.
-{% highlight python %}
+```python
 from matplotlib import rcParams
 rcParams['font.family'] = 'serif'
 #   3D plot of the
@@ -137,12 +137,12 @@ ax.set_ylabel('\n$y$ (mm)',fontsize=16)
 zlabel = ax.set_zlabel('\n$z$ (mm)',fontsize=16)
 plt.show()
 plt.savefig('steelBallFitted.pdf', format='pdf', dpi=300, bbox_extra_artists=[zlabel], bbox_inches='tight')
-{% endhighlight %}
+```
 
 Please let me know if you found this post useful!  
 
 Please cite this work as:
-{% highlight bibtex %}
+```bibtex
 @book{Jekel2016,
  author = {Jekel, Charles F},
  booktitle = {Obtaining non-linear orthotropic material
@@ -155,4 +155,4 @@ Please cite this work as:
  url = {http://hdl.handle.net/10019.1/98627},
  year = {2016}
 }
-{% endhighlight %}
+```

@@ -11,11 +11,9 @@ This post will show how to detect faces using the [facenet](https://github.com/d
 
 The [facenet](https://github.com/davidsandberg/facenet) library is a TensorFlow implementation of the [FaceNet](https://arxiv.org/abs/1503.03832) paper. You can download some of the pre-trained models, which have an accuracy of 0.993 with the LFW dataset. This accuracy is certainly impressive. So what are you waiting for, go clone and fork this library!
 
-<div>
-{% highlight bash %}
+```bash
 $ git clone https://github.com/davidsandberg/facenet.git
-{% endhighlight %}
-</div>
+```
 
 And now install.
 
@@ -29,8 +27,7 @@ First you must be sure that you have all have  installed all of the Python requi
 The facenet library uses a pre-trained [MTCNN](https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html) to detect faces. This appears to be a really good facial detection implmenation. With my particular dataset, the MTCNN facial detection implementation is working much better than the standard haarcascade frontalface detection typically done with OpenCV.
 
 Here is a simple script to detect faces using the facenet implmenation:
-<div>
-{% highlight python %}
+```python
 #   import facenet libraires
 from __future__ import absolute_import
 from __future__ import division
@@ -91,18 +88,15 @@ with tf.Graph().as_default():
         plt.figure()
         plt.imshow(img)
         plt.show()
-{% endhighlight %}
-</div>
+```
 
 The long lines may mess up your code if you copy and paste from the above source. So I recommend that you download [faceDetect.py](https://github.com/cjekel/cjekel.github.io/blob/master/assets/2017-05-01/faceDetect.py) and the [presdients](https://github.com/cjekel/cjekel.github.io/blob/master/assets/2017-05-01/presidents/) folder of images from [here](https://github.com/cjekel/cjekel.github.io/blob/master/assets/2017-05-01/).
 
 Now just run faceDetect.py to watch the MTCNN box the location of faces around the sample presidents.
 
-<div>
-{% highlight bash %}
+```bash
 $ python faceDetect.py
-{% endhighlight %}
-</div>
+```
 
 The code should create the following images.
 
