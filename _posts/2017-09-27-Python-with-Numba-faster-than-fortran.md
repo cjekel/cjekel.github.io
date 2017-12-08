@@ -29,9 +29,10 @@ where <span>\\( X, Y  \\)</span> are double precision floating point arrays with
 
 The benchmark will run <span>\\( X = X + 2.0 Y  \\)</span> 10 times, and return the average run time for 1 dimensional array sizes of 1,000,000, 10,000,000, 100,000,000, and 1,000,000,000 elements. The sample code for one run in each language is provided below.
 
+
+
 NumPy code:
-<div>
-{% highlight python %}
+```python
 import numpy as np
 import time as time
 
@@ -43,12 +44,10 @@ t0 = time.time()
 X += Y; X += Y
 t1 = time.time()
 run_time = t1 - t0
-{% endhighlight %}
-</div>
+```
 
 NumPy + Numba single threaded code (inspired by [jzwinck](https://news.ycombinator.com/item?id=15123846)):
-<div>
-{% highlight python %}
+```python
 import numpy as np
 import numba
 import time as time
@@ -65,12 +64,10 @@ t0 = time.time()
 add2_par(X, Y, out=X)
 t1 = time.time()
 run_time = t1 - t0
-{% endhighlight %}
-</div>
+```
 
 NumPy + Numba parallel code:
-<div>
-{% highlight python %}
+```python
 import numpy as np
 import numba
 import time as time
@@ -87,12 +84,10 @@ t0 = time.time()
 add2_par(X, Y, out=X)
 t1 = time.time()
 run_time = t1 - t0
-{% endhighlight %}
-</div>
+```
 
 MATLAB Code:
-<div>
-{% highlight matlab %}
+```matlab
 clear; clc;
 % --- single threaded run ---
 X = ones(1e9,1);
@@ -100,12 +95,10 @@ Y = ones(1e9,1);
 t = cputime;
 X = X + 2.0*Y;
 e = cputime-t;
-{% endhighlight %}
-</div>
+```
 
 Fortran code:
-<div>
-{% highlight fortran %}
+```fortran
     program main
 c compile with GNU Fortran as
 c gfortran -mcmodel=medium demo.f
@@ -126,8 +119,7 @@ c to execture program run ./a.out
     write ( *, * ) t2-t1
     stop
     end
-{% endhighlight %}
-</div>
+```
 
 Application versions:
 
@@ -140,24 +132,19 @@ Application versions:
 | GNU Fortran | 4.8.5      |
 
 [Python folder](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27/Python) and execution:
-<div>
-{% highlight bash %}
+```bash
 > python numpy_bench.py
 > python numba_bench_single.py
 > python numba_bench_par.py
-{% endhighlight %}
-</div>
+```
 
 [MATLAB folder](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27/Matlab) and execution:
-<div>
-{% highlight bash %}
+```bash
 > matlab -nodesktop -nodisplay -r "run speedTest.m"
-{% endhighlight %}
-</div>
+```
 
 [Fortran folder](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27/Fortran) and execution:
-<div>
-{% highlight bash %}
+```bash
 > gfortran -mcmodel=medium speed1e9.f
 > ./a.out
 > gfortran speed1e8.f
@@ -174,8 +161,7 @@ Application versions:
 > ./a.out
 > gfortran -O2 speed1e6.f
 > ./a.out
-{% endhighlight %}
-</div>
+```
 
 ### Results
 
