@@ -11,8 +11,6 @@ Like faster than *Fortan fast*.
 
 *Edit September 28, 2017: I've updated the benchmark to include runs with gfortran -O2.*
 
-![Pulls out popcorn](https://media.giphy.com/media/tFK8urY6XHj2w/giphy.gif)
-
 ### Preface
 So this post was inspired by a HN comment by [CS207](https://news.ycombinator.com/item?id=15123559) about NumPy performance. The post demonstrates a *trick* that you can use to increase NumPy's peformance with integer arrays. Unfortunately the performance gain greatly diminishes when working with double precision floats (though it is still always faster on average). The demo and conversation that follows was interesting, and I got my first taste of [Numba](https://numba.pydata.org/) (high performance Python acceleration libarary -- which has a seamless integration with NumPy).
 
