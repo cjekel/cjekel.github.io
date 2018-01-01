@@ -17,14 +17,18 @@ Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyes
 Bsc Mechanical Engineering: 3.72/4.00 with honor
 
 ### Publications
+Charles F. Jekel, Gerhard Venter, Martin P. Venter, Nielen Stander, Raphael T. Haftka, **Similarity measures for identifying material parameters from hysteresis loops using inverse analysis**, *Under review*, 2017.
+
 Charles F. Jekel, Gerhard Venter, Martin P. Venter, **Modeling PVC-coated polyester as a hypoelastic non-linear orthotropic material**, *Composite Structures*, Volume 161, 1 February 2017, Pages 51-64, ISSN 0263-8223, [doi:10.1016/j.compstruct.2016.11.019](http://dx.doi.org/10.1016/j.compstruct.2016.11.019). [View pdf]({{ "/" | relative_url  }}assets/papers/JekelModelingPVC-CoatedPolyester.pdf).
 
 Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining a hyperelastic non-linear orthotropic material model via inverse bubble inflation analysis**, *Structural and Multidisciplinary Optimization*, pages 1-9, 2016, ISSN 1615-1488, [doi:10.1007/s00158-016-1456-8](http:////dx.doi.org/10.1007/s00158-016-1456-8). [View pdf]({{ "/" | relative_url  }}assets/papers/JekelInverseBubbleInflationFinal.pdf).
 
 ### Conference Presentations
-Jekel CF, Venter G, Venter MP (2015), **Obtaining Material Models for use in Finite Element Analyses of PVC-coated polyester via an Inverse Bubble Inflation Method** [abstract], CIMNE VII International Conference on Textile Composites and Inflatable Structures, Barcelona, Spain.
+Charles F. Jekel, Raphael T. Haftka, Gerhard Venter, and Martin P. Venter (2018), **Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction**, AIAA Non-Deterministic Approaches Conference, AIAA SciTech Forum, American Institute of Aeronautics and Astronautics, Jan 2018. [View pdf]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf).
 
-Jekel CF, Venter G (2014), **An Inverse Method for Generating Polymer Properties for use in Finite Element Analyses via Bubble Inflation Testing** [abstract], SAImechE Mechanical, Manufacturing, and Materials Engineering Conference, Stellenbosch, South Africa.
+Charles F. Jekel, Gerhard Venter, and Martin P. Venter (2015), **Obtaining Material Models for use in Finite Element Analyses of PVC-coated polyester via an Inverse Bubble Inflation Method** [abstract], CIMNE VII International Conference on Textile Composites and Inflatable Structures, Oct 2015, Barcelona, Spain.
+
+Charles F. Jekel and Gerhard Venter, **An Inverse Method for Generating Polymer Properties for use in Finite Element Analyses via Bubble Inflation Testing** [abstract], SAImechE Mechanical, Manufacturing, and Materials Engineering Conference, 2014, Stellenbosch, South Africa.
 
 ### Professional Experience
 
@@ -32,6 +36,11 @@ Jekel CF, Venter G (2014), **An Inverse Method for Generating Polymer Properties
 2017: [Python Programming]({{ "/" | relative_url  }}assets/PythonProgrammingEML6934.pdf) - 1 credit hour graduate course - [Syllabus]({{ "/" | relative_url  }}assets/eml6934_Python_Syllabus.pdf) - [Course material](https://github.com/cjekel/Introduction-to-Python-Numerical-Analysis-for-Engineers-and-Scientist)
 
 Created and taught the first Python Programming course in the MAE department at the University of Florida. The course goes from the basics of Python to covering the most popular scientific Python libraries in an effort to prepare graduate students for performing research in Python.
+
+## Python Libraries
+[pwlf](https://github.com/cjekel/piecewise_linear_fit_py): A library for fitting a continuous piecewise linear functions to two dimmensional data.
+
+[tindetheus](https://github.com/cjekel/tindetheus): A Python application that allows users to build their own personalized machine learning models using computer vision. The models can automatically like users on Tinder, based on the user's own historical preference.
 
 ## UTC Aerospace Systems
 2013 - 2014: Manufacturing Engineer  
