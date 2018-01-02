@@ -11,9 +11,11 @@ I created [tindetheus](https://github.com/cjekel/tindetheus) which is a Python a
 2. Train a model to your personal database.
 3. Use the trained model to automatically like and dislike new profiles.
 
-Tindetheus allows you to browse the Tinder profiles near you like you would on your phone. Every profile you review is stored in your own personal database. Tindetheus then includes a methodology to train your own classification model to your database. The model will predict whether you'll like or dislike a profile based on your historical preference. The training first uses a [MTCNN](https://kpzhang93.github.io/MTCNN_face_detection_alignment/) to detect and box the faces in your database. Then a [facenet](https://github.com/davidsandberg/facenet) model is run on the faces to extract the embeddings (the last layer of the CNN from the facial classification model). These embeddings can be thought of as the set of features that describe and individual's face. It just so happens that these features are somewhat related to facial attractiveness.  A logistic regression model is then fit to the embeddings of the faces you have liked and disliked. The trained model can then be evaluated to automatically like and dislike new profiles.
+Tindetheus allows you to browse the Tinder profiles near you like you would on your phone. Every profile you review is stored in your own personal database. Tindetheus then includes a methodology to train your own classification model to your database. The model will predict whether you'll like or dislike a profile based on your historical preference.
 
-# How do I install tindetheus on Windows 10?
+The training first uses a [MTCNN](https://kpzhang93.github.io/MTCNN_face_detection_alignment/) to detect and box the faces in your database. Then a [facenet](https://github.com/davidsandberg/facenet) model is run on the faces to extract the embeddings (the last layer of the CNN from the facial classification model). These embeddings can be thought of as the set of features that describe an individual's face. It just so happens that these features are somewhat related to facial attractiveness.  A logistic regression model is then fit to the embeddings of the faces you have liked and disliked. The trained model can then be evaluated to automatically like and dislike new profiles.
+
+# How to install tindetheus on Windows 10
 I'm going to describe how to install tindetheus on a Windows 10 machine for someone who has never used Python before.
 
 1. You need to download and install Anaconda. Visit the [Anaconda download site](https://www.anaconda.com/download/) and follow the instructions to install the latest version of Anaconda.
