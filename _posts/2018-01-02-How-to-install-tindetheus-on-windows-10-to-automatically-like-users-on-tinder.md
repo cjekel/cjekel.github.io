@@ -5,7 +5,7 @@ description: Tindetheus makes it easy for a user to build and apply their own pe
 keywords: [tindetheus, Tinder machine learning, personalized like model, automatically like people on Tinder, create Tinder database, facenet]
 ---
 
-# What is tindetheus
+### What is tindetheus
 I created [tindetheus](https://github.com/cjekel/tindetheus) which is a Python application that allows users to build their own personalized machine learning model for Tinder. Essentially tindetheus has three major functions:
 1. Browse Tinder profiles while creating a personal database of the profiles you've liked and disliked.
 2. Train a model to your personal database.
@@ -15,7 +15,7 @@ Tindetheus allows you to browse the Tinder profiles near you like you would on y
 
 The training first uses a [MTCNN](https://kpzhang93.github.io/MTCNN_face_detection_alignment/) to detect and box the faces in your database. Then a [facenet](https://github.com/davidsandberg/facenet) model is run on the faces to extract the embeddings (the last layer of the CNN from the facial classification model). These embeddings can be thought of as the set of features that describe an individual's face. It just so happens that these features are somewhat related to facial attractiveness.  A logistic regression model is then fit to the embeddings of the faces you have liked and disliked. The trained model can then be evaluated to automatically like and dislike new profiles.
 
-# How to install tindetheus on Windows 10
+### How to install tindetheus on Windows 10
 I'm going to describe how to install tindetheus on a Windows 10 machine for someone who has never used Python before.
 
 1. You need to download and install Anaconda. Visit the [Anaconda download site](https://www.anaconda.com/download/) and follow the instructions to install the latest version of Anaconda.
