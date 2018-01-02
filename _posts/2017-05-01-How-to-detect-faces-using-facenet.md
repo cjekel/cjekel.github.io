@@ -1,13 +1,13 @@
 ---
 title:  "Detect faces using facenet in Python"
 date:   2017-05-01 11:11:00
-description: The TensorFlow implementation of facenet is an extremely powerful deep face recognition libarary. You can download pre-trained models with a LFW accuracy of 0.993. This post demonstrates how you can use the facenet library to detect faces in images using Python.
+description: The TensorFlow implementation of facenet is an extremely powerful deep face recognition library. You can download pre-trained models with a LFW accuracy of 0.993. This post demonstrates how you can use the facenet library to detect faces in images using Python.
 keywords: [facenet, how to use facenet, facenet detect faces, facial recognition python]
 ---
 
 *Edit 2017 September 8, I fixed the images BGR issue as recommended by Jason Taylor*
 
-This post will show how to detect faces using the [facenet](https://github.com/davidsandberg/facenet) library, as it is not exactly clear from the wiki on how to use functions within the library. I've found that the facial detection implmenation in facenet to be much better than the standard [OpenCV](http://opencv.org/) haarcascade frontalface detection method.
+This post will show how to detect faces using the [facenet](https://github.com/davidsandberg/facenet) library, as it is not exactly clear from the wiki on how to use functions within the library. I've found that the facial detection implementation in facenet to be much better than the standard [OpenCV](http://opencv.org/) haarcascade frontalface detection method.
 
 The [facenet](https://github.com/davidsandberg/facenet) library is a TensorFlow implementation of the [FaceNet](https://arxiv.org/abs/1503.03832) paper. You can download some of the pre-trained models, which have an accuracy of 0.993 with the LFW dataset. This accuracy is certainly impressive. So what are you waiting for, go clone and fork this library!
 
@@ -24,9 +24,9 @@ And now install.
 
 First you must be sure that you have all have  installed all of the Python requirements which are: tensorflow==1.0, scipy, scikit-learn, opencv-python, h5py, matplotlib, Pillow,  requests, and psutil. I'm running the latest tensorflow=1.1.0-rc2 and facenet appears to be working with no problems. Now you should validate facenet using the LFW dataset to verify that your installation is working  properly. You can follow [these](https://github.com/davidsandberg/facenet/wiki/Validate-on-lfw) instructions.
 
-The facenet library uses a pre-trained [MTCNN](https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html) to detect faces. This appears to be a really good facial detection implmenation. With my particular dataset, the MTCNN facial detection implementation is working much better than the standard haarcascade frontalface detection typically done with OpenCV.
+The facenet library uses a pre-trained [MTCNN](https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html) to detect faces. This appears to be a really good facial detection implementation. With my particular dataset, the MTCNN facial detection implementation is working much better than the standard haarcascade frontalface detection typically done with OpenCV.
 
-Here is a simple script to detect faces using the facenet implmenation:
+Here is a simple script to detect faces using the facenet implementation:
 ```python
 #   import facenet libraires
 from __future__ import absolute_import
