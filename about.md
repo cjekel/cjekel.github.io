@@ -5,7 +5,7 @@ profile: true
 ---
 
 # About Me
-I have a love for computers and solving problems. Currently I'm pursuing a PhD in Mechanical Engineering at the University of Florida and Stellenbosch University. Take a look at my [CV](/cv), [Google Scholar](https://scholar.google.com/citations?user=pSIRTswAAAAJ&hl=en&oi=sra), or [GitHub](https://github.com/cjekel). Some of my interests include:
+I love computers and solving problems. Currently I'm pursuing a PhD in Mechanical Engineering at the University of Florida and Stellenbosch University. Take a look at my [CV](/cv), [Google Scholar](https://scholar.google.com/citations?user=pSIRTswAAAAJ&hl=en&oi=sra), or [GitHub](https://github.com/cjekel). Some of my interests include:
 
 - regression and classification
 - optimization
@@ -22,7 +22,7 @@ I've created a couple of open source Python libraries.
 [Tindetheus](https://github.com/cjekel/tindetheus) is a Python application that allows users to build their own personalized machine learning model to automatically like users on Tinder based on their historical preference. Tindetheus takes advantage of recent advancements in computer vision and has three major functions: 1) Build your own Tinder database. 2) Fit a machine learning model to your data. 3) Automatically like/dislike users based on your trained model.
 
 
-I'm currently teaching a 1 credit hour course on Python Programming. Take a look at the [Syllabus]({{ "/" | relative_url  }}assets/eml6934_Python_Syllabus.pdf). Since I've been at UF many graduate students have expressed their desire to learn Python, however there are very few opportunities in my college to learn Python. Why do so many people want to learn Python? Because there have been so many state-of-the-art scientific libraries developed in Python recently! This course was created to help my fellow graduate students pick up Python for their research. Feel free to check out the [course material](https://github.com/cjekel/Introduction-to-Python-Numerical-Analysis-for-Engineers-and-Scientist).
+I taught a 1 credit hour course on Python Programming in Fall 2017. Take a look at the [Syllabus]({{ "/" | relative_url  }}assets/eml6934_Python_Syllabus.pdf). Since I've been at UF, many graduate students have expressed their desire to learn Python. However, there are very few opportunities in my college to learn Python. Why do so many people want to learn Python? Because there have been so many state-of-the-art scientific libraries developed in Python recently! This course was created to help my fellow graduate students pick up Python for their research. Feel free to check out the [course material](https://github.com/cjekel/Introduction-to-Python-Numerical-Analysis-for-Engineers-and-Scientist).
 
 I use PGP. My public key is [here](https://raw.githubusercontent.com/cjekel/cjekel.github.io/master/assets/Charles.Jekel.asc).
 
