@@ -38,7 +38,7 @@ Charles F. Jekel and Gerhard Venter, **An Inverse Method for Generating Polymer 
 Created and taught the first Python Programming course in the MAE department at the University of Florida. The course covers topics from the basics of Python to the most popular scientific Python libraries in an effort to prepare graduate students to perform research in Python.
 
 ## Python Libraries
-[pwlf](https://github.com/cjekel/piecewise_linear_fit_py): A library for fitting a continuous piecewise linear functions to two dimmensional data.
+[pwlf](https://github.com/cjekel/piecewise_linear_fit_py): A library for fitting continuous piecewise linear functions to two dimensional data.
 
 [tindetheus](https://github.com/cjekel/tindetheus): A Python application that allows users to build their own personalized machine learning models using computer vision. The models can automatically like users on Tinder, based on the user's own historical preference.
 
