@@ -16,6 +16,7 @@ Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyes
 2009 - 2013: University of Colorado - Colorado Springs  
 BSc Mechanical Engineering: 3.72/4.00 with honor
 
+---
 ### Publications
 Charles F. Jekel, Gerhard Venter, Martin P. Venter, Nielen Stander, Raphael T. Haftka, **Similarity measures for identifying material parameters from hysteresis loops using inverse analysis**, *Under review*, 2017.
 
@@ -23,6 +24,7 @@ Charles F. Jekel, Gerhard Venter, Martin P. Venter, **Modeling PVC-coated polyes
 
 Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining a hyperelastic non-linear orthotropic material model via inverse bubble inflation analysis**, *Structural and Multidisciplinary Optimization*, pages 1-9, 2016, ISSN 1615-1488, [doi:10.1007/s00158-016-1456-8](http:////dx.doi.org/10.1007/s00158-016-1456-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelInverseBubbleInflationFinal.pdf).
 
+---
 ### Conference Presentations
 Charles F. Jekel, Raphael T. Haftka, Gerhard Venter, and Martin P. Venter. **Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction**, 2018 AIAA Non-Deterministic Approaches Conference, AIAA SciTech Forum, (AIAA 2018-1664) [doi:10.2514/6.2018-1664](https://doi.org/10.2514/6.2018-1664) [pdf]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf).
 
@@ -30,6 +32,7 @@ Charles F. Jekel, Gerhard Venter, and Martin P. Venter, **Obtaining Material Mod
 
 Charles F. Jekel and Gerhard Venter, **An Inverse Method for Generating Polymer Properties for use in Finite Element Analyses via Bubble Inflation Testing** [abstract], SAImechE Mechanical, Manufacturing, and Materials Engineering Conference, 2014, Stellenbosch, South Africa.
 
+---
 ### Professional Experience
 
 ## Courses Taught
@@ -54,6 +57,7 @@ platforms.
 
 All-purpose IT wizard. Graphic design guru.
 
+---
 ### Honors and Awards
 2016: University of Florida GSFA - four year graduate school fellowship    
 2016: Stellenbosch departmental bursary - three year PhD funding   
