@@ -1,11 +1,11 @@
 ---
 title:  "Using tmpfs to speed up non-linear finite element models"
 date:   2018-02-04 11:52:00
-description: Benchmark of a HDD, SSD, and tmpfs (RAM disk) for read/write, and an optimization on a non-linear FE model.
+description: Benchmark of a HDD, SSD, and tmpfs (RAM disk) for read/write, and behncmark of an optimization on a non-linear FE model.
 keywords: [SSD FE model performance, SSD FE model improvement, make FE model faster, speed up non-linear FEA, FE model compare HDD SSD, tmpfs for non-linear fea, ramdisk to speed up fea]
 ---
 
-tl;dr Use a solid state drive (SSD) or tmpfs to speed up non-linear FE models in optimizations.
+tl;dr Use a solid-state drive (SSD) or tmpfs to speed up non-linear FE models in optimizations.
 
 I frequently run optimizations on non-linear finite element (FE) models. In my case these optimizations require the FE model to be solved for thousands of different configurations. A lot of commercial non-linear FE codes write a substantial amount of information to the hard drive. Much of this written information can not be turned off! For large models (with a large number of degrees of freedom) the computational time required to solve the problem dominates the overall run time of the analysis. However, for small FE models the information written to the hard drive can be primary contribution of model run time.
 
@@ -18,7 +18,7 @@ The optimizations I've performed on non-linear FE models use somewhere between o
 I've been interested in comparing my SSD performance to a [RAM drive](https://en.wikipedia.org/wiki/RAM_drive) for a while. A temporary file system, [tmpfs](https://en.wikipedia.org/wiki/Tmpfs), is a popular unix file system for creating a RAM drive. These RAM drives are really fast, however data stored to the RAM drive is volatile. This means that all information stored in the RAM drive will be permanently lost during a power cycle.
 
 I run 32 GB of RAM on my workstation, and on my laptop (Thinkpad 13). So I often have a lot of RAM to use tmpfs. Creating a tmpfs partition is easy, all I need to run is
-```bash
+```
 sudo mkdir /mnt/ramdisk
 sudo mount -t tmpfs none /mnt/ramdisk -o size=16g
 ```
@@ -29,7 +29,7 @@ to create a 16 GB tmpfs drive.
 I'm going to use fio to perform a worst case read/write benchmark comparison. (I don't want to use dd since I have critical data on my drives, and since I want to get an idea about the file system performance on each drive.) For information about fio see [this](https://askubuntu.com/posts/991311/revisions) post by Mikko Rantalainen.
 
 I'm going to run
-```bash
+```
 fio --name TEST --eta-newline=5s --filename=fio-tempfile.dat --rw=randrw --size=500m --io_size=10g --blocksize=4k --ioengine=libaio --fsync=1 --iodepth=1 --numjobs=1 --runtime=60 --group_reporting
 ```  
 on my HDD, SSD, and tmpfs to demonstrate a worst case read/write speed comparison.
