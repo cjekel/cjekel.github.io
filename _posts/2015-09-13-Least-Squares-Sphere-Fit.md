@@ -97,7 +97,7 @@ def sphereFit(spX,spY,spZ):
     C, residules, rank, singval = np.linalg.lstsq(A,f)
 
     #   solve for the radius
-	t = (C[0]*C[0])+(C[1]*C[1])+(C[2]*C[2])+C[3]
+    t = (C[0]*C[0])+(C[1]*C[1])+(C[2]*C[2])+C[3]
     radius = math.sqrt(t)
 
     return radius, C[0], C[1], C[2]
