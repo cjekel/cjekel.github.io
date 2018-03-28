@@ -5,7 +5,7 @@ description: I used facenet to find a pattern in the Tinder profiles I liked and
 keywords: [facenet, automated tinder, tinder facenet, tindetheus, facial recognition python]
 ---
 
-tl;dr I swiped thousands of Tinder profiles so you wouldn't have to. I used facenet to find a pattern in the Tinder profiles I liked and disliked. You can build your own models to automatically like Tinder profiles based on your historical preference using [tindetheus](https://github.com/cjekel/tindetheus).
+**tl;dr** I swiped thousands of Tinder profiles so you wouldn't have to. I used facenet to find a pattern in the Tinder profiles I liked and disliked. You can build your own models to automatically like Tinder profiles based on your historical preference using [tindetheus](https://github.com/cjekel/tindetheus).
 
 It takes a lot of time to review Tinder profiles. Before [Tinder gold](https://www.help.tinder.com/hc/en-us/articles/115004487406-Tinder-Plus-and-Tinder-Gold-), you'd have to review hundreds of profiles of individuals who weren't that interested in you. Let's say you like one out of five profiles, of which one out of ten profiles you'd like would result in a match. This means you'd have to review 50 profiles to get a match. If you're an average looking guy, you may end up needing to review many additional profiles before getting a match. Then there is always the chance that the individual you match with, as it turns out, is not that interested in you.
 
@@ -70,7 +70,7 @@ Highlights:
 Thoughts for improvement:
 - Include [NLP](https://en.wikipedia.org/wiki/Neuro-linguistic_programming) to find a pattern in user biographies. About one out of three Tinder profiles I reviewed didn't contain a single character in the bio. I didn't include any bio information in this model, however I know that the bio was definitely a factor in how I evaluated a profile.
 - It would be very interesting to see how this method works at scale for a lot of users. While the method worked well with my data, it's likely to work both better and worse depending on the individual. It would be interesting to see how much does the accuracy vary from user to user. Unfortunately this requires users to have reviewed a lot of profiles.
-- There is very little research on using computer models to find what women find attractive in male faces. I'd be very interested to see if this method works for women who are interested in men. 
+- There is very little research on using computer models to find what women find attractive in male faces. I'd be very interested to see if this method works for women who are interested in men.
 
 
 ### References
