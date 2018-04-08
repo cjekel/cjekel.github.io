@@ -4,6 +4,8 @@ date:   2017-04-01 11:11:00
 description: A Python library to fit continuous piecewise linear functions to data was created. This library allows for the user to specify the desired number of line segments when fitting piecewise linear functions.
 keywords: [piecewise linear fit, continuous piecewise fit, piece-wise linear fit, Python piecwise linear fit, how to fit a piecewise linear function Python]
 ---
+*Edit* 2018-04-08 Major update to pwlf. Read [this](http://jekel.me/2018/Continous-piecewise-linear-regression/). The code in this post has been changed to reflect the new naming convention.
+
 *Edit* 2017-11-03 Now you can install with pip!
 
 ##  Abstract
@@ -90,7 +92,7 @@ First we initialize the pwlf library with our data. Then we'll find the best pie
 
 ```python
 #   initialize piecwise linear fit with your x and y data
-myPWLF = pwlf.piecewise_lin_fit(x,y)
+myPWLF = pwlf.PiecewiseLinFit(x,y)
 
 #   fit the data for four line segments
 res = myPWLF.fit(4)
@@ -103,19 +105,20 @@ yHat = myPWLF.predict(xHat)
 
 It was intended that this syntax be simple to use.
 
-*But what if I know the locations of where the line segments should end?*
+**But what if I know the locations of where the line segments should end?**
 Not a problem! This library includes the function for classic least squares fit as well. For instance you could run the following code to fit the piecewise linear function at the x0 locations.
 
 ```python
-#   your desired line sengment end locations
+
+#   your desired line segment end locations
 x0 = np.array([ min(x), 0.039, 0.10, max(x)])
 
 #   initialize piecwise linear fit with your x and y data
-myPWLF = pwlf.piecewise_lin_fit(x,y)
+myPWLF = pwlf.PiecewiseLinFit(x,y)
 
 #   fit the data with the specified break points (ie the x locations of where
 #   the line segments should end
-myPWLF.fitWithBreaks(x0)
+myPWLF.fit_with_breaks(x0)
 ```
 
 ## Conclusion
