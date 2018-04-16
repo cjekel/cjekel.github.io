@@ -59,6 +59,10 @@ y_c = [0.0]
 res = myPWLF.fit(3, x_c, y_c)
 ```
 
+This will give you a similar fit to the following, which has been forced to go through the origin.
+![PDF of validation accuracy]({{ "/" | relative_url  }}assets/2018-04-15/example_fit.png)
+
+
 # References
 
 [1] Boyd, Stephen and Vandenberghe, Lieven. Introduction to Applied Linear Algebra - Vectors, Matrices, and Least Squares. Chapter 16 - Constrained least squares. Cambridge University Press. 2018. [link](https://web.stanford.edu/~boyd/vmls)
