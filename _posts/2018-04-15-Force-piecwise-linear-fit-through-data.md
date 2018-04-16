@@ -32,8 +32,8 @@ $$
  \mathbf{\beta} \\
  \mathbf{\zeta} \\
  \end{bmatrix} = \begin{bmatrix}
-2\mathbf{A}^\text{T}\mathbf{y}
-\mathbf{z}
+2\mathbf{A}^\text{T}\mathbf{y} \\
+\mathbf{z} \\
 \end{bmatrix}
 $$
 </div>
