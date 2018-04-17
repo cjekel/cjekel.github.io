@@ -4,11 +4,11 @@ date:   2016-10-15 17:20:00
 description: Using maximum likelihood to fit a polynomial to data as opposed to a least squares fit
 keywords: [maximum likelihood, maximum likelihood estimation, linear regression, least squares, Python, scikit-learn]
 ---
-*Edit April 17, 2018. I would highly recommend using [differential evolution](https://docs.scipy.org/doc/scipy-1.0.0/reference/generated/scipy.optimize.differential_evolution.html) instead of BFGS to perform the optimization. The reason is that the maximum likelihood optimization is likely to have multiple local minima, which may be difficult for the BFGS to overcome without careful use.
-
-*Edit October 19, 2016. There was an error in my code, where I took the standard deviation of the true values, when I should have actually been taking the standard deviation of the residual values. I have corrected the post and the files.*
+*Edit3 April 17, 2018. I would highly recommend using [differential evolution](https://docs.scipy.org/doc/scipy-1.0.0/reference/generated/scipy.optimize.differential_evolution.html) instead of BFGS to perform the optimization. The reason is that the maximum likelihood optimization is likely to have multiple local minima, which may be difficult for the BFGS to overcome without careful use.*
 
 *Edit2 October 20, 2016. I was passing the integer length of the data set, instead of the floating point length, which messed up the math. I've corrected this and updated the code.*
+
+*Edit October 19, 2016. There was an error in my code, where I took the standard deviation of the true values, when I should have actually been taking the standard deviation of the residual values. I have corrected the post and the files.*
 
 I am going to use maximum likelihood estimation (MLE) to fit a linear (polynomial) model to some data points. A simple case is presented to create an understanding of how model parameters can be identified by maximizing the likelihood as opposed to minimizing the sum of the squares (least squares). The likelihood equation is derived for a simple case, and gradient optimization is used to determine the coefficients of a polynomial which maximize the likelihood with the sample. The polynomial that results from maximizing the likelihood should be the same as a polynomial from a least squares fit, if we assume a normal (Gaussian) distribution and that the data is independent and identically distributed. Thus the maximum likelihood parameters will be compared to the least squares parameters. All of the Python code used in this comparison will be available [here](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2016-10-16).
 
