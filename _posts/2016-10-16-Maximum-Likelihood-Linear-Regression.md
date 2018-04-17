@@ -4,13 +4,15 @@ date:   2016-10-15 17:20:00
 description: Using maximum likelihood to fit a polynomial to data as opposed to a least squares fit
 keywords: [maximum likelihood, maximum likelihood estimation, linear regression, least squares, Python, scikit-learn]
 ---
+*Edit April 17, 2018. I would highly recommend using [differential evolution](https://docs.scipy.org/doc/scipy-1.0.0/reference/generated/scipy.optimize.differential_evolution.html) instead of BFGS to perform the optimization. The reason is that the maximum likelihood optimization is likely to have multiple local minima, which may be difficult for the BFGS to overcome without careful use.
+
 *Edit October 19, 2016. There was an error in my code, where I took the standard deviation of the true values, when I should have actually been taking the standard deviation of the residual values. I have corrected the post and the files.*
 
 *Edit2 October 20, 2016. I was passing the integer length of the data set, instead of the floating point length, which messed up the math. I've corrected this and updated the code.*
 
 I am going to use maximum likelihood estimation (MLE) to fit a linear (polynomial) model to some data points. A simple case is presented to create an understanding of how model parameters can be identified by maximizing the likelihood as opposed to minimizing the sum of the squares (least squares). The likelihood equation is derived for a simple case, and gradient optimization is used to determine the coefficients of a polynomial which maximize the likelihood with the sample. The polynomial that results from maximizing the likelihood should be the same as a polynomial from a least squares fit, if we assume a normal (Gaussian) distribution and that the data is independent and identically distributed. Thus the maximum likelihood parameters will be compared to the least squares parameters. All of the Python code used in this comparison will be available [here](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2016-10-16).
 
-So let's generate the data points that we'll be fitting a polynomial to. I assumed the data is from some second order polynomial, of which I added some noise to make the linear regression a bit more interesting. 
+So let's generate the data points that we'll be fitting a polynomial to. I assumed the data is from some second order polynomial, of which I added some noise to make the linear regression a bit more interesting.
 <div>
 {% highlight python %}
 import numpy as np
@@ -18,7 +20,7 @@ x = np.linspace(0.0,10.0, num=100)
 a = 4.0
 b = -3.5
 c = 0.0
-y = (a*(x**2)) + (b*x) + c 
+y = (a*(x**2)) + (b*x) + c
 
 #   let's add noise to the data
 #   np.random.normal(mean, standardDeviation, num)
@@ -33,16 +35,16 @@ The Python code gives us the following data points.
 
 Now onto the formulation of the likelihood equation that we'll use to determine coefficients of a fitted polynomial.
 
-Linear regression is generally of some form 
+Linear regression is generally of some form
 <div>
 $$
 \mathbf{Y} = \mathbf{X}\mathbf{\beta} + \mathbf{r}
 $$
 </div>
-for a true function <span>\\( \mathbf{Y} \\)</span>, the matrix of independent variables <span>\\( \mathbf{X} \\)</span>, the model coefficients <span>\\( \mathbf{\beta} \\)</span>, and some residual difference between the true data and the model <span>\\( \mathbf{r} \\)</span>. For a second order polynomial, <span>\\( \mathbf{X} \\)</span> is of the form <span>\\( \mathbf{X} = [\mathbf{1}, \mathbf{x}, \mathbf{x^2}]\\)</span>. We can rewrite the equation of linear regression as 
+for a true function <span>\\( \mathbf{Y} \\)</span>, the matrix of independent variables <span>\\( \mathbf{X} \\)</span>, the model coefficients <span>\\( \mathbf{\beta} \\)</span>, and some residual difference between the true data and the model <span>\\( \mathbf{r} \\)</span>. For a second order polynomial, <span>\\( \mathbf{X} \\)</span> is of the form <span>\\( \mathbf{X} = [\mathbf{1}, \mathbf{x}, \mathbf{x^2}]\\)</span>. We can rewrite the equation of linear regression as
 <div>
 $$
-\mathbf{r} = \mathbf{Y} - \mathbf{X}\mathbf{\beta} 
+\mathbf{r} = \mathbf{Y} - \mathbf{X}\mathbf{\beta}
 $$
 </div>
 where the residuals <span>\\( \mathbf{r} \\)</span> are expressed as the difference between the true model (<span>\\( \mathbf{Y} \\)</span>) and the linear model (<span>\\( \mathbf{X}\mathbf{\beta} \\)</span>). If we assume the data to be of an independent and identically distributed sample, and that the residual <span>\\( \mathbf{r} \\)</span> is from a normal (Gaussian) distribution, then we'll get the following probability density function <span>\\( f \\)</span>.
@@ -119,7 +121,7 @@ res = minimize(myFunction, var, method='BFGS',
 {% endhighlight %}
 </div>
 
-As it turns out, with the assumptions we have made (Gaussian distribution, independent and identically distributed, <span>\\( \mu = 0 \\)</span>) the result of maximizing the likelihood should be the same as performing a least squares fit. So let's go ahead and perform a least squares fit to determine the coefficients of a second order polynomial from the data points. This can be done with scikit-learn easily with the following lines of Python code. 
+As it turns out, with the assumptions we have made (Gaussian distribution, independent and identically distributed, <span>\\( \mu = 0 \\)</span>) the result of maximizing the likelihood should be the same as performing a least squares fit. So let's go ahead and perform a least squares fit to determine the coefficients of a second order polynomial from the data points. This can be done with scikit-learn easily with the following lines of Python code.
 <div>
 {% highlight python %}
 #   perform least squares fit using scikitlearn
@@ -134,7 +136,7 @@ coefs = model.named_steps['linear'].coef_
 {% endhighlight %}
 </div>
 
-I've made a plot of the data points, the polynomial from maximizing the log-likelihood, and the least squares fit all on the same graph. We can clearly see that maximizing the likelihood was equivalent to performing a least squares fit for this data set. This was intended to be a simple example, as I hope to transition a maximum likelihood estimation to non-linear regression in the future. Obviously this example doesn't highlight or explain why someone would prefer to use a maximum likelihood estimation, but hopefully in the future I can explain the difference on a sample where the MLE gives a different result than the least squares optimization. 
+I've made a plot of the data points, the polynomial from maximizing the log-likelihood, and the least squares fit all on the same graph. We can clearly see that maximizing the likelihood was equivalent to performing a least squares fit for this data set. This was intended to be a simple example, as I hope to transition a maximum likelihood estimation to non-linear regression in the future. Obviously this example doesn't highlight or explain why someone would prefer to use a maximum likelihood estimation, but hopefully in the future I can explain the difference on a sample where the MLE gives a different result than the least squares optimization.
 
 ![Image of the fitted polynomials and the data points.]({{ "/" | relative_url  }}assets/2016-10-16/maxLikelihoodComp.png)
 
