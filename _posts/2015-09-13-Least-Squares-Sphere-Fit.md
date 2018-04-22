@@ -4,6 +4,8 @@ date:   2015-09-13 22:00:00
 description: Fitting a sphere to data points using the least squares method
 keywords: [Python, least squares fit, sphere fit, Python sphere fit]
 ---
+*Update: 2018-04-22 I've uploaded the data and a demo Python file [here](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2015-09-13).*
+
 *Update: 2016-01-22 I have added the code I used to make the plot of the 3D data and sphere!*
 
 It may not be intuitive to fit a sphere to three dimensional data points using the least squares method. This post demonstrates how the equation of a sphere can be rearranged to formulate the least squares problem. A Python function, which determines the sphere of best fit, is then presented.
