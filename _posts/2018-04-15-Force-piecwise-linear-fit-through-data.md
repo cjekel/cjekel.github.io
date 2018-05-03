@@ -8,7 +8,7 @@ keywords: [ piecewise linear fit, constrained piecewsise fit, force pwlf through
 I've received a few request for [pwlf](https://github.com/cjekel/piecewise_linear_fit_py) to perform fits through a particular data point, or set of data points. For instance, you may know that your model must go through the origin (0, 0). We can use Lagrange multipliers to solve a constrained least squares problem to find the best piecewise linear fit while forcing the fit through a set of data points.  
 
 # Constrained least squares fit
-So from my [previous post](http://jekel.me/2018/Continous-piecewise-linear-regression/), we have defined a piecewise linear regression problem as
+So from my [previous post](https://jekel.me/2018/Continous-piecewise-linear-regression/), we have defined a piecewise linear regression problem as
 <div>
 $$
 \mathbf{A} \mathbf{\beta} = \mathbf{y}

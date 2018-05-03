@@ -203,4 +203,4 @@ Wow Numba is Fast. I would have never expected to see a Python NumPy Numba array
 
 Is there anything I missed? I'm looking forward to playing with Numba GPU acceleration in the future. You can take a look at the code I used to run the benchmark [here](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2017-09-27).
 
-It's worthwhile to note that I did not do this benchmark with  [ATLAS](http://math-atlas.sourceforge.net/), and that using ATLAS may seriously speed up the Fortran execution of this problem (and likely speed up the Numpy and Numba execution as well).
+It's worthwhile to note that I did not do this benchmark with  [ATLAS](https://math-atlas.sourceforge.net/), and that using ATLAS may seriously speed up the Fortran execution of this problem (and likely speed up the Numpy and Numba execution as well).

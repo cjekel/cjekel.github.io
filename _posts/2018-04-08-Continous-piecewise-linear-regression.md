@@ -15,7 +15,7 @@ keywords: [ piecewise linear fit, Python, pwlf, fitting picewsie lines, best pie
 
 # New derivation
 
-There was nothing wrong with [Golovchenko (2004)](http://golovchenko.org/docs/ContinuousPiecewiseLinearFit.pdf), which was the basis for the the first release of pwlf. I've always knew that the for loops used to assemble the regression matrix were slow, and this was killing the performance for large problems. After reading [this](http://www.regressionist.com/2018/02/07/continuous-piecewise-linear-fitting/), I felt a bit inspired to do something about it. The [pwlf library](https://github.com/cjekel/piecewise_linear_fit_py) has been modified to solve the linear regression matrix directly, where previously a square matrix was assembled (as oppose to the regression matrix). The result is that more of the code is solved in numpy (which is fast), instead of Python.
+There was nothing wrong with [Golovchenko (2004)](https://golovchenko.org/docs/ContinuousPiecewiseLinearFit.pdf), which was the basis for the the first release of pwlf. I've always knew that the for loops used to assemble the regression matrix were slow, and this was killing the performance for large problems. After reading [this](https://www.regressionist.com/2018/02/07/continuous-piecewise-linear-fitting/), I felt a bit inspired to do something about it. The [pwlf library](https://github.com/cjekel/piecewise_linear_fit_py) has been modified to solve the linear regression matrix directly, where previously a square matrix was assembled (as oppose to the regression matrix). The result is that more of the code is solved in numpy (which is fast), instead of Python.
 
 Let's assume we have a one dimensional data set. In this case we will assume <span>\\(\mathbf{x} \\)</span> is the independent variable and <span>\\(\mathbf{y} \\)</span> is dependent on <span>\\(\mathbf{x} \\)</span> such that <span>\\(\mathbf{y}(\mathbf{x}) \\)</span>. Our data is paired as
 <div>
@@ -99,7 +99,7 @@ $$
 \mathbf{A} \mathbf{\beta} = \mathbf{y}
 $$
 </div>
-where <span>\\(\mathbf{A} \\)</span> is our regression matrix, <span>\\(\mathbf{\beta} \\)</span> is our unknown set of parameters, and <span>\\(\mathbf{y} \\)</span> is our vector of <span>\\(y \\)</span> values. We can use a least squares solver to solve for <span>\\(\mathbf{\beta} \\)</span>. In Python, I like to use the [numpy lstsq](https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq) solver which uses [LAPACK](http://www.netlib.org/lapack/explore-html/d7/d3b/group__double_g_esolve_ga94bd4a63a6dacf523e25ff617719f752) to solve the matrix.
+where <span>\\(\mathbf{A} \\)</span> is our regression matrix, <span>\\(\mathbf{\beta} \\)</span> is our unknown set of parameters, and <span>\\(\mathbf{y} \\)</span> is our vector of <span>\\(y \\)</span> values. We can use a least squares solver to solve for <span>\\(\mathbf{\beta} \\)</span>. In Python, I like to use the [numpy lstsq](https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq) solver which uses [LAPACK](https://www.netlib.org/lapack/explore-html/d7/d3b/group__double_g_esolve_ga94bd4a63a6dacf523e25ff617719f752) to solve the matrix.
 
 Once you have found your set of optimal parameters <span>\\(\mathbf{\beta} \\)</span>, then you can predict for new <span>\\(x \\)</span> values by assembling your regression matrix <span>\\(\mathbf{A} \\)</span> for the new <span>\\(x \\)</span> values. The new <span>\\(y \\)</span> values are solved by multiplying
 <div>

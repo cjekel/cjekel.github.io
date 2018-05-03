@@ -4,7 +4,7 @@ date:   2016-09-15 19:20:00
 description: A simple one variable Kriging example utilizing scikit-learn to model a known function
 keywords: [Python, scikit-learn, gaussian process, kriging how to]
 ---
-I was looking for a Python Kriging package for the longest time, and somehow I overlooked [scikit-learn](http://scikit-learn.org/). Honestly I didn't understand that Kriging is a Gaussian process prediction (see the [wiki](https://en.wikipedia.org/wiki/Gaussian_process#Gaussian_process_prediction.2C_or_kriging)).This post will demonstrate how to use scikit-learn to create a Kriging model (Gaussian process prediction) for a single independent variable.
+I was looking for a Python Kriging package for the longest time, and somehow I overlooked [scikit-learn](https://scikit-learn.org/). Honestly I didn't understand that Kriging is a Gaussian process prediction (see the [wiki](https://en.wikipedia.org/wiki/Gaussian_process#Gaussian_process_prediction.2C_or_kriging)).This post will demonstrate how to use scikit-learn to create a Kriging model (Gaussian process prediction) for a single independent variable.
 
 Let's say we have some function <span>\\( Y(X) \\)</span> defined as
 <div>
@@ -55,7 +55,7 @@ plt.show()
 
 ![First Kriging fit to the training points was just okay.]({{ "/" | relative_url  }}assets/2016-09-15/figure1.png)
 
-This fit is okay, but we can certainly do better. According to the scikit-learn documentation on the [Gaussian process](http://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcess.html#sklearn.gaussian_process.GaussianProcess) model, we notice that have a few options for the correlation function. The scikit-learn Gaussian process defaults to a squared-exponential correlation function. Let's see what happens if we pick a different correlation function, so let's set the correlation to absolute-exponential and see what happens.
+This fit is okay, but we can certainly do better. According to the scikit-learn documentation on the [Gaussian process](https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcess.html#sklearn.gaussian_process.GaussianProcess) model, we notice that have a few options for the correlation function. The scikit-learn Gaussian process defaults to a squared-exponential correlation function. Let's see what happens if we pick a different correlation function, so let's set the correlation to absolute-exponential and see what happens.
 
 ```python
 gp = gaussian_process.GaussianProcess(corr='absolute_exponential') gp.fit(x,y)

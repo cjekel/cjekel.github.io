@@ -27,6 +27,6 @@ I taught a 1 credit hour course on Python Programming in Fall 2017. Take a look 
 I use PGP. My public key is [here](https://raw.githubusercontent.com/cjekel/cjekel.github.io/master/assets/Charles.Jekel.asc).
 
 # Site
-This website is hosted on [Github Pages](https://pages.github.com), and is built with [Jekyll](https://jekyllrb.com/) using the [Kactus](https://github.com/nickbalestra/kactus) theme by [Nick Balestra](http://nick.balestra.ch). All of the material on this site is freely [available](https://github.com/cjekel/cjekel.github.io).
+This website is hosted on [Github Pages](https://pages.github.com), and is built with [Jekyll](https://jekyllrb.com/) using the [Kactus](https://github.com/nickbalestra/kactus) theme by [Nick Balestra](https://nick.balestra.ch). All of the material on this site is freely [available](https://github.com/cjekel/cjekel.github.io).
 
 {% include footer.html %}

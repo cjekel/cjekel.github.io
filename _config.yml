@@ -11,13 +11,13 @@ highlighter: rouge
 
 plugins: [jekyll-paginate,jekyll-github-metadata]
 paginate: 20
-domain_name: 'http://jekel.me'
+domain_name: 'https://jekel.me'
 google_analytics: 'UA-67542734-1'
 disqus: true
 disqus_shortname: 'cjekel'
 
 # Details for the RSS feed generator
-url:            'http://jekel.me'
+url:            'https://jekel.me'
 author:         'Charles Jekel'
 # I don't Tweet authorTwitter:  'YourTwitterUsername'
 

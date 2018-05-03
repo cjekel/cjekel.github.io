@@ -7,7 +7,7 @@ keywords: [facenet, how to use facenet, facenet detect faces, facial recognition
 
 *Edit 2017 September 8, I fixed the images BGR issue as recommended by Jason Taylor*
 
-This post will show how to detect faces using the [facenet](https://github.com/davidsandberg/facenet) library, as it is not exactly clear from the wiki on how to use functions within the library. I've found that the facial detection implementation in facenet to be much better than the standard [OpenCV](http://opencv.org/) haarcascade frontalface detection method.
+This post will show how to detect faces using the [facenet](https://github.com/davidsandberg/facenet) library, as it is not exactly clear from the wiki on how to use functions within the library. I've found that the facial detection implementation in facenet to be much better than the standard [OpenCV](https://opencv.org/) haarcascade frontalface detection method.
 
 The [facenet](https://github.com/davidsandberg/facenet) library is a TensorFlow implementation of the [FaceNet](https://arxiv.org/abs/1503.03832) paper. You can download some of the pre-trained models, which have an accuracy of 0.993 with the LFW dataset. This accuracy is certainly impressive. So what are you waiting for, go clone and fork this library!
 

@@ -154,7 +154,7 @@ Please cite this work as:
  organization = {Stellenbosch University},
  pages = {83--87},
  title = {Digital Image Correlation on Steel Ball},
- url = {http://hdl.handle.net/10019.1/98627},
+ url = {https://hdl.handle.net/10019.1/98627},
  year = {2016}
 }
 ```

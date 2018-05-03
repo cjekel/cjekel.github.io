@@ -10,7 +10,7 @@ This is a very complicated topic to demonstrate effectively. One could look at e
 
 Gross Domestic Product (GDP) has been useful metric for comparing the economies of different countries. It's especially useful for understanding the relative scale of different economies. GDP represents the total gross value added by residents of a particular market. The GDP of the USA looks only at the economic contributions within the USA. Contributors to GDP include people, technology, natural resources, and intellectual property. Another useful metric is Gross National Income (GNI). From what I understand, the difference between GDP and GNI is that GDP is specific to a particular geographical situation, while GNI data looks at the economic ownership. If a USA resident owned a business in India, the value of goods produced from that business would count for GNI and not GDP. 
 
-I obtained the GDP and GNI (Atlas method) information from [The World Bank](http://data.worldbank.org) of the USA between 1960 and 2014. I then plotted the data using Python; you can see the plot below.
+I obtained the GDP and GNI (Atlas method) information from [The World Bank](https://data.worldbank.org) of the USA between 1960 and 2014. I then plotted the data using Python; you can see the plot below.
 
 ![USA GDP and GNI from 1960 - 2014](https://raw.githubusercontent.com/cjekel/USA_GDP_per_capita_inflation_adjust/master/images/usaGDPandGNI.png)
 
@@ -18,7 +18,7 @@ Well we can clearly see that the GDP and GNI are increasing exponentially. This 
 
 ### GDP per capita and GNI per capita
 
-This is all fine. The World Bank includes [population](http://data.worldbank.org/indicator/SP.POP.TOTL) data for the USA as well.  So if we take the GDP and GNI data I have collected, and divide each by the population of the year, we end up with GDP per capita and GNI per capita. The GDP per capita effectively demonstrates the value of each resident of an economy. Together these metrics can be related to the average gross income of residents in a country.
+This is all fine. The World Bank includes [population](https://data.worldbank.org/indicator/SP.POP.TOTL) data for the USA as well.  So if we take the GDP and GNI data I have collected, and divide each by the population of the year, we end up with GDP per capita and GNI per capita. The GDP per capita effectively demonstrates the value of each resident of an economy. Together these metrics can be related to the average gross income of residents in a country.
 
 An improving economic situation for the average residents of a country would show that the per capita values of both GDP and GNI are increasing over time. We want to see that the GDP per capita and GNI per capita of the USA are increasing; because it represents that the value of the people is increasing over time. Potentially compensation and lifestyle increases follow this increase of value. I've taken the GDP and GNI data and divided it by the population for each year. The result is the following plot of the per capita GDP and GNI of the USA.
 
@@ -28,7 +28,7 @@ The plot of the per capita GDP and GNI has the same exponential trend as the plo
 
 ### Dealing with inflation
 
-The [Bureau of Labor Statistics](http://www.bls.gov) has been monitoring the effects of inflation with the Consumer Price Index (CPI). Now the CPI isn't actually an inflation index, as it's a bit difficult to monitor actual inflation rate. The CPI is effectively a price of goods index, which helps compare purchasing power at different times. So we can use the CPI to relate the purchasing power of $ in 1960, and other years, to the purchasing power of $ in 2014.
+The [Bureau of Labor Statistics](https://www.bls.gov) has been monitoring the effects of inflation with the Consumer Price Index (CPI). Now the CPI isn't actually an inflation index, as it's a bit difficult to monitor actual inflation rate. The CPI is effectively a price of goods index, which helps compare purchasing power at different times. So we can use the CPI to relate the purchasing power of $ in 1960, and other years, to the purchasing power of $ in 2014.
 
 I adjusted the GDP per capita and GNI per capita plot for inflation with the CPI values, such that all prices are in 2014 US dollars. The plot can be seen below. 
 
@@ -38,7 +38,7 @@ When we look at the GDP and GNI per capita values adjusted for inflation, we see
 
 ### What happens if the CPI is wrong?  
 
-It is important to mention that the CPI isn't a magic inflation calculator. The methods for determining CPI have often been criticized. Some believe CPI [overestimates inflation](http://www.colorado.edu/economics/courses/econ2020/section6/section6-main.html), while others believe CPI [underestimates inflation](http://bpp.mit.edu/usa/). I am a bit curious to see how an overestimating/underestimating CPI value has on the adjusted GDP per capita.
+It is important to mention that the CPI isn't a magic inflation calculator. The methods for determining CPI have often been criticized. Some believe CPI [overestimates inflation](https://www.colorado.edu/economics/courses/econ2020/section6/section6-main.html), while others believe CPI [underestimates inflation](https://bpp.mit.edu/usa/). I am a bit curious to see how an overestimating/underestimating CPI value has on the adjusted GDP per capita.
 
 So let's assume a very minute underestimation and overestimation case, where the Bureau of Labor Statistics has been consistently over estimating or underestimating the actual CPI value by just 0.5%. To continually overestimate or understate by a constant margin will represent the worst possible case. What I believe has most likely occurred is that the CPI value has sometimes been an overestimated value of inflation, and other times been an underestimated value of inflation. I made a plot just showing the adjusted GDP per capita (since GNI per capita was so similar) for inflation assuming the two potential cases: 1. The CPI has overestimated inflation by 0.5% each year. 2. The CPI has underestimated inflation by 0.5% each year. You can see the plot below.
 
@@ -64,7 +64,7 @@ GDP per capita and GNI per capita were calculated for the USA between 1960 and 2
 
 The overall trend is that the GDP per capita in the USA is increasing over time. This appears to be true form 1960 - 2014. Increasing GDP per capita is a good thing, and can mean that people are producing and consuming more. Additionally this can mean to an increase in compensation, because the value at which workers produce is higher. 
 
-I was very surprised on the sensitivity of GDP per capita to inflation when adjusting the CPI inflation error. If the CPI underestimated inflation every year by just 1.0% it appears that the GDP per capita reaches a plateau in the 1970s. It starts to get scary when you assume that the CPI value has underestimated inflation by just 2.0% each year as it starts to appear that GDP per capita has peaked in the 1970s. What I'd like to find is a statistical error metric for the CPI value. I was searching the [BLS's FAQs](http://www.bls.gov/cpi/cpifaq.htm#Question_1) and didn't find any mention of the sorts. As another alternative I could plot what the GDP per capita looks like over time with different inflation indexes.
+I was very surprised on the sensitivity of GDP per capita to inflation when adjusting the CPI inflation error. If the CPI underestimated inflation every year by just 1.0% it appears that the GDP per capita reaches a plateau in the 1970s. It starts to get scary when you assume that the CPI value has underestimated inflation by just 2.0% each year as it starts to appear that GDP per capita has peaked in the 1970s. What I'd like to find is a statistical error metric for the CPI value. I was searching the [BLS's FAQs](https://www.bls.gov/cpi/cpifaq.htm#Question_1) and didn't find any mention of the sorts. As another alternative I could plot what the GDP per capita looks like over time with different inflation indexes.
 
 All of the code I used to process the GDP and GNI data is available on [GitHub](https://github.com/cjekel/USA_GDP_per_capita_inflation_adjust). 
 

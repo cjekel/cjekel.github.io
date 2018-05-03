@@ -4,7 +4,7 @@ date:   2017-04-01 11:11:00
 description: A Python library to fit continuous piecewise linear functions to data was created. This library allows for the user to specify the desired number of line segments when fitting piecewise linear functions.
 keywords: [piecewise linear fit, continuous piecewise fit, piece-wise linear fit, Python piecwise linear fit, how to fit a piecewise linear function Python]
 ---
-*Edit* 2018-04-08 Major update to pwlf. Read [this](http://jekel.me/2018/Continous-piecewise-linear-regression/). The code in this post has been changed to reflect the new naming convention.
+*Edit* 2018-04-08 Major update to pwlf. Read [this](https://jekel.me/2018/Continous-piecewise-linear-regression/). The code in this post has been changed to reflect the new naming convention.
 
 *Edit* 2017-11-03 Now you can install with pip!
 
@@ -13,7 +13,7 @@ I created a Python library, called [pwlf](https://github.com/cjekel/piecewise_li
 
 
 ##  Introduction
-So let's say we have data that exists in two dimensional space, where each point can be represented by <span>\\( (x,y) \\)</span>. It is possible to fit a continuous piecewise linear function <span>\\( f(x) \\)</span> to the data using a least squares method, as long as the <span>\\( x \\)</span> locations of the line segment ends are known. [Golovchenko (2004)](http://golovchenko.org/docs/ContinuousPiecewiseLinearFit.pdf) covered the simple least squares derivation well if you want to see how the math works out.
+So let's say we have data that exists in two dimensional space, where each point can be represented by <span>\\( (x,y) \\)</span>. It is possible to fit a continuous piecewise linear function <span>\\( f(x) \\)</span> to the data using a least squares method, as long as the <span>\\( x \\)</span> locations of the line segment ends are known. [Golovchenko (2004)](https://golovchenko.org/docs/ContinuousPiecewiseLinearFit.pdf) covered the simple least squares derivation well if you want to see how the math works out.
 
 I took the least squares approach and coupled it to a global optimization algorithm ([differential evolution](https://docs.scipy.org/doc/scipy-0.17.0/reference/generated/scipy.optimize.differential_evolution.html)) such that a user can specify the number of line segments to fit the data with. The routine finds the best location for the line segments by minimizing the sum of the square of the residuals. The result is the optimal continuous piecewise linear function for the specified number of line segments.
 
