@@ -62,11 +62,10 @@ $$
 \vdots & \vdots & \vdots & \vdots &  \ddots & \vdots \\
 1 & x_n-b_1 & (x_n-b_2)1_{x_n > b_2} & (x_n-b_3)1_{x_n > b_3} & \cdots & (x_n-b_{n_b-1})1_{x_n > b_{n_b-1}} \\
 \end{bmatrix} \begin{bmatrix}
-\beta_1 \\y_0 \\
-
+\beta_1 \\
 \beta_2 \\
 \vdots \\
-\beta_{n_b+1}
+\beta_{n_b}
 \end{bmatrix} = \begin{bmatrix}
 y_1 \\
 y_2 \\
