@@ -18,9 +18,9 @@ BSc Mechanical Engineering: 3.72/4.00 with honor
 
 ---
 ### Publications
-Charles F. Jekel, Gerhard Venter, Martin P. Venter, Nielen Stander, Raphael T. Haftka, **Similarity measures for identifying material parameters from hysteresis loops using inverse analysis**, *Submitted* 2017, *Accepted* 2018.
+Jekel, C. F., Venter, G., Venter, M. P., Stander, N., & Haftka, R. T. (2018). **Similarity measures for identifying material parameters from hysteresis loops using inverse analysis**, International Journal of Material Forming. [doi:10.1007/s12289-018-1421-8](https://doi.org/10.1007/s12289-018-1421-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelArea_IJMF_rev05_final.pdf).
 
-Charles F. Jekel, Gerhard Venter, Martin P. Venter, **Modeling PVC-coated polyester as a hypoelastic non-linear orthotropic material**, *Composite Structures*, Volume 161, 1 February 2017, Pages 51-64, ISSN 0263-8223, [doi:10.1016/j.compstruct.2016.11.019](https://dx.doi.org/10.1016/j.compstruct.2016.11.019) [pdf]({{ "/" | relative_url  }}assets/papers/JekelModelingPVC-CoatedPolyester.pdf).
+Charles F. Jekel, Gerhard Venter, Martin P. Venter. **Modeling PVC-coated polyester as a hypoelastic non-linear orthotropic material**, *Composite Structures*, Volume 161, 1 February 2017, Pages 51-64, ISSN 0263-8223, [doi:10.1016/j.compstruct.2016.11.019](https://dx.doi.org/10.1016/j.compstruct.2016.11.019) [pdf]({{ "/" | relative_url  }}assets/papers/JekelModelingPVC-CoatedPolyester.pdf).
 
 Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining a hyperelastic non-linear orthotropic material model via inverse bubble inflation analysis**, *Structural and Multidisciplinary Optimization*, pages 1-9, 2016, ISSN 1615-1488, [doi:10.1007/s00158-016-1456-8](https:////dx.doi.org/10.1007/s00158-016-1456-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelInverseBubbleInflationFinal.pdf).
 
@@ -28,9 +28,9 @@ Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining a hyperelast
 ### Conference Presentations
 Charles F. Jekel, Raphael T. Haftka, Gerhard Venter, and Martin P. Venter. **Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction**, 2018 AIAA Non-Deterministic Approaches Conference, AIAA SciTech Forum, (AIAA 2018-1664) [doi:10.2514/6.2018-1664](https://doi.org/10.2514/6.2018-1664) [pdf]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf).
 
-Charles F. Jekel, Gerhard Venter, and Martin P. Venter, **Obtaining Material Models for use in Finite Element Analyses of PVC-coated polyester via an Inverse Bubble Inflation Method** [abstract], CIMNE VII International Conference on Textile Composites and Inflatable Structures, Oct 2015, Barcelona, Spain.
+Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining Material Models for use in Finite Element Analyses of PVC-coated polyester via an Inverse Bubble Inflation Method** [abstract], CIMNE VII International Conference on Textile Composites and Inflatable Structures, Oct 2015, Barcelona, Spain.
 
-Charles F. Jekel and Gerhard Venter, **An Inverse Method for Generating Polymer Properties for use in Finite Element Analyses via Bubble Inflation Testing** [abstract], SAImechE Mechanical, Manufacturing, and Materials Engineering Conference, 2014, Stellenbosch, South Africa.
+Charles F. Jekel and Gerhard Venter. **An Inverse Method for Generating Polymer Properties for use in Finite Element Analyses via Bubble Inflation Testing** [abstract], SAImechE Mechanical, Manufacturing, and Materials Engineering Conference, 2014, Stellenbosch, South Africa.
 
 ---
 ### Professional Experience
@@ -44,6 +44,8 @@ Created and taught the first Python Programming course in the MAE department at 
 [pwlf](https://github.com/cjekel/piecewise_linear_fit_py): A library for fitting continuous piecewise linear functions to two dimensional data.
 
 [tindetheus](https://github.com/cjekel/tindetheus): A Python application that allows users to build their own personalized machine learning models using computer vision. The models can automatically like users on Tinder, based on the user's own historical preference.
+
+[similaritymeasures](https://github.com/cjekel/Similarity_measures_for_identifying_material_parameters_from_hysteresis_loops_using_inverse_analysis): Quantify the difference between two curves using the Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, and Curve Length based similarity measure. This is useful to quantify the difference between material load/unload curves.
 
 ## UTC Aerospace Systems
 2013 - 2014: Manufacturing Engineer  
