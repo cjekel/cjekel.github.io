@@ -1,11 +1,11 @@
 ---
 title:  "Visual Studio Code Python Setup"
 date:   2018-07-29 14:15:00
-description: Visual Studio Code is my favorite editor to write Python code. This post shows you how to setup Code so that you can begin using Code to write better Python!
+description: Visual Studio Code is my favorite editor to write Python code. This post shows you how to setup Code so that you can start writing better Python!
 keywords: [Python Code setup, Visual studio Code Python setup, Python linting in Code, flake8 Code setup python]
 ---
 
-Visual Studio Code has become my absolute favorite IDE / text editor. I highly recommend those who work with Python to consider using Code for their work. If I were to revisit my [Python course](https://github.com/cjekel/Introduction-to-Python-Numerical-Analysis-for-Engineers-and-Scientist), I would spend a lecture going over setting up Code for working with Python. Right now
+Visual Studio Code has become my absolute favorite IDE / text editor. I highly recommend those who work with Python to consider using Code for their work. If I were to revisit my [Python course](https://github.com/cjekel/Introduction-to-Python-Numerical-Analysis-for-Engineers-and-Scientist), I would spend a lecture going over setting up Code for working with Python. It takes a bit of time to set up Python for Code, and then to start running Python from Code. This post will show you how to setup code, why the linting options are useful, and how to run Python scripts from code.
 
 Some of the reasons I like Visual Studio Code:
 - Code opens fast
