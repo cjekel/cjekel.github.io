@@ -93,7 +93,7 @@ There are several problems with our code not following the style guide as shown 
 
 ![Code warnings]({{ "/" | relative_url  }}assets/2018-07-29/issues.png)
 
-Flake8 helps you right code that follows the Python [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide. It does this by complaining about all of the lines that don't follow the style guide. This is a [wonderful thing](https://medium.com/python-pandemonium/what-is-flake8-and-why-we-should-use-it-b89bd78073f2) as far as getting everyone to follow the style guide. If we fix our code, we'll no longer have any warnings or problems.
+Flake8 helps you right code that follows the Python [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide. It does this by complaining about all of the lines that don't follow the style guide. This is a [wonderful thing](https://medium.com/python-pandemonium/what-is-flake8-and-why-we-should-use-it-b89bd78073f2) to help people follow the style guide. If we fix our code, we'll no longer have any warnings or problems.
 
 ![Code warnings]({{ "/" | relative_url  }}assets/2018-07-29/noissues.png)
 
