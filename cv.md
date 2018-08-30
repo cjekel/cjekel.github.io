@@ -5,8 +5,8 @@ profile: true
 ---
 
 ### Education
-2016 - 2019: University of Florida
-PhD Mechanical Engineering: 3.68/4.00 GPA
+2016 - 2019: University of Florida 
+PhD Mechanical Engineering: 3.68/4.00 GPA 
 Surrogate models and inverse analysis to characterize material parameters 
 Anticipated December 2019 graduation 
 
