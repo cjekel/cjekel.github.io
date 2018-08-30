@@ -6,7 +6,8 @@ profile: true
 
 ### Education
 2016 - 2019: University of Florida
-PhD Mechanical Engineering: surrogate models and inverse analysis to characterize material parameters 
+PhD Mechanical Engineering: 3.68/4.00 GPA
+Surrogate models and inverse analysis to characterize material parameters 
 Anticipated December 2019 graduation 
 
 2014 - 2016: Stellenbosch University  
@@ -14,7 +15,7 @@ MEng Mechanical Engineering: cum laude
 Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyester via inverse bubble inflation.** [https://hdl.handle.net/10019.1/98627](https://hdl.handle.net/10019.1/98627) [pdf]({{ "/" | relative_url  }}assets/papers/jekel_obtaining_2016.pdf).
 
 2009 - 2013: University of Colorado - Colorado Springs  
-BSc Mechanical Engineering: 3.72/4.00 with honor
+BSc Mechanical Engineering: 3.72/4.00 GPA with honor
 
 ---
 ### Peer-reviewed journal articles
