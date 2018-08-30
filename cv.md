@@ -34,20 +34,20 @@ Charles F. Jekel, Raphael T. Haftka, Gerhard Venter, and Martin P. Venter. **Lac
 Jekel, C.F. and Haftka, R.T., 2018. **Classifying Online Dating Profiles on Tinder using FaceNet Facial Embeddings**. arXiv preprint arXiv:[1803.04347](https://arxiv.org/abs/1803.04347) [pdf](https://arxiv.org/pdf/1803.04347.pdf).
 
 ---
-### Python Libraries
+### Python libraries
 [pwlf](https://github.com/cjekel/piecewise_linear_fit_py): A library for fitting continuous piecewise linear functions to two dimensional data.
 
 [tindetheus](https://github.com/cjekel/tindetheus): A Python application that allows users to build their own personalized machine learning models using computer vision. The models can automatically like users on Tinder, based on the user's own historical preference.
 
-[similaritymeasures](https://github.com/cjekel/Similarity_measures_for_identifying_material_parameters_from_hysteresis_loops_using_inverse_analysis): Quantify the difference between two curves using the Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, or Curve Length based similarity measure. This is useful to quantify the difference between material load/unload curves.
+[similaritymeasures](https://github.com/cjekel/Similarity_measures_for_identifying_material_parameters_from_hysteresis_loops_using_inverse_analysis): Quantify the difference between two curves using the Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, or Curve Length based similarity measure. These methods are particularly useful for identifying parameters from material load/unload curves.
 
 ---
-### Professional Experience
+### Professional experience
 
 #### Sandia National Laboratories
 2018 - present: R&D Graduate Intern
 
-Works in the Verification Validation (VV), Uncertainty Quantification (UQ), Credibility Process group. Performed research and development of statistical methods to predict extreme tail probabilities with a limited number of samples.
+Works in the Verification Validation (VV), Uncertainty Quantification (UQ), Credibility Process group. R&D of statistical methods to estimate extreme tail probabilities with a limited number of samples.
 
 #### UTC Aerospace Systems
 2013 - 2014: Manufacturing Engineer  
@@ -62,13 +62,13 @@ platforms.
 All-purpose IT wizard. Graphic design guru.
 
 ---
-### Courses Taught
+### Courses taught
 2017: [Python Programming]({{ "/" | relative_url  }}assets/PythonProgrammingEML6934.pdf) - 1 credit hour graduate course - [Syllabus]({{ "/" | relative_url  }}assets/eml6934_Python_Syllabus.pdf) - [Course material](https://github.com/cjekel/Introduction-to-Python-Numerical-Analysis-for-Engineers-and-Scientist)
 
 Created and taught the first Python Programming course in the MAE department at the University of Florida. The course covers topics from the basics of Python to the most popular scientific Python libraries in an effort to prepare graduate students to perform research in Python.
 
 ---
-### Honors and Awards
+### Honors and awards
 2016: University of Florida GSFA - four year graduate school fellowship    
 2016: Stellenbosch departmental bursary - three year PhD funding   
 2016: MEng, obtained cum laude   
