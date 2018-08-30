@@ -5,8 +5,9 @@ profile: true
 ---
 
 ### Education
-2016 - 2019: University of Florida and Stellenbosch University   
-PhD Mechanical Engineering: surrogate models and inverse analysis to characterize material parameters
+2016 - 2019: University of Florida
+PhD Mechanical Engineering: surrogate models and inverse analysis to characterize material parameters 
+Anticipated December 2019 graduation 
 
 2014 - 2016: Stellenbosch University  
 MEng Mechanical Engineering: cum laude  
@@ -16,7 +17,7 @@ Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyes
 BSc Mechanical Engineering: 3.72/4.00 with honor
 
 ---
-### Publications
+### Peer-reviewed journal articles
 Jekel, C. F., Venter, G., Venter, M. P., Stander, N., & Haftka, R. T. (2018). **Similarity measures for identifying material parameters from hysteresis loops using inverse analysis**, *International Journal of Material Forming*. [doi:10.1007/s12289-018-1421-8](https://doi.org/10.1007/s12289-018-1421-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelArea_IJMF_rev05_final.pdf).
 
 Charles F. Jekel, Gerhard Venter, Martin P. Venter. **Modeling PVC-coated polyester as a hypoelastic non-linear orthotropic material**, *Composite Structures*, Volume 161, 1 February 2017, Pages 51-64, ISSN 0263-8223, [doi:10.1016/j.compstruct.2016.11.019](https://dx.doi.org/10.1016/j.compstruct.2016.11.019) [pdf]({{ "/" | relative_url  }}assets/papers/JekelModelingPVC-CoatedPolyester.pdf).
@@ -24,15 +25,11 @@ Charles F. Jekel, Gerhard Venter, Martin P. Venter. **Modeling PVC-coated polyes
 Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining a hyperelastic non-linear orthotropic material model via inverse bubble inflation analysis**, *Structural and Multidisciplinary Optimization*, pages 1-9, 2016, ISSN 1615-1488, [doi:10.1007/s00158-016-1456-8](https:////dx.doi.org/10.1007/s00158-016-1456-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelInverseBubbleInflationFinal.pdf).
 
 ---
-### Conference Presentations
+### Conference papers
 Charles F. Jekel, Raphael T. Haftka, Gerhard Venter, and Martin P. Venter. **Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction**, 2018 AIAA Non-Deterministic Approaches Conference, AIAA SciTech Forum, (AIAA 2018-1664) [doi:10.2514/6.2018-1664](https://doi.org/10.2514/6.2018-1664) [pdf]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf).
 
-Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining Material Models for use in Finite Element Analyses of PVC-coated polyester via an Inverse Bubble Inflation Method** [abstract], CIMNE VII International Conference on Textile Composites and Inflatable Structures, Oct 2015, Barcelona, Spain.
-
-Charles F. Jekel and Gerhard Venter. **An Inverse Method for Generating Polymer Properties for use in Finite Element Analyses via Bubble Inflation Testing** [abstract], SAImechE Mechanical, Manufacturing, and Materials Engineering Conference, 2014, Stellenbosch, South Africa.
-
 ---
-### Non-refereed papers
+### Technical reports and non-refereed papers
 Jekel, C.F. and Haftka, R.T., 2018. **Classifying Online Dating Profiles on Tinder using FaceNet Facial Embeddings**. arXiv preprint arXiv:[1803.04347](https://arxiv.org/abs/1803.04347) [pdf](https://arxiv.org/pdf/1803.04347.pdf).
 
 ---
@@ -47,9 +44,9 @@ Jekel, C.F. and Haftka, R.T., 2018. **Classifying Online Dating Profiles on Tind
 ### Professional Experience
 
 #### Sandia National Laboratories
-2018: R&D Graduate Summer Intern
+2018 - present: R&D Graduate Intern
 
-Worked in the Verification Validation (VV), Uncertainty Quantification (UQ), Credibility Process group. Performed research and development of statistical methods for quantifying extreme tail probabilities with a limited number of samples.
+Works in the Verification Validation (VV), Uncertainty Quantification (UQ), Credibility Process group. Performed research and development of statistical methods to predict extreme tail probabilities with a limited number of samples.
 
 #### UTC Aerospace Systems
 2013 - 2014: Manufacturing Engineer  
