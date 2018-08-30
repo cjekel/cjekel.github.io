@@ -29,7 +29,7 @@ Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining a hyperelast
 Charles F. Jekel, Raphael T. Haftka, Gerhard Venter, and Martin P. Venter. **Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction**, 2018 AIAA Non-Deterministic Approaches Conference, AIAA SciTech Forum, (AIAA 2018-1664) [doi:10.2514/6.2018-1664](https://doi.org/10.2514/6.2018-1664) [pdf]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf).
 
 ---
-### Technical reports and non-refereed papers
+### Technical reports and other non-refereed papers
 Jekel, C.F. and Haftka, R.T., 2018. **Classifying Online Dating Profiles on Tinder using FaceNet Facial Embeddings**. arXiv preprint arXiv:[1803.04347](https://arxiv.org/abs/1803.04347) [pdf](https://arxiv.org/pdf/1803.04347.pdf).
 
 ---
