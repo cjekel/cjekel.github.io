@@ -45,7 +45,7 @@ Jekel, C.F. and Haftka, R.T., 2018. **Classifying Online Dating Profiles on Tind
 ### Professional experience
 
 #### Sandia National Laboratories
-2018 - present: R&D Graduate Intern
+2018: R&D Graduate Intern
 
 Works in the Verification Validation (VV), Uncertainty Quantification (UQ), Credibility Process group. R&D of statistical methods to estimate extreme tail probabilities with a limited number of samples.
 
