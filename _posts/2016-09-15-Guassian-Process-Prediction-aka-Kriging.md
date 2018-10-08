@@ -4,6 +4,8 @@ date:   2016-09-15 19:20:00
 description: A simple one variable Kriging example utilizing scikit-learn to model a known function
 keywords: [Python, scikit-learn, gaussian process, kriging how to]
 ---
+*EDIT Oct 8, 2018*: This method for fitting a Gaussian Process has been depreciated in scikit-learn. I may update this post at somepoint in time, but for now see the scikit-learn [documentation](http://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html).
+
 I was looking for a Python Kriging package for the longest time, and somehow I overlooked [scikit-learn](https://scikit-learn.org/). Honestly I didn't understand that Kriging is a Gaussian process prediction (see the [wiki](https://en.wikipedia.org/wiki/Gaussian_process#Gaussian_process_prediction.2C_or_kriging)).This post will demonstrate how to use scikit-learn to create a Kriging model (Gaussian process prediction) for a single independent variable.
 
 Let's say we have some function <span>\\( Y(X) \\)</span> defined as
