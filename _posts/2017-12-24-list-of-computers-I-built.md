@@ -25,3 +25,4 @@ I'll try to keep this list up to date, every time I put together a new computer!
 | 2016   | AMD FX-8370          |
 | 2017   | AMD FX-9590          |
 | 2017   | AMD Ryzen 5 1600     |
+| 2018   | AMD Ryzen 7 2700x    |
