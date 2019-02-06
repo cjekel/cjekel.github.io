@@ -24,5 +24,6 @@ for j = 1:4
     mm = mean(time_plus_eq);
     mean_run_times(j) = mm;
 end
+mean_run_times
 savefile = 'matlab_single.mat';
 save(savefile, 'mean_run_times')

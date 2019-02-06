@@ -14,8 +14,12 @@ for j = 1:4
         X = ones(n(j),1);
         Y = ones(n(j),1);
         t = cputime;
-        X = X + 2.0*Y;
-        e = cputime-t;
+        %X = X + 2.0*Y;
+        % interesting this is slower in matlab than X = X + 2.0*Y;
+	X = X + Y;
+	X = X + Y;
+    %X = X + Y;
+	e = cputime-t;
         time_plus_eq(i) = e;
     end
     mm = mean(time_plus_eq);
