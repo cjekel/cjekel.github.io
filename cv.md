@@ -6,9 +6,9 @@ profile: true
 
 ### Education
 2016 - 2019: University of Florida  
-PhD Mechanical Engineering: 3.68/4.00 GPA  
-Surrogate models and inverse analysis to characterize material parameters  
-Anticipated December 2019 graduation 
+PhD Mechanical Engineering: 3.68/4.00 GPA
+Identification of material model parameters from experimental data
+December 2019 graduation 
 
 2014 - 2016: Stellenbosch University  
 MEng Mechanical Engineering: cum laude  
@@ -31,11 +31,13 @@ Charles F. Jekel, Raphael T. Haftka, Gerhard Venter, and Martin P. Venter. **Lac
 
 ---
 ### Technical reports and other non-refereed papers
+C. F. Jekel and G. Venter, pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions, 2019. [Online]. Available: https://github.com/cjekel/piecewise_linear_fit_py [pdf](https://github.com/cjekel/piecewise_linear_fit_py/blob/master/paper/pwlf_Jekel_Venter_v1.pdf).
+
 Jekel, C.F. and Haftka, R.T., 2018. **Classifying Online Dating Profiles on Tinder using FaceNet Facial Embeddings**. arXiv preprint arXiv:[1803.04347](https://arxiv.org/abs/1803.04347) [pdf](https://arxiv.org/pdf/1803.04347.pdf).
 
 ---
 ### Python libraries
-[pwlf](https://github.com/cjekel/piecewise_linear_fit_py): A library for fitting continuous piecewise linear functions to two dimensional data.
+[pwlf](https://github.com/cjekel/piecewise_linear_fit_py): A Python library for fitting 1D continuous piecewise linear functions.
 
 [tindetheus](https://github.com/cjekel/tindetheus): A Python application that allows users to build their own personalized machine learning models using computer vision. The models can automatically like users on Tinder, based on the user's own historical preference.
 
@@ -45,9 +47,14 @@ Jekel, C.F. and Haftka, R.T., 2018. **Classifying Online Dating Profiles on Tind
 ### Professional experience
 
 #### Sandia National Laboratories
-2018: R&D Graduate Intern
+2018: Research & Development Graduate Intern
 
 Works in the Verification Validation (VV), Uncertainty Quantification (UQ), Credibility Process group. R&D of statistical methods to estimate extreme tail probabilities with a limited number of samples.
+
+#### University of Florida 
+2016 - present: Research Assistant /  Instructor
+
+Applied optimization finds model parameters to match experimental data. Quantifying the difference between experimental data and numerical models. Created and taught a Python Programming course.
 
 #### UTC Aerospace Systems
 2013 - 2014: Manufacturing Engineer  
