@@ -31,7 +31,7 @@ Charles F. Jekel, Raphael T. Haftka, Gerhard Venter, and Martin P. Venter. **Lac
 
 ---
 ### Technical reports and other non-refereed papers
-C. F. Jekel and G. Venter, pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions, 2019. [Online]. Available: https://github.com/cjekel/piecewise_linear_fit_py [pdf](https://github.com/cjekel/piecewise_linear_fit_py/blob/master/paper/pwlf_Jekel_Venter_v1.pdf).
+C. F. Jekel and G. Venter, pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions, 2019. [Online]. Available: https://github.com/cjekel/piecewise_linear_fit_py [pdf](https://github.com/cjekel/piecewise_linear_fit_py/raw/master/paper/pwlf_Jekel_Venter_v1.pdf).
 
 Jekel, C.F. and Haftka, R.T., 2018. **Classifying Online Dating Profiles on Tinder using FaceNet Facial Embeddings**. arXiv preprint arXiv:[1803.04347](https://arxiv.org/abs/1803.04347) [pdf](https://arxiv.org/pdf/1803.04347.pdf).
 
