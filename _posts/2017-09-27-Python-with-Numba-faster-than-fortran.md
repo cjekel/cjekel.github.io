@@ -9,6 +9,10 @@ TL;DR; Python Numba acceleration is really fast.
 
 Like faster than *Fortan fast*.
 
+**Edit February 6, 2018**:
+
+Some notes. In Python X += Y; X += Y is faster than X = X + Y + Y which is faster than X = X + 2*Y. However, in MATLAB X = X + 2*Y is faster than X = X + Y + Y. The Fortan code I run could be marginally improved (~2%) by compling X = X + Y + Y instead of X = X + 2*Y. The code for the Numba, MATLAB, and Fortran benchmark is the same X = X + 2*Y.
+
 *Edit September 28, 2017: I've updated the benchmark to include runs with gfortran -O2.*
 
 ### Preface
