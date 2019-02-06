@@ -54,7 +54,7 @@ Works in the Verification Validation (VV), Uncertainty Quantification (UQ), Cred
 #### University of Florida 
 2016 - present: Research Assistant /  Instructor
 
-Applied optimization to find model parameters that match experimental data. Quantifying the difference between experimental data and numerical models. Created and taught a Python Programming course.
+Applied optimization to find model parameters that match experimental data, and research on quantifying the difference between experimental data and numerical models. Created and taught a Python Programming course.
 
 #### UTC Aerospace Systems
 2013 - 2014: Manufacturing Engineer  
