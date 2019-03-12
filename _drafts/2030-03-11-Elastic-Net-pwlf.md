@@ -1,19 +1,19 @@
 ---
-title:  "Elastic net stuff"
-date:   2030-03-11 11:20:00
-description: elastic net stuff
-keywords: [ piecewise linear fit, Python, pwlf, fitting picewsie lines, best piecewise linear fit]
+title:  "Attempting to detect the number of linear segments"
+date:   2019-03-12 11:20:00
+description: Many people using pwlf want to find out how many line segments are present in their data. There is an expensive way to do this, but this posts attempts to find some cheaper alternatives. A least squares fit and an Elastic Net are used to help identify important breakpoint locations.
+keywords: [ piecewise linear fits, detect linear segments, linear breakpoint detection, pwlf, linear changepoint detection, sklearn elastic net fit, elastic net fit]
 ---
 
-There have been a number of people asking how to use [pwlf](https://github.com/cjekel/piecewise_linear_fit_py) when you don't know how many line segments to use. I've been recomending the use of a regularization technique which [penalizes the number of line segments](https://github.com/cjekel/piecewise_linear_fit_py/blob/master/examples/run_opt_to_find_best_number_of_line_segments.py) (or model complexity). This is problematic in a few ways:
+There have been a number of people asking how to use [pwlf](https://github.com/cjekel/piecewise_linear_fit_py) when you don't know how many line segments to use. I've been recommending the use of a regularization technique which [penalizes the number of line segments](https://github.com/cjekel/piecewise_linear_fit_py/blob/master/examples/run_opt_to_find_best_number_of_line_segments.py) (or model complexity). This is problematic in a few ways:
 1. It's an expensive three layer optimization problem (least squares fit, find break point locations, find number of line segments).
 2. The result will be dependant upon the penalty parameter which is problem specific. Something like cross validation could be used to select the parameter, but again this can be expensive.
 
-The 0.4.0 version of pwlf will include some functions to deal with this.
+A large portion of the expense results from searching for breakpoints on a continuous domain. Once the breakpoint locations are known, then the resulting piecewise continuous model is just a simple least squares fit. In many applications it is reasonable to assume some discrete set of possible breakpoint locations. For instance, it may be reasonable to assume that breakpoints can only occur at the points within the data. This would work well for a large amount of data that is evenly distributed in the domain. Alternatively, one could specify a large number of possible breakpoint locations over the domain. The 0.4.0 version of pwlf will include a function which returns the linear regression matrix, which will be used later on to perform Elastic Net fits to a complex function.
 
-A large portion of the expense results from searching for breakpoints on a continous domain. Once the breakpoint locations are known, then the resulting piecewise contionus model is just a simple least squares fit. In many applications it is reasonable to assume some discrete set of possible breakpoint locations. For instance, it may be reasonable to assume that a breakpoint can only occur at the observed locations in the data. This would work well for a large amount of data that is evenly distributed in the domain. Alternatively, one could specify a large number of possible breakpoint locations over the domain. 
+# Least Squares Fits
 
-A least squares fit can be used to solve for the model parameters <span>\\((\mathbf{\beta}) \\)</span> from the discrete list of possible breakpoint locations. Then a changes between consecutive model parameters <span>\\((|\beta_3 - \beta_2|) \\)</span> would tell whether a breakpoint was significant. The following example demonstrates this on a simple example with two distinct line segments.
+A least squares fit can be used to solve for the model parameters <span>\\((\mathbf{\beta}) \\)</span> from a discrete list of possible breakpoint locations. Then the value of a model parameter <span>\\((|\beta_3|) \\)</span> would tell whether a breakpoint was significant. The following example demonstrates this on a simple problem with two distinct line segments.
 
 ```python
 import numpy as np
@@ -27,7 +27,7 @@ y = np.array([5, 7, 9, 11, 13, 15, 28.92, 42.81, 56.7, 70.59,
 # initialize pwlf on data
 my_pwlf = pwlf.PiecewiseLinFit(x, y)
 # perform a least squares fit with the breakpoints
-# occuring at the exact x locaitons
+# occurring at the exact x locations
 ssr = my_pwlf.fit_with_breaks(x.copy())
 
 # predict on the domain
@@ -37,7 +37,7 @@ yhat = my_pwlf.predict(xhat)
 
 This results on the following fit which appears excellent.
 
-![excellent fit]({{ "/" | relative_url  }}assets/2019-03-11/simpleex.png)
+![excellent fit]({{ "/" | relative_url  }}assets/2019-03-12/simpleex.png)
 
 Let's take a look at the model parameters.
 
@@ -51,9 +51,9 @@ print(my_pwlf.beta)
   2.06085149e-14 -5.27564104e-14  7.40345285e-14]
 ```
 
-The first parameter is the model offset and the second parameter is the slope of the first line. The remaining parameters are related to the slopes of subsequent lines. The small and near zero parameters imply that the slope didn't change from the previous breakpoint. We can see that seventh parameter is significant as the seventh data point indicates the first data point on the second line.
+The first parameter is the model offset and the second parameter is the slope of the first line. The remaining parameters are related to the slopes of subsequent lines. The small and near zero parameters imply that the slope didn't change from the previous breakpoint. We can see that seventh parameter is significant, and it so happens that it corresponds to the seventh data point. This is the first data point on the second line!
 
-There are a few obvious problems with this method. One problem is that the least squares problem becomes ill-posed in the case when you have more unknowns than data points. Additionally, this method is likely to result in a poor model that overfits the data. The following example follows the same procedure to fit a contionus peicewise linear model to a noisy sine wave.
+There are a few obvious problems with this method. One problem is that the least squares problem becomes ill-posed in the case when you have more unknowns than data points. Additionally, this method is likely to result in a poor model that overfits the data. The following example follows the previous procedure to fit a continuous piecewise linear model to a noisy sine wave.
 
 ```python
 # select random seed for reproducibility
@@ -76,9 +76,11 @@ xhat = np.linspace(x.min(), x.max(), 100)
 yhat = my_pwlf.predict(xhat)
 ```
 
-![Overfit of the sine wave]({{ "/" | relative_url  }}assets/2019-03-11/sin_of.png)
+![Overfit of the sine wave]({{ "/" | relative_url  }}assets/2019-03-12/sin_of.png)
 
 The result was a continuous piecewise linear function that has overfit the data. You'll find that most of the <span>\\((\mathbf{\beta}) \\)</span> parameters are active, with an average absolute value of 1.1. 
+
+# Elastic Net for noisy data
 
 We can use a linear model regularizer such as [Elastic Net](https://en.wikipedia.org/wiki/Elastic_net_regularization) to prevent this overfitting. The least squares problem minimizes
 <div>
@@ -86,15 +88,15 @@ $$
 \mathbf{\hat{\beta}} = {\underset {\mathbf{\beta} }{\operatorname {argmin} }}( \|\mathbf{y}-\mathbf{A}\mathbf{\beta} \|^{2} )
 $$
 </div>
-which is prone to overfitting when there are a lot of possible <span>\\((\mathbf{\beta}) \\)</span> parameters. The Elastic Net uses both L1 (LASSO) and L2 (Ridge regression) penalties on the model complexity to prevent overfitting, which minimizes
+which is prone to overfitting when there are a lot of possible <span>\\((\mathbf{\beta}) \\)</span> parameters. The Elastic Net uses both L1 (LASSO) and L2 (Ridge regression) to penalize the model complexity. This prevents overfitting. The objective function of the Elastic Net is to minimize
 <div>
 $$
 \mathbf{\hat{\beta}} = {\underset {\mathbf{\beta} }{\operatorname {argmin} }}( \|\mathbf{y}-\mathbf{A}\mathbf{\beta} \|^{2} + \lambda_2 \|\mathbf{\beta} \|^{2} + \lambda_1 \|\mathbf{\beta} \|_{1})
 $$
 </div>
-for some <span>\\((\lambda_1, \lambda_2) \\)</span> penalty parameters. The Elastic Net solution stats each <span>\\((\mathbf{\beta}) \\)</span> parameter at zero, and slowly activate a parameter at a time through the iterations until it converges. This work well for continuous picewise linear functions, where a zero parameter value corresponds to that breakpoint being inactive. 
+for some <span>\\((\lambda_1, \lambda_2) \\)</span> penalty parameters. The Elastic Net solution stats each <span>\\((\mathbf{\beta}) \\)</span> parameter at zero, and slowly activates a parameter one at a time through the iterations until convergence. This work well for continuous piecewise linear functions, where a zero parameter value corresponds to that breakpoint being inactive.
 
-[Scikit-learn](http://scikit-learn.org/) has implented the Elastic Net reguilizer in [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html. The important penalty parameters to select will be *l1_ratio* and *alpha*. However, we'll use [ElasticNetCV](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNetCV.html) which will automatically select these parameters based on the cross validation results. The following example perform the Elastic Net fit to the noisy sine wave.
+[Scikit-learn](http://scikit-learn.org/) has implemented the Elastic Net regularizer in [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html. The important penalty parameters to select will be *l1_ratio* and *alpha*. However, we'll use [ElasticNetCV](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNetCV.html) which will select these parameters based on cross validation results. The following example perform the Elastic Net fit to the noisy sine wave.
 
 ```python
 from sklearn.linear_model import ElasticNetCV
@@ -110,131 +112,40 @@ en_model = ElasticNetCV(cv=5, l1_ratio=[.1, .5, .7, .9, .95, .99, 1],
 # fit the model using the elastic net
 en_model.fit(A, my_pwlf_en.y_data)
 
-# predict from the elastic net paramters
+# predict from the elastic net parameters
 xhat = np.linspace(x.min(), x.max(), 1000)
 yhat_en = my_pwlf_en.predict(xhat, breaks=breaks, beta=en_model.coef_)
 ```
-![Fit of the sine wave]({{ "/" | relative_url  }}assets/2019-03-11/sin.png)
+![Fit of the sine wave]({{ "/" | relative_url  }}assets/2019-03-12/sin.png)
 
-We can see the Elastic Net results are a much better fit to the sine wave than the least squares fit. The first two parameters are related to the first line segment, so we'll always want to grab the first to parameters. However, after the first two parameters we'll only grab the parameters where there is a change that is greater than a threshold to select important breakpoints. 
+We can see the Elastic Net results are a much better fit to the sine wave than the least squares fit. In fact, the fit appears to resemble a result from support vector regression!
+
+Perhaps we can use the Elastic Net fit to identify important breakpoint locations. Again, the first two parameters are related to the first line segment, so we'll always want to grab the first two parameters. However, after the first two parameters we'll only grab parameters that have an absolute value larger than a threshold. The rational for this is that when <span>\\((\mathbf{\beta}) \\)</span> parameters are small the breakpoint become inactive (effectively removing a column from the regression matrix). 
 
 ```python
 true_list = np.zeros(breaks.size, dtype=bool)
 true_list[:2] = True
 for i in range(breaks.size):
-    if np.abs(en_model.coef_[i] - en_model.coef_[i - 1]) > 1e-2:
+    if np.abs(en_model.coef_[i]) > 2e-1:
         true_list[i] = True
     else:
         true_list[i] = False
+# new list of important breakpoint locations
 new_breaks = breaks[true_list]
 n_segments = new_breaks.size - 1.
 
+# get the y value from these new breakpoints form the EN model
 ybreaks = my_pwlf_en.predict(new_breaks)
+
+# fit a least squares model from these new breakpoints
+ssr = my_pwlf.fit_with_breaks(new_breaks)
+yhat = my_pwlf.predict(xhat)
 ```
 
-![breakpoint locations]({{ "/" | relative_url  }}assets/2019-03-11/sin_new.png)
+If we filter the breakpoints with the above code, we'll have 28 line segments and the following important breakpoints. Unfortunately, the new least squares fit at these new breakpoint locations still overfits the true function. 
 
-This results in 59 parameters 
+![breakpoint locations]({{ "/" | relative_url  }}assets/2019-03-12/sin_new.png)
 
-# pwlf improvements in 0.2.0 release
-- **much faster** at finding optimum break point locations due to new derivation of regression problem
-- pwlf now uses pure numpy instead of Python to solve continuous piecewise linear fit
-- new mathematical derivation (defined below)
-- pep8 style naming for class, variables, and functions
-- old naming convention still usable, but will be depreciated at some time
-- Available soon on [github](https://github.com/cjekel/piecewise_linear_fit_py) or [pypi](https://pypi.python.org/pypi/pwlf)
+# Conclusion
 
-# New derivation
-
-There was nothing wrong with [Golovchenko (2004)](https://golovchenko.org/docs/ContinuousPiecewiseLinearFit.pdf), which was the basis for the the first release of pwlf. I've always knew that the for loops used to assemble the regression matrix were slow, and this was killing the performance for large problems. After reading [this](https://www.regressionist.com/2018/02/07/continuous-piecewise-linear-fitting/), I felt a bit inspired to do something about it. The [pwlf library](https://github.com/cjekel/piecewise_linear_fit_py) has been modified to solve the linear regression matrix directly, where previously a square matrix was assembled (as oppose to the regression matrix). The result is that more of the code is solved in numpy (which is fast), instead of Python.
-
-Let's assume we have a one dimensional data set. In this case we will assume <span>\\(\mathbf{x} \\)</span> is the independent variable and <span>\\(\mathbf{y} \\)</span> is dependent on <span>\\(\mathbf{x} \\)</span> such that <span>\\(\mathbf{y}(\mathbf{x}) \\)</span>. Our data is paired as
-<div>
-$$
-\begin{bmatrix}
-x_1 & y_1 \\
-x_2 & y_2 \\
-x_3 & y_3 \\
-\vdots & \vdots \\
-x_n & y_n \\
-\end{bmatrix}
-$$
-</div>
-where <span>\\((x_1, y_1) \\)</span> represents the first data point and the data points have been ordered according to <span>\\( x_1 < x_2 < x_3 < \cdots < x_n \\)</span> for <span>\\(n \\)</span> number of data points. A piecewise linear function can be constructed to the function as follows
-<div>
-$$
-\mathbf{y}(x) = \begin{cases}
-      \eta_1 + \beta_1(x-b_1) & b_1 < x \leq b_2 \\
-      \eta_2 + \beta_2(x-b_2) & b_2 < x \leq b_3 \\
-      \vdots & \vdots \\
-      \eta_n + \beta_{n_b}(x-b_{n_b-1}) & b_{n-1} < x \leq b_{n_b} \\
-\end{cases}
-$$
-</div>
-where <span>\\(b_1 \\)</span> is the <span>\\(x \\)</span> location of the first break point, <span>\\(b_2 \\)</span> is the <span>\\(x \\)</span> location of the second break point, and so forth until the last break point <span>\\(b_{n_b} \\)</span> for <span>\\(n_b \\)</span> number of break points. The break points are also ordered as <span>\\(b_1 < b_2 < \cdots < b_{n_b} \\)</span>. Additionally the first break point is always <span>\\(b_1 = x_1 \\)</span>, and the last break point is always <span>\\(b_{n_b} = x_n \\)</span>. This initialization of the data seems tedious at first, but some magic will happen later on if you arrange the data this way.
-
-Now if we enforce that the piecewise linear functions be continuous on the domain, we'll end up with
-<div>
-$$
-\mathbf{y}(x) = \begin{cases}
-      \beta_1 + \beta_2(x-b_1) & b_1 \leq x \leq b_2 \\
-      \beta_1 + \beta_2(x-b_1) + \beta_3(x-b_2) & b_2 < x \leq b_3 \\
-      \vdots & \vdots \\
-      \beta_1 + \beta_2(x-b_1) + \beta_3(x-b_2) + \cdots + \beta_{n_b+1}(x-b_{n_b-1}) & b_{n-1} < x \leq b_{n_b} \\
-\end{cases}
-$$
-</div>
-as our continuous piecewise linear function. This can be extended in Matrix form as
-<div>
-$$
-\begin{bmatrix}
-1 & x_1-b_1 & (x_1-b_2)1_{x_1 > b_2} & (x_1-b_3)1_{x_1 > b_3} & \cdots & (x_1-b_{n_b-1})1_{x_1 > b_{n_b-1}} \\
-1 & x_2-b_1 & (x_2-b_2)1_{x_2 > b_2} & (x_2-b_3)1_{x_2 > b_3} & \cdots & (x_2-b_{n_b-1})1_{x_2 > b_{n_b-1}} \\
-\vdots & \vdots & \vdots & \vdots &  \ddots & \vdots \\
-1 & x_n-b_1 & (x_n-b_2)1_{x_n > b_2} & (x_n-b_3)1_{x_n > b_3} & \cdots & (x_n-b_{n_b-1})1_{x_n > b_{n_b-1}} \\
-\end{bmatrix} \begin{bmatrix}
-\beta_1 \\
-\beta_2 \\
-\vdots \\
-\beta_{n_b}
-\end{bmatrix} = \begin{bmatrix}
-y_1 \\
-y_2 \\
-\vdots \\
-y_n
-\end{bmatrix}
-$$
-</div> where <span>\\(1_{x_n > b_1} \\)</span> represents the piecewise function of form
-<div>
-$$
-1_{x_n > b_2} = \begin{cases}
-      0 & x_n \leq b_2 \\
-	  1 & x_n > b_2 \\
-\end{cases}
-$$
-</div>
-and <span>\\(1_{x_n > b_3} \\)</span> represents
-<div>
-$$
-1_{x_n > b_3} = \begin{cases}
-      0 & x_n \leq b_3 \\
-	  1 & x_n > b_3 \\
-\end{cases}
-$$
-</div> and so forth. This is where the magic happens! If you've ordered your data, the result will be a regression matrix that's already in a lower triangular style. Since <span>\\(\mathbf{x} \\)</span> was initially sorted from min to max, the matrix can be assembled quickly by replacing only the non-zero values. This won't be a big deal if you know the break point locations <span>\\(\mathbf{b} \\)</span>. However if you were running an optimization to find the ideal location for break points (as in pwlf), you may need to assemble the regression matrix thousands of times.
-
-We can express the matrix expression as a linear equation
-<div>
-$$
-\mathbf{A} \mathbf{\beta} = \mathbf{y}
-$$
-</div>
-where <span>\\(\mathbf{A} \\)</span> is our regression matrix, <span>\\(\mathbf{\beta} \\)</span> is our unknown set of parameters, and <span>\\(\mathbf{y} \\)</span> is our vector of <span>\\(y \\)</span> values. We can use a least squares solver to solve for <span>\\(\mathbf{\beta} \\)</span>. In Python, I like to use the [numpy lstsq](https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq) solver which uses [LAPACK](https://www.netlib.org/lapack/explore-html/d7/d3b/group__double_g_esolve_ga94bd4a63a6dacf523e25ff617719f752) to solve the matrix.
-
-Once you have found your set of optimal parameters <span>\\(\mathbf{\beta} \\)</span>, then you can predict for new <span>\\(x \\)</span> values by assembling your regression matrix <span>\\(\mathbf{A} \\)</span> for the new <span>\\(x \\)</span> values. The new <span>\\(y \\)</span> values are solved by multiplying
-<div>
-$$
-\mathbf{A} \mathbf{\beta} = \mathbf{y}
-$$
-</div>
-the new regression matrix with the determined set of parameters.
+A couple alternative strategies are presented to find the number of line segments instead of running an expensive three-layer optimization. If you do not have much noise in your data, you can try to perform a least squares fit where the breakpoints occur at the data points. Alternatively, if you have noise in your data you can use something like the Elastic Net regularizer to perform the fit. (I have a [paper](({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf)) on approximating the noise in 1D data.) After the fits are performed, you can analyze the model parameters (or slopes) to identify unique line segments in your model. A small <span>\\(\beta} \\)</span> parameter implies that the breakpoint is not active.
