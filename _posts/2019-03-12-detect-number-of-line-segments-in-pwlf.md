@@ -1,13 +1,14 @@
 ---
-title:  "Attempting to detect the number of linear segments"
+title:  "Attempting to detect the number of important line segments in data"
 date:   2019-03-12 11:20:00
 description: Many people using pwlf want to find out how many line segments are present in their data. There is an expensive way to do this, but this posts attempts to find some cheaper alternatives. A least squares fit and an Elastic Net are used to help identify important breakpoint locations.
 keywords: [ piecewise linear fits, detect linear segments, linear breakpoint detection, pwlf, linear changepoint detection, sklearn elastic net fit, elastic net fit]
 ---
 
 There have been a number of people asking how to use [pwlf](https://github.com/cjekel/piecewise_linear_fit_py) when you don't know how many line segments to use. I've been recommending the use of a regularization technique which [penalizes the number of line segments](https://github.com/cjekel/piecewise_linear_fit_py/blob/master/examples/run_opt_to_find_best_number_of_line_segments.py) (or model complexity). This is problematic in a few ways:
-1. It's an expensive three layer optimization problem (least squares fit, find break point locations, find number of line segments).
-2. The result will be dependant upon the penalty parameter which is problem specific. Something like cross validation could be used to select the parameter, but again this can be expensive.
+- It's an expensive three layer optimization problem (least squares fit, find break point locations, find number of line segments).
+- The result will be dependant upon the penalty parameter which is problem specific. Something like cross validation could be used to select the parameter, but again this can be expensive.
+
 
 A large portion of the expense results from searching for breakpoints on a continuous domain. Once the breakpoint locations are known, then the resulting piecewise continuous model is just a simple least squares fit. In many applications it is reasonable to assume some discrete set of possible breakpoint locations. For instance, it may be reasonable to assume that breakpoints can only occur at the points within the data. This would work well for a large amount of data that is evenly distributed in the domain. Alternatively, one could specify a large number of possible breakpoint locations over the domain. The 0.4.0 version of pwlf will include a function which returns the linear regression matrix, which will be used later on to perform Elastic Net fits to a complex function.
 
@@ -20,9 +21,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pwlf
 
-x = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-y = np.array([5, 7, 9, 11, 13, 15, 28.92, 42.81, 56.7, 70.59,
-              84.47, 98.36, 112.25, 126.14, 140.03])
+x = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+              14, 15])
+y = np.array([5, 7, 9, 11, 13, 15, 28.92, 42.81, 56.7,
+              70.59, 84.47, 98.36, 112.25, 126.14,
+              140.03])
 
 # initialize pwlf on data
 my_pwlf = pwlf.PiecewiseLinFit(x, y)
@@ -45,9 +48,10 @@ Let's take a look at the model parameters.
 print(my_pwlf.beta)
 ```
 ```
-[ 5.00000000e+00  2.00000000e+00 -8.72635297e-14  4.06341627e-14
- -1.99840144e-15 -6.66133815e-16  1.19200000e+01 -3.00000000e-02
- -1.24344979e-14  1.29896094e-14 -1.00000000e-02  1.00000000e-02
+[ 5.00000000e+00  2.00000000e+00 -8.72635297e-14
+  4.06341627e-14 -1.99840144e-15 -6.66133815e-16
+  1.19200000e+01 -3.00000000e-02 -1.24344979e-14
+  1.29896094e-14 -1.00000000e-02  1.00000000e-02
   2.06085149e-14 -5.27564104e-14  7.40345285e-14]
 ```
 
@@ -96,7 +100,7 @@ $$
 </div>
 for some <span>\\((\lambda_1, \lambda_2) \\)</span> penalty parameters. The Elastic Net solution stats each <span>\\((\mathbf{\beta}) \\)</span> parameter at zero, and slowly activates a parameter one at a time through the iterations until convergence. This work well for continuous piecewise linear functions, where a zero parameter value corresponds to that breakpoint being inactive.
 
-[Scikit-learn](http://scikit-learn.org/) has implemented the Elastic Net regularizer in [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html. The important penalty parameters to select will be *l1_ratio* and *alpha*. However, we'll use [ElasticNetCV](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNetCV.html) which will select these parameters based on cross validation results. The following example perform the Elastic Net fit to the noisy sine wave.
+[Scikit-learn](http://scikit-learn.org/) has implemented the Elastic Net regularizer in [ElasticNet](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html). The important penalty parameters to select will be *l1_ratio* and *alpha*. However, we'll use [ElasticNetCV](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNetCV.html) which will select these parameters based on cross validation results. The following example perform the Elastic Net fit to the noisy sine wave.
 
 ```python
 from sklearn.linear_model import ElasticNetCV
@@ -107,14 +111,18 @@ breaks = my_pwlf_en.x_data.copy()
 A = my_pwlf_en.assemble_regression_matrix(breaks, my_pwlf_en.x_data)
 
 # set up the elastic net
-en_model = ElasticNetCV(cv=5, l1_ratio=[.1, .5, .7, .9, .95, .99, 1],
-                        fit_intercept=False, max_iter=1000000, n_jobs=-1)
+en_model = ElasticNetCV(cv=5,
+                        l1_ratio=[.1, .5, .7, .9,
+                                  .95, .99, 1],
+                        fit_intercept=False,
+                        max_iter=1000000, n_jobs=-1)
 # fit the model using the elastic net
 en_model.fit(A, my_pwlf_en.y_data)
 
 # predict from the elastic net parameters
 xhat = np.linspace(x.min(), x.max(), 1000)
-yhat_en = my_pwlf_en.predict(xhat, breaks=breaks, beta=en_model.coef_)
+yhat_en = my_pwlf_en.predict(xhat, breaks=breaks,
+                             beta=en_model.coef_)
 ```
 ![Fit of the sine wave]({{ "/" | relative_url  }}assets/2019-03-12/sin.png)
 
@@ -148,4 +156,4 @@ If we filter the breakpoints with the above code, we'll have 28 line segments an
 
 # Conclusion
 
-A couple alternative strategies are presented to find the number of line segments instead of running an expensive three-layer optimization. If you do not have much noise in your data, you can try to perform a least squares fit where the breakpoints occur at the data points. Alternatively, if you have noise in your data you can use something like the Elastic Net regularizer to perform the fit. (I have a [paper](({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf)) on approximating the noise in 1D data.) After the fits are performed, you can analyze the model parameters (or slopes) to identify unique line segments in your model. A small <span>\\(\beta} \\)</span> parameter implies that the breakpoint is not active.
+A couple alternative strategies are presented to find the number of line segments instead of running an expensive three-layer optimization. If you do not have much noise in your data, you can try to perform a least squares fit where the breakpoints occur at the data points. Alternatively, if you have noise in your data you can use something like the Elastic Net regularizer to perform the fit. (I have a [paper]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf) on approximating the noise in 1D data.) After the fits are performed, you can analyze the model parameters (or slopes) to identify unique line segments in your model. A small <span>\\(\beta \\)</span> parameter implies that the breakpoint is not active.
