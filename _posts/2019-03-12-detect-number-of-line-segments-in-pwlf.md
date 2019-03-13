@@ -63,9 +63,9 @@ There are a few obvious problems with this method. One problem is that the least
 # select random seed for reproducibility
 np.random.seed(123)
 # generate sin wave data
-x = np.linspace(0, 10, num=1000)
+x = np.linspace(0, 10, num=100)
 y = np.sin(x * np.pi / 2)
-yture = y.copy()
+ytrue = y.copy()
 # add noise to the data
 y = np.random.normal(0, 0.05, 100) + ytrue
 
@@ -76,7 +76,7 @@ my_pwlf = pwlf.PiecewiseLinFit(x, y)
 ssr = my_pwlf.fit_with_breaks(x.copy())
 
 # predict on the domain
-xhat = np.linspace(x.min(), x.max(), 100)
+xhat = np.linspace(x.min(), x.max(), 1000)
 yhat = my_pwlf.predict(xhat)
 ```
 
