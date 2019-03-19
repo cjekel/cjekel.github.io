@@ -5,35 +5,41 @@ profile: true
 ---
 
 ### Education
-2016 - 2019: University of Florida  
+2016 - 2019: University of Florida, Gainesville, FL
 PhD Mechanical Engineering: 3.68/4.00 GPA
 Identification of material model parameters from experimental data
 December 2019 graduation 
 
-2014 - 2016: Stellenbosch University  
+2014 - 2016: Stellenbosch University, Stellenbosch, South Africa
 MEng Mechanical Engineering: cum laude  
 Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyester via inverse bubble inflation.** [https://hdl.handle.net/10019.1/98627](https://hdl.handle.net/10019.1/98627) [pdf]({{ "/" | relative_url  }}assets/papers/jekel_obtaining_2016.pdf).
 
-2009 - 2013: University of Colorado - Colorado Springs  
+2009 - 2013: University of Colorado, Colorado Springs, CO  
 BSc Mechanical Engineering: 3.72/4.00 GPA with honor
 
 ---
 ### Peer-reviewed journal articles
-Jekel, C. F., Venter, G., Venter, M. P., Stander, N., & Haftka, R. T. (2018). **Similarity measures for identifying material parameters from hysteresis loops using inverse analysis**, *International Journal of Material Forming*. [doi:10.1007/s12289-018-1421-8](https://doi.org/10.1007/s12289-018-1421-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelArea_IJMF_rev05_final.pdf).
+Jekel, C.F., Venter, G., Venter, M.P., Stander, N. and Haftka, R.T., 2018. Similarity measures for identifying material parameters from hysteresis loops using inverse analysis. International Journal of Material Forming, pp.1-24. [doi:10.1007/s12289-018-1421-8](https://doi.org/10.1007/s12289-018-1421-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelArea_IJMF_rev05_final.pdf).
 
-Charles F. Jekel, Gerhard Venter, Martin P. Venter. **Modeling PVC-coated polyester as a hypoelastic non-linear orthotropic material**, *Composite Structures*, Volume 161, 1 February 2017, Pages 51-64, ISSN 0263-8223, [doi:10.1016/j.compstruct.2016.11.019](https://dx.doi.org/10.1016/j.compstruct.2016.11.019) [pdf]({{ "/" | relative_url  }}assets/papers/JekelModelingPVC-CoatedPolyester.pdf).
+Jekel, C.F., Venter, G. and Venter, M.P., 2017. Modeling PVC-coated polyester as a hypoelastic non-linear orthotropic material. Composite Structures, 161, pp.51-64.  [doi:10.1016/j.compstruct.2016.11.019](https://dx.doi.org/10.1016/j.compstruct.2016.11.019) [pdf]({{ "/" | relative_url  }}assets/papers/JekelModelingPVC-CoatedPolyester.pdf).
 
-Charles F. Jekel, Gerhard Venter, and Martin P. Venter. **Obtaining a hyperelastic non-linear orthotropic material model via inverse bubble inflation analysis**, *Structural and Multidisciplinary Optimization*, pages 1-9, 2016, ISSN 1615-1488, [doi:10.1007/s00158-016-1456-8](https:////dx.doi.org/10.1007/s00158-016-1456-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelInverseBubbleInflationFinal.pdf).
+Jekel, C.F., Venter, G. and Venter, M.P., 2016. Obtaining a hyperelastic non-linear orthotropic material model via inverse bubble inflation analysis. Structural and Multidisciplinary Optimization, 54(4), pp.927-935. [doi:10.1007/s00158-016-1456-8](https:////dx.doi.org/10.1007/s00158-016-1456-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelInverseBubbleInflationFinal.pdf).
 
 ---
 ### Conference papers
-Charles F. Jekel, Raphael T. Haftka, Gerhard Venter, and Martin P. Venter. **Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction**, 2018 AIAA Non-Deterministic Approaches Conference, AIAA SciTech Forum, (AIAA 2018-1664) [doi:10.2514/6.2018-1664](https://doi.org/10.2514/6.2018-1664) [pdf]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf).
+Jekel, C. F., Grechuk, B., Zhang, Y., and Haftka, R. Comparison of Chebyshev’s Inequality and Non-parametric B-Basis to Estimate Failure Strength of Composite Open Hole Tension Tests. In preparation 2019.
+
+Jekel, C. F., Haftka, R. T., Venter, M. P., and Venter, G. Isotropic and Orthotropic Parameter Identification from Full Field Bulge Inflation Tests on PVC-coated Polyester. Structural Engineering, Mechanics and Computation.  Under review 2019.
+
+Jekel, C. F., and Romero, V.J. Bootstrapping and Jackknife Resampling to Improve Sparse-Data UQ Methods For Tail Probability Estimates with Limited Samples, ASME V\&V Verification and Validation Symposium . Accepted paper 2019.
+
+Jekel, C.F., Haftka, R.T., Venter, G. and Venter, M.P., 2018. Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction. In 2018 AIAA Non-Deterministic Approaches Conference (p. 1664). [doi:10.2514/6.2018-1664](https://doi.org/10.2514/6.2018-1664) [pdf]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf).
 
 ---
 ### Technical reports and other non-refereed papers
-C. F. Jekel and G. Venter, pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions, 2019. [Online]. Available: https://github.com/cjekel/piecewise_linear_fit_py [pdf]({{ "/" | relative_url  }}assets/papers/pwlf_Jekel_Venter_v1.pdf).
+Jekel, C.F. and Venter, G., 2019. pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions. [Online]. Available: https://github.com/cjekel/piecewise_linear_fit_py [pdf]({{ "/" | relative_url  }}assets/papers/pwlf_Jekel_Venter_v2.pdf).
 
-Jekel, C.F. and Haftka, R.T., 2018. **Classifying Online Dating Profiles on Tinder using FaceNet Facial Embeddings**. arXiv preprint arXiv:[1803.04347](https://arxiv.org/abs/1803.04347) [pdf](https://arxiv.org/pdf/1803.04347.pdf).
+Jekel, C.F. and Haftka, R.T., 2018. Classifying Online Dating Profiles on Tinder using FaceNet Facial Embeddings. arXiv preprint arXiv:[1803.04347](https://arxiv.org/abs/1803.04347) [pdf](https://arxiv.org/pdf/1803.04347.pdf).
 
 ---
 ### Python libraries
