@@ -5,12 +5,12 @@ profile: true
 ---
 
 ### Education
-2016 - 2019: University of Florida, Gainesville, FL
+2016 - 2019: University of Florida, Gainesville, FL  
 PhD Mechanical Engineering: 3.68/4.00 GPA
 Identification of material model parameters from experimental data
 December 2019 graduation 
 
-2014 - 2016: Stellenbosch University, Stellenbosch, South Africa
+2014 - 2016: Stellenbosch University, Stellenbosch, South Africa  
 MEng Mechanical Engineering: cum laude  
 Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyester via inverse bubble inflation.** [https://hdl.handle.net/10019.1/98627](https://hdl.handle.net/10019.1/98627) [pdf]({{ "/" | relative_url  }}assets/papers/jekel_obtaining_2016.pdf).
 
@@ -37,7 +37,7 @@ Jekel, C.F., Haftka, R.T., Venter, G. and Venter, M.P., 2018. Lack-of-fit Tests 
 
 ---
 ### Technical reports and other non-refereed papers
-Jekel, C.F. and Venter, G., 2019. pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions. [Online]. Available: https://github.com/cjekel/piecewise_linear_fit_py [pdf]({{ "/" | relative_url  }}assets/papers/pwlf_Jekel_Venter_v2.pdf).
+Jekel, C.F. and Venter, G., 2019. pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions. [https://github.com/cjekel/piecewise_linear_fit_py](https://github.com/cjekel/piecewise_linear_fit_py) [pdf]({{ "/" | relative_url  }}assets/papers/pwlf_Jekel_Venter_v2.pdf).
 
 Jekel, C.F. and Haftka, R.T., 2018. Classifying Online Dating Profiles on Tinder using FaceNet Facial Embeddings. arXiv preprint arXiv:[1803.04347](https://arxiv.org/abs/1803.04347) [pdf](https://arxiv.org/pdf/1803.04347.pdf).
 
