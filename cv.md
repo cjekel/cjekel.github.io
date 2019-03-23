@@ -90,5 +90,21 @@ Created and taught the first Python Programming course in the MAE department at 
 2010: Reisher Family Scholarship - three year award   
 2009: Braxton Technologies Scholarship - four year award   
 
+---
+### Presentations
+
+2019: Advances with Reviewing Personalized Tinder profiles using FaceNet. University of Florida Data Science and Informatics Spring Symposium, Gainesville, Florida. 
+
+2018: Conservative Estimation of Tail Probabilities from Limited Sample Data. University of Florida Workshop Risk Management Approaches in Engineering Applications, Gainesville, Florida. 
+
+2018: Using FaceNet to automatically like Tinder profiles based on individual preference. University of Florida Data Science and Informatics Spring Symposium, Gainesville, Florida. 
+
+2018: Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction. AIAA Non-Deterministic Approaches Conference, Kissimmee, Florida. 
+
+2015: Obtaining Material Models for Inflatable Structures via Inverse Bubble Inflation. Stellenbosch University Mechanical & Mechatronic Engineering Department Research Colloquium, Stellenbosch, South Africa. 
+
+2015: Obtaining Material Models for use in Finite Element Analyses of PVC-coated polyester via an Inverse Bubble Inflation Method. CIMNE VII International Conference on Textile Composites and Inflatable Structures, Barcelona, Spain. 
+
+2014: An Inverse Method for Generating Polymer Properties for use in Finite Element Analyses via Bubble Inflation Testing. SAImechE Mechanical, Manufacturing, and Materials Engineering Conference, Stellenbosch, South Africa. 
 
 {% include footer.html %}
