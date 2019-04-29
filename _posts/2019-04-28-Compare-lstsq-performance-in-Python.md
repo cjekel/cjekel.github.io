@@ -88,7 +88,10 @@ The results below compare the run time of the fits against the number of data po
 
 It appears that the CuPy least squares solver wasn't faster than NumPy until there was at least 100,000 data points. With 6,309,573 data points `cupy.linalg.lstsq` was about 6 times faster than `numpy.linalg.lstsq`.
 
+
 I should really run this benchmark on a computer with Intel CPU + NVIDIA GPU. Especially since a [previous post](https://jekel.me/2019/Adding-tensorflow-to-pwlf/) hinted that TensorFlow performs significantly better on an Intel CPU, and a Cholesky decomposition should be faster than SVD.
+
+NumPy was built from source using Intel MKL on the AMD FX-8350 which isn't the fastest, however it is the best supported...
 
 # Acknowledgements
 
