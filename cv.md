@@ -27,7 +27,7 @@ Jekel, C.F., Venter, G. and Venter, M.P., 2016. Obtaining a hyperelastic non-lin
 
 ---
 ### Conference papers
-Jekel, C. F., Grechuk, B., Zhang, Y., and Haftka, R. Comparison of Chebyshev’s Inequality and Non-parametric B-Basis to Estimate Failure Strength of Composite Open Hole Tension Tests. In preparation 2019.
+Jekel, C. F., Grechuk, B., Zhang, Y., and Haftka, R. Comparison of Chebyshev’s Inequality and Non-parametric B-Basis to Estimate Failure Strength of Composite Open Hole Tension Tests. WCSMO 13 May 2019.
 
 Jekel, C. F., Haftka, R. T., Venter, M. P., and Venter, G. Isotropic and Orthotropic Parameter Identification from Full Field Bulge Inflation Tests on PVC-coated Polyester. Structural Engineering, Mechanics and Computation.  Under review 2019.
 
@@ -106,5 +106,8 @@ Created and taught the first Python Programming course in the MAE department at 
 2015: Obtaining Material Models for use in Finite Element Analyses of PVC-coated polyester via an Inverse Bubble Inflation Method. CIMNE VII International Conference on Textile Composites and Inflatable Structures, Barcelona, Spain. 
 
 2014: An Inverse Method for Generating Polymer Properties for use in Finite Element Analyses via Bubble Inflation Testing. SAImechE Mechanical, Manufacturing, and Materials Engineering Conference, Stellenbosch, South Africa. 
+
+---
+### Open Source Contributions
 
 {% include footer.html %}
