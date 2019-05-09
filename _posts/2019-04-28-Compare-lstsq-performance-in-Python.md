@@ -5,6 +5,8 @@ description: Comparing the performance of the least-squares solvers in NumPy, Cu
 keywords: [ Python least squares, tensorflow, benchmarks, svd, cholesky decomposition ]
 ---
 
+**Edit 2019-05-09: The benchmark has been updated to include the latest CuPy syntax for cupy.linalg.lstsq.**
+
 [CuPy](https://cupy.chainer.org) is a GPU accelerated version of NumPy that is very easy to use. I just submited a [PR](https://github.com/cupy/cupy/pull/2165) which adds ```cupy.linalg.lstsq```, and naturally I wanted to compare the least squares performance to ```numpy.linalg.lstsq```. I also compared ```tensorflow.linalg.lstsq``` as a reasonable alternative. Hopefully this will provide some insight into when it will pay off to solve least squares problems with CuPy instead of NumPy. 
 
 **I only have one computer that I was able to run this on so far. I'll update the post if I can run this benchmark on different hardware.**
@@ -81,8 +83,8 @@ The results below compare the run time of the fits against the number of data po
 
 | CPU/GPU        |  lstsq parameters  | Data points      | CuPy x faster NumPy|
 | ------------- |:-------------:|:-------------:|:-----:|
-| AMD FX-8350/NVIDIA TITAN Xp      | 6 | 6,309,573 | 5.76 |
-| AMD FX-8350/NVIDIA TITAN Xp      | 20 | 6,309,573 | 6.80 |
+| AMD FX-8350/NVIDIA TITAN Xp      | 6 | 6,309,573 | 4.84 |
+| AMD FX-8350/NVIDIA TITAN Xp      | 20 | 6,309,573 | 6.54 |
 
 # Disucssion
 
