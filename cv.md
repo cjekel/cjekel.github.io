@@ -27,11 +27,11 @@ Jekel, C.F., Venter, G. and Venter, M.P., 2016. Obtaining a hyperelastic non-lin
 
 ---
 ### Conference papers
-Jekel, C. F., Grechuk, B., Zhang, Y., and Haftka, R. Comparison of Chebyshev’s Inequality and Non-parametric B-Basis to Estimate Failure Strength of Composite Open Hole Tension Tests. In preparation 2019.
+Jekel, C. F., Haftka, R. T., Venter, M. P., and Venter, G. Cross Validation to Select Material Models with Bulge Inflation Tests on PVC-coated Polyester. Structural Engineering, Mechanics and Computation, September 2019. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_semc_2019.pdf)
 
-Jekel, C. F., Haftka, R. T., Venter, M. P., and Venter, G. Isotropic and Orthotropic Parameter Identification from Full Field Bulge Inflation Tests on PVC-coated Polyester. Structural Engineering, Mechanics and Computation.  Under review 2019.
+Jekel, C. F., Grechuk, B., Zhang, Y., and Haftka, R. Comparison of Chebyshev’s Inequality and Non-parametric B-Basis to Estimate Failure Strength of Composite Open Hole Tension Tests. The World Congress of Structural and Multidisciplinary Optimization, May 2019. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_wcsmo13_2019.pdf)
 
-Jekel, C. F., and Romero, V.J. Bootstrapping and Jackknife Resampling to Improve Sparse-Data UQ Methods For Tail Probability Estimates with Limited Samples, ASME V\&V Verification and Validation Symposium . Accepted paper 2019.
+Jekel, C. F., and Romero, V.J. Bootstrapping and Jackknife Resampling to Improve Sparse-Data UQ Methods For Tail Probability Estimates with Limited Samples, ASME V&V Verification and Validation Symposium May 2019. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_asme_vv_2019.pdf)
 
 Jekel, C.F., Haftka, R.T., Venter, G. and Venter, M.P., 2018. Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction. In 2018 AIAA Non-Deterministic Approaches Conference (p. 1664). [doi:10.2514/6.2018-1664](https://doi.org/10.2514/6.2018-1664) [pdf]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf).
 
