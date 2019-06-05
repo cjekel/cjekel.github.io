@@ -100,11 +100,11 @@ h2 {
 
 .profile h2 {
 	font-size: 20px;
-	  font-weight: 300;
-	  color: #aaa;
-	  margin-top: 10px;
-	  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	  font-style: normal;
+	font-weight: 300;
+	color: #aaa;
+	margin-top: 10px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-style: normal;
 
 }
 
@@ -182,8 +182,8 @@ a,
 	transition: all 0.15s ease;
 }
 
-ul 	{ margin:0; padding:0; }
-li	{ list-style-type:circle; list-style-position:inside; }
+ul 	{ margin:0; padding:0; list-style-type:circle; }
+li	{ list-style-position:inside; line-height:1.7; }
 
 /* Line Height */
 #post-body, p { line-height:1.7; }
