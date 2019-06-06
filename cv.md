@@ -112,6 +112,7 @@ Created and taught the first Python Programming course in the MAE department at 
 
 2014: An Inverse Method for Generating Polymer Properties for use in Finite Element Analyses via Bubble Inflation Testing. SAImechE Mechanical, Manufacturing, and Materials Engineering Conference, Stellenbosch, South Africa. 
 
+---
 ### Professional service
 
 - Structural and Multidisciplinary Optimization (SAMO) Journal reviewer
