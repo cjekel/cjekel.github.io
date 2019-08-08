@@ -77,7 +77,7 @@ All-purpose IT wizard. Graphic design guru.
 
 [tindetheus](https://github.com/cjekel/tindetheus): A Python application that allows users to build their own personalized machine learning models using computer vision. The models can automatically like users on Tinder, based on the user's own historical preference.
 
-[similaritymeasures](https://github.com/cjekel/Similarity_measures_for_identifying_material_parameters_from_hysteresis_loops_using_inverse_analysis): Quantify the difference between two curves using the Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, or Curve Length based similarity measure. These methods are particularly useful for identifying parameters from material load/unload curves.
+[similaritymeasures](https://github.com/cjekel/similarity_measures): Quantify the difference between two curves using the Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, or Curve Length based similarity measure. These methods are particularly useful for identifying parameters from material load/unload curves.
 
 ---
 ### Courses taught
