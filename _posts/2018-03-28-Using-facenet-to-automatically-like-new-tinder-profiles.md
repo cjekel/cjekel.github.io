@@ -68,7 +68,7 @@ Highlights:
 - The accuracy will vary from user to user, but in general the more profiles you review the more accurate the model will become.
 
 Thoughts for improvement:
-- Include [NLP](https://en.wikipedia.org/wiki/Neuro-linguistic_programming) to find a pattern in user biographies. About one out of three Tinder profiles I reviewed didn't contain a single character in the bio. I didn't include any bio information in this model, however I know that the bio was definitely a factor in how I evaluated a profile.
+- Include [NLP](https://en.wikipedia.org/wiki/Natural_language_processing) to find a pattern in user biographies. About one out of three Tinder profiles I reviewed didn't contain a single character in the bio. I didn't include any bio information in this model, however I know that the bio was definitely a factor in how I evaluated a profile.
 - It would be very interesting to see how this method works at scale for a lot of users. While the method worked well with my data, it's likely to work both better and worse depending on the individual. It would be interesting to see how much does the accuracy vary from user to user. Unfortunately this requires users to have reviewed a lot of profiles.
 - There is very little research on using computer models to find what women find attractive in male faces. I'd be very interested to see if this method works for women who are interested in men.
 
