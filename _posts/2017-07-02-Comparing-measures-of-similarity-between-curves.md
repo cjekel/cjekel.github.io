@@ -6,7 +6,7 @@ keywords: [similarity between two curves, Fréchet distance, dynamic time warpin
 ---
 
 #### Edit: July 15, 2018
-I've published a paper on this topic aimed at identifying unique material load/unload curves [doi:10.1007/s12289-018-1421-8](https://doi.org/10.1007/s12289-018-1421-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelArea_IJMF_rev05_final.pdf). Additionally I've created a Python library called [similaritymeasures](https://github.com/cjekel/Similarity_measures_for_identifying_material_parameters_from_hysteresis_loops_using_inverse_analysis) which includes the Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, and Curve Length based similarity measures. These methods are useful for quantifying the differences between 2D curves.
+I've published a paper on this topic aimed at identifying unique material load/unload curves [doi:10.1007/s12289-018-1421-8](https://doi.org/10.1007/s12289-018-1421-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelArea_IJMF_rev05_final.pdf). Additionally I've created a Python library called [similaritymeasures](https://github.com/cjekel/similarity_measures) which includes the Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, and Curve Length based similarity measures. These methods are useful for quantifying the differences between 2D curves.
 
 ---
 
