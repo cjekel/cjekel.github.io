@@ -73,11 +73,44 @@ All-purpose IT wizard. Graphic design guru.
 
 ---
 ### Software
-[pwlf](https://github.com/cjekel/piecewise_linear_fit_py): A Python library for fitting 1D continuous piecewise linear functions.
 
-[tindetheus](https://github.com/cjekel/tindetheus): A Python application that allows users to build their own personalized machine learning models using computer vision. The models can automatically like users on Tinder, based on the user's own historical preference.
+#### pwlf
+{:.no_toc}
+<a class="github-button" href="https://github.com/cjekel/piecewise_linear_fit_py" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/piecewise_linear_fit_py on GitHub">Star</a>
+<a href="https://github.com/cjekel/piecewise_linear_fit_py"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/pwlf"> <img class="badge" alt="Build status" src="https://travis-ci.org/cjekel/piecewise_linear_fit_py.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/piecewise_linear_fit_py/badge.svg?branch=master"></a>
+- A Python library for fitting 1D continuous piecewise linear functions.
+- Technologies: Python, NumPy, SciPy, pyDOE, (Optional: TensorFlow).
+<br><br>
 
-[similaritymeasures](https://github.com/cjekel/similarity_measures): Quantify the difference between two curves using the Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, or Curve Length based similarity measure. These methods are particularly useful for identifying parameters from material load/unload curves.
+#### similaritymeasures
+{:.no_toc}
+<a class="github-button" href="https://github.com/cjekel/similarity_measures" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/similarity_measures on GitHub">Star</a>
+<a href="https://github.com/cjekel/similarity_measures"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/similaritymeasures"> <img class="badge" alt="Build status" src="https://travis-ci.com/cjekel/similarity_measures.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/similarity_measures/badge.svg?branch=master"></a>
+
+- Quantify the difference between two curves in space.
+- Includes Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, Dynamic Time Warping (DTW), or Curve Length based similarity measures.
+- Discrete Fréchet distance and DTW support N-Dimensional data!
+- Technologies: Python, NumPy, SciPy.
+<br><br>
+
+#### tindetheus
+{:.no_toc}
+<a class="github-button" href="https://github.com/cjekel/tindetheus" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/tindetheus on GitHub">Star</a>
+<a href="https://github.com/cjekel/tindetheus"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/tindetheus"></a>
+- Command line application to build personalized machine learning models for Tinder.
+- Build a database as you like and dislike profiles.
+- Train a model using computer vision to your database.
+- Use the trained model to automatically like and dislike new profiles.
+- Technologies: Python, NumPy, Matplotlib, Pandas, imageio, scikit-learn, scikit-image, TensorFlow, FaceNet, (Optional: Docker)
+<br><br>
+
+#### DTW c++
+{:.no_toc}
+<a class="github-button" href="https://github.com/cjekel/DTW_cpp" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/DTW_cpp on GitHub">Star</a>
+<a href="https://github.com/cjekel/DTW_cpp"> <img class="badge" alt="Build status" src="https://travis-ci.com/cjekel/DTW_cpp.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/DTW_cpp/badge.svg?branch=master"></a>
+- Dynamic Time Warping (DTW) single header library for C++.
+- Compute the DTW distance between two c++ vectors of arbitrary length.
+- Supports N-Dimensional data.
 
 ---
 ### Courses taught
@@ -118,4 +151,6 @@ Created and taught the first Python Programming course in the MAE department at 
 - Structural and Multidisciplinary Optimization (SAMO) Journal reviewer
 - Society for Industrial and Applied Mathematics (SIAM) book review
 
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 {% include footer.html %}

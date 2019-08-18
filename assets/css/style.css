@@ -358,6 +358,12 @@ img {
 	border-radius: 3px;
 }
 
+img.badge {
+	width: auto;
+	max-width: auto;
+	border-radius: 0;
+}
+
 /* Made with Cactus Badge */
 #badge {
 	position: absolute;
