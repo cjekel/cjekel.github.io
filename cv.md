@@ -11,7 +11,7 @@ profile: true
 ---
 ### Education
 2016 - 2019: University of Florida, Gainesville, FL  
-PhD Mechanical Engineering: 3.68/4.00 GPA
+PhD Mechanical Engineering: 3.68/4.00 GPA  
 Identification of material model parameters from experimental data
 December 2019 graduation 
 
