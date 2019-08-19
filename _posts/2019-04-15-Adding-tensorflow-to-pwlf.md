@@ -5,6 +5,12 @@ description: New pwlf 0.5.0 release has introduced a lot of changes. This post w
 keywords: [ piecewise linear fits, tensorflow, benchmarks, cholesky decomposition ]
 ---
 
+# Edit
+
+August 19, 2019: This post is severely outdated. Since the 1.0.0 release, I'd recommend to use the NumPy/SciPy class over the TensorFlow class for the vast majority of use cases. The 1.0.0 release introduced a number of improvements to the NumPy/SciPy class that make the following benchmarks obsolete.
+
+---
+
 The upcoming 0.5.0 version of [pwlf](https://github.com/cjekel/piecewise_linear_fit_py) has introduced a number of [changes](https://github.com/cjekel/piecewise_linear_fit_py/blob/master/CHANGELOG.md). The most notable change is the addition of a *PiecewiseLinFitTF* object, which will be available if you have [TensorFlow](https://www.tensorflow.org/install) installed. This post will benchmark the performance of this new object vs the older Numpy/SciPy class.
 
 # Why TensorFlow
