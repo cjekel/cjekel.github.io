@@ -65,12 +65,12 @@ Disconnect the ribbon that is right above the battery. Near this large ribbon wi
 
 ![Battery ribbon]({{ "/" | relative_url  }}assets/2018-09-18/11.png)
 
-Now you can begin to remove the battery.
+<!-- Now you can begin to remove the battery.
 
-![Removing battery]({{ "/" | relative_url  }}assets/2018-09-18/12.png)
+![Removing battery]({{ "/" | relative_url  }}assets/2018-09-18/12.png) -->
 
 
-Be very careful not to puncture the battery as you remove the battery. The battery is glued into the base of the phone. You can see the two major glue strips in the following picture. 
+Be very careful not to puncture the battery as you remove the battery. The battery is glued into the base of the phone. You can see the two major glue strips in the following picture. You may need to remove the motherboard in order to access the pull tabs on the glue strips.
 
 ![Battery removed]({{ "/" | relative_url  }}assets/2018-09-18/13.png)
 
