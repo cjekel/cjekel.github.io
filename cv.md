@@ -131,6 +131,8 @@ Created and taught the first Python Programming course in the MAE department at 
 ---
 ### Presentations
 
+2019: Isotropic and orthotropic parameter identification from full field bulge inflation tests on PVC-coated polyester. The Seventh International Conference On Structural Engineering, Mechanics and Computation, Cape Town, South Africa. 
+
 2019: Advances with Reviewing Personalized Tinder Profiles Using FaceNet and Historical Preference. University of Florida Data Science and Informatics Spring Symposium, Gainesville, Florida. 
 
 2018: Conservative Estimation of Tail Probabilities from Limited Sample Data. University of Florida Workshop Risk Management Approaches in Engineering Applications, Gainesville, Florida. 
