@@ -43,7 +43,7 @@ You'll see the results for each facenet model in the flowing tables. The mean ac
 |81| 0.692 | 0.021|
 |406| 0.718 | 0.009 |
 
-## 20180408 mode (512 embeddings)
+## 20180408 model (512 embeddings)
 
 |  # of training profiles     | Mean accuracy| Standard deviation  |
 | -------------: |:-------------:| :-----:|
