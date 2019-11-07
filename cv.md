@@ -111,6 +111,17 @@ All-purpose IT wizard. Graphic design guru.
 - Dynamic Time Warping (DTW) single header library for C++.
 - Compute the DTW distance between two c++ vectors of arbitrary length.
 - Supports N-Dimensional data.
+<br><br>
+
+#### toleranceinterval
+{:.no_toc}
+<a class="github-button" href="https://github.com/cjekel/tolerance_interval_py" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/tolerance_interval_py">Star</a>
+<a href="https://github.com/cjekel/tolerance_interval_py"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/toleranceinterval"></a>
+- A small Python library for one-sided tolerance bounds and two-sided tolerance intervals.
+- Supports two sided tolerance intervals for: Normal and Lognormal distributions
+- Supports one sided tolerance bounds for: Normal, Lognormal, Non-parametric Hanson Koopmans, and Hanson Koopmans CHM methods 
+- Technologies: Python, NumPy, SciPy, SymPy
+
 
 ---
 ### Courses taught
