@@ -116,7 +116,7 @@ All-purpose IT wizard. Graphic design guru.
 #### toleranceinterval
 {:.no_toc}
 <a class="github-button" href="https://github.com/cjekel/tolerance_interval_py" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/tolerance_interval_py">Star</a>
-<a href="https://github.com/cjekel/tolerance_interval_py"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/toleranceinterval"></a> <img class="badge" alt="Build status" src="https://travis-ci.org/cjekel/tolerance_interval_py.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/tolerance_interval_py/badge.svg?branch=master"></a>
+<a href="https://github.com/cjekel/tolerance_interval_py"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/toleranceinterval"> <img class="badge" alt="Build status" src="https://travis-ci.org/cjekel/tolerance_interval_py.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/tolerance_interval_py/badge.svg?branch=master"></a>
 - A small Python library for one-sided tolerance bounds and two-sided tolerance intervals.
 - Supports two sided tolerance intervals for: Normal and Lognormal distributions
 - Supports one sided tolerance bounds for: Normal, Lognormal, Non-parametric Hanson Koopmans, and Hanson Koopmans CHM methods 
@@ -161,8 +161,8 @@ Created and taught the first Python Programming course in the MAE department at 
 ---
 ### Professional service
 
-- Structural and Multidisciplinary Optimization (SAMO) Journal reviewer
-- Society for Industrial and Applied Mathematics (SIAM) book review
+- Structural and Multidisciplinary Optimization (SAMO) Journal reviewer (2017, 2018, 2019)
+- Society for Industrial and Applied Mathematics (SIAM) book review (2019)
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
