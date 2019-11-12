@@ -5,7 +5,7 @@ profile: true
 ---
 
 # About Me
-I love computers and solving problems. You can find me in my free time playing video games, working on cars, or fixing things. I'm pursuing a PhD in Mechanical Engineering at the University of Florida. Take a look at my [CV](/cv), [Google Scholar](https://scholar.google.com/citations?user=pSIRTswAAAAJ&hl=en&oi=sra), or [GitHub](https://github.com/cjekel). Some of my interests include:
+I love computers and solving problems. You can find me in my free time playing video games, working on cars, or fixing things. I completed a PhD in Mechanical Engineering at the University of Florida. Take a look at my [CV](/cv), [Google Scholar](https://scholar.google.com/citations?user=pSIRTswAAAAJ&hl=en&oi=sra), or [GitHub](https://github.com/cjekel). Some of my interests include:
 
 - machine learning
 - regression
