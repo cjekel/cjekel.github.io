@@ -119,7 +119,7 @@ All-purpose IT wizard. Graphic design guru.
 <a href="https://github.com/cjekel/tolerance_interval_py"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/toleranceinterval"> <img class="badge" alt="Build status" src="https://travis-ci.com/cjekel/tolerance_interval_py.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/tolerance_interval_py/badge.svg?branch=master"></a>
 - A small Python library for one-sided tolerance bounds and two-sided tolerance intervals.
 - Supports two sided tolerance intervals for: Normal and Lognormal distributions
-- Supports one sided tolerance bounds for: Normal, Lognormal, Non-parametric Hanson Koopmans, and Hanson Koopmans CHM methods 
+- Supports one sided tolerance bounds for: Normal, Lognormal, Non-parametric, Hanson Koopmans, and Hanson Koopmans CHM methods 
 - Technologies: Python, NumPy, SciPy, SymPy
 
 
@@ -163,6 +163,7 @@ Created and taught the first Python Programming course in the MAE department at 
 
 - Structural and Multidisciplinary Optimization (SAMO) Journal reviewer (2017, 2018, 2019)
 - Society for Industrial and Applied Mathematics (SIAM) book review (2019)
+- Journal of Composite Materials reviewer (2019)
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
