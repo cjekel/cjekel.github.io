@@ -12,12 +12,11 @@ profile: true
 ### Education
 2016 - 2019: University of Florida, Gainesville, FL  
 PhD Mechanical Engineering: 3.68/4.00 GPA  
-Dissertation: Influence of objective functions on the identification of material model parameters from experimental data [pdf]({{ "/" | relative_url  }}assets/papers/Jekel_Jr_C_dissertation.pdf).
-December 2019 graduation 
+Dissertation: **Influence of objective functions on the identification of material model parameters from experimental data** [pdf]({{ "/" | relative_url  }}assets/papers/Jekel_Jr_C_dissertation.pdf).
 
 2014 - 2016: Stellenbosch University, Stellenbosch, South Africa  
 MEng Mechanical Engineering: cum laude  
-Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyester via inverse bubble inflation.** [https://hdl.handle.net/10019.1/98627](https://hdl.handle.net/10019.1/98627) [pdf]({{ "/" | relative_url  }}assets/papers/jekel_obtaining_2016.pdf).
+Thesis: **Obtaining non-linear orthotropic material models for pvc-coated polyester via inverse bubble inflation** [https://hdl.handle.net/10019.1/98627](https://hdl.handle.net/10019.1/98627) [pdf]({{ "/" | relative_url  }}assets/papers/jekel_obtaining_2016.pdf).
 
 2009 - 2013: University of Colorado, Colorado Springs, CO  
 BSc Mechanical Engineering: 3.72/4.00 GPA with honor
