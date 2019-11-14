@@ -12,7 +12,7 @@ profile: true
 ### Education
 2016 - 2019: University of Florida, Gainesville, FL  
 PhD Mechanical Engineering: 3.68/4.00 GPA  
-Identification of material model parameters from experimental data
+Dissertation: Influence of objective functions on the identification of material model parameters from experimental data [pdf]({{ "/" | relative_url  }}assets/papers/Jekel_Jr_C_dissertation.pdf).
 December 2019 graduation 
 
 2014 - 2016: Stellenbosch University, Stellenbosch, South Africa  
