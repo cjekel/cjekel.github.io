@@ -67,6 +67,7 @@ All-purpose IT wizard. Graphic design guru.
 
 #### Technical reports and other non-refereed papers
 {:.no_toc}  
+0. Jekel, C.F. and Haftka, R.T., 2019. Fortified Test Functions for Global Optimization and the Power of Multiple Runs. arXiv preprint arXiv:[1912.10575](https://arxiv.org/abs/1912.10575) [pdf](https://arxiv.org/pdf/1912.10575.pdf) <br><br>
 0. Jekel, C.F. and Venter, G., 2019. pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions. [https://github.com/cjekel/piecewise_linear_fit_py](https://github.com/cjekel/piecewise_linear_fit_py) [pdf]({{ "/" | relative_url  }}assets/papers/pwlf_Jekel_Venter_v2.pdf) <br><br>
 0. Jekel, C.F. and Haftka, R.T., 2018. Classifying Online Dating Profiles on Tinder using FaceNet Facial Embeddings. arXiv preprint arXiv:[1803.04347](https://arxiv.org/abs/1803.04347) [pdf](https://arxiv.org/pdf/1803.04347.pdf)
 
