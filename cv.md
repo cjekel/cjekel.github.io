@@ -60,7 +60,7 @@ All-purpose IT wizard. Graphic design guru.
 
 #### Conference papers
 {:.no_toc}
-0. Jekel, C.F., and Haftka, R.T., 2020. Risk Allocation for Design Optimization with Unidentified Statistical Distributions. In 2020 AIAA Non-Deterministic Approaches Conference. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_nda_mdo_scitech2020_rev07.pdf)<br><br>
+0. Jekel, C.F., and Haftka, R.T., 2020. Risk Allocation for Design Optimization with Unidentified Statistical Distributions. In 2020 AIAA Non-Deterministic Approaches Conference. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_nda_mdo_scitech2020_rev08.pdf)<br><br>
 0. Jekel, C. F., Haftka, R. T., Venter, M. P., and Venter, G. Cross Validation to Select Material Models with Bulge Inflation Tests on PVC-coated Polyester. Structural Engineering, Mechanics and Computation, September 2019. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_semc_2019.pdf)<br><br>
 0. Jekel, C. F., Grechuk, B., Zhang, Y., and Haftka, R. Comparison of Chebyshev’s Inequality and Non-parametric B-Basis to Estimate Failure Strength of Composite Open Hole Tension Tests. The World Congress of Structural and Multidisciplinary Optimization, May 2019. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_wcsmo13_2019.pdf)<br><br>
 0. Jekel, C. F., and Romero, V.J. Bootstrapping and Jackknife Resampling to Improve Sparse-Data UQ Methods For Tail Probability Estimates with Limited Samples, ASME V&V Verification and Validation Symposium May 2019. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_asme_vv_2019.pdf)<br><br>
