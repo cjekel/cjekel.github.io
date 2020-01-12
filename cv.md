@@ -149,7 +149,7 @@ Created and taught the first Python Programming course in the MAE department at 
 
 2019: Advances with Reviewing Personalized Tinder Profiles Using FaceNet and Historical Preference. University of Florida Data Science and Informatics Spring Symposium, Gainesville, Florida. [pdf]({{ "/" | relative_url  }}assets/presentations/2019/tinder_automation_Jekel_2019.pdf) 
 
-2018: Conservative Estimation of Tail Probabilities from Limited Sample Data. University of Florida Workshop Risk Management Approaches in Engineering Applications, Gainesville, Florida. 
+2018: Conservative Estimation of Tail Probabilities from Limited Sample Data. University of Florida Workshop Risk Management Approaches in Engineering Applications, Gainesville, Florida. [pdf]({{ "/" | relative_url  }}assets/presentations/2018/jekel_UF_risk_reliability_2018_final.pdf) 
 
 2018: Using FaceNet to automatically like Tinder profiles based on individual preference. University of Florida Data Science and Informatics Spring Symposium, Gainesville, Florida. 
 
