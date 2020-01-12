@@ -153,7 +153,7 @@ Created and taught the first Python Programming course in the MAE department at 
 
 2018: Using FaceNet to automatically like Tinder profiles based on individual preference. University of Florida Data Science and Informatics Spring Symposium, Gainesville, Florida. 
 
-2018: Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction. AIAA Non-Deterministic Approaches Conference, Kissimmee, Florida. 
+2018: Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction. AIAA Non-Deterministic Approaches Conference, Kissimmee, Florida. [pdf]({{ "/" | relative_url  }}assets/presentations/2018/lack_of_fit_rev02.pdf) 
 
 2015: Obtaining Material Models for Inflatable Structures via Inverse Bubble Inflation. Stellenbosch University Mechanical & Mechatronic Engineering Department Research Colloquium, Stellenbosch, South Africa. 
 
