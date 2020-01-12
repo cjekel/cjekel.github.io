@@ -32,7 +32,7 @@ Works in the Verification Validation (VV), Uncertainty Quantification (UQ), Cred
 
 #### University of Florida
 {:.no_toc}
-2016 - present: Research Assistant /  Instructor
+2016 - 2019: Research Assistant /  Instructor
 
 Applied optimization to find model parameters that match experimental data, and research on quantifying the difference between experimental data and numerical models. Created and taught a Python Programming course.
 
