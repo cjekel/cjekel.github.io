@@ -145,7 +145,7 @@ Created and taught the first Python Programming course in the MAE department at 
 
 2020: Risk Allocation for Design Optimization with Unidentified Statistical Distributions. In 2020 AIAA Non-Deterministic Approaches Conference. Orlando, Florida. [pdf]({{ "/" | relative_url  }}assets/presentations/2020/jekel_scitech_nda_2020_rev01.pdf) 
 
-2019: Isotropic and orthotropic parameter identification from full field bulge inflation tests on PVC-coated polyester. The Seventh International Conference On Structural Engineering, Mechanics and Computation, Cape Town, South Africa. 
+2019: Isotropic and orthotropic parameter identification from full field bulge inflation tests on PVC-coated polyester. The Seventh International Conference On Structural Engineering, Mechanics and Computation, Cape Town, South Africa. [pdf]({{ "/" | relative_url  }}assets/presentations/2019/uct_semc_jekel_rev03.pdf) 
 
 2019: Advances with Reviewing Personalized Tinder Profiles Using FaceNet and Historical Preference. University of Florida Data Science and Informatics Spring Symposium, Gainesville, Florida. [pdf]({{ "/" | relative_url  }}assets/presentations/2019/tinder_automation_Jekel_2019.pdf) 
 
