@@ -26,7 +26,7 @@ BSc Mechanical Engineering: 3.72/4.00 GPA with honor
 
 #### Sandia National Laboratories
 {:.no_toc}
-2018: Research & Development Graduate Intern
+2018 - 2020: Research & Development Graduate Intern
 
 Works in the Verification Validation (VV), Uncertainty Quantification (UQ), Credibility Process group. R&D of statistical methods to estimate extreme tail probabilities with a limited number of samples.
 
