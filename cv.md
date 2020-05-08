@@ -24,11 +24,17 @@ BSc Mechanical Engineering: 3.72/4.00 GPA with honor
 ---
 ### Professional experience
 
+#### Lawrence Livermore National Laboratory
+{:.no_toc}
+2020 - Present: Postdoctoral Researcher Staff Member
+
+Build and deploy machine learning models for structural optimization software.
+
 #### Sandia National Laboratories
 {:.no_toc}
 2018 - 2020: Research & Development Graduate Intern
 
-Works in the Verification Validation (VV), Uncertainty Quantification (UQ), Credibility Process group. R&D of statistical methods to estimate extreme tail probabilities with a limited number of samples.
+Worked in the Verification Validation (VV), Uncertainty Quantification (UQ), Credibility Process group. R&D of statistical methods to estimate extreme tail probabilities with a limited number of samples.
 
 #### University of Florida
 {:.no_toc}
