@@ -66,7 +66,7 @@ All-purpose IT wizard. Graphic design guru.
 
 #### Conference papers
 {:.no_toc}
-0. Jekel, C.F., and Haftka, R.T., 2020. Weaponizing Favorite Test Functions for Testing Global Optimization Algorithms: An illustration with the Branin-Hoo Function. In 2020 AIAA AVIATION FORUM. [doi:10.2514/6.2020-3132](https://doi.org/) [pdf]({{ "/" | relative_url  }}assets/papers/Weaponizing_Favorite_Test_Function_final_rev05.pdf)<br><br>
+0. Jekel, C.F., and Haftka, R.T., 2020. Weaponizing Favorite Test Functions for Testing Global Optimization Algorithms: An illustration with the Branin-Hoo Function. In 2020 AIAA AVIATION FORUM. [doi:10.2514/6.2020-3132](https://doi.org/10.2514/6.2020-3132) [pdf]({{ "/" | relative_url  }}assets/papers/Weaponizing_Favorite_Test_Function_final_rev05.pdf)<br><br>
 0. Jekel, C.F., and Haftka, R.T., 2020. Risk Allocation for Design Optimization with Unidentified Statistical Distributions. In 2020 AIAA Non-Deterministic Approaches Conference. [doi:0.2514/6.2020-0415](https://doi.org/10.2514/6.2020-0415) [pdf]({{ "/" | relative_url  }}assets/papers/jekel_nda_mdo_scitech2020_rev08.pdf)<br><br>
 0. Jekel, C. F., Haftka, R. T., Venter, M. P., and Venter, G. Cross Validation to Select Material Models with Bulge Inflation Tests on PVC-coated Polyester. Structural Engineering, Mechanics and Computation, September 2019. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_semc_2019.pdf)<br><br>
 0. Jekel, C. F., Grechuk, B., Zhang, Y., and Haftka, R. Comparison of Chebyshev’s Inequality and Non-parametric B-Basis to Estimate Failure Strength of Composite Open Hole Tension Tests. The World Congress of Structural and Multidisciplinary Optimization, May 2019. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_wcsmo13_2019.pdf)<br><br>
@@ -150,6 +150,8 @@ Created and taught the first Python Programming course in the MAE department at 
 
 ---
 ### Presentations
+
+2020: Weaponizing Favorite Test Functions for Testing Global Optimization Algorithms: An illustration with the Branin-Hoo Function. In 2020 AIAA AVIATION FORUM. [Video](https://www.youtube.com/watch?v=NPIVi60NNkc)
 
 2020: Risk Allocation for Design Optimization with Unidentified Statistical Distributions. In 2020 AIAA Non-Deterministic Approaches Conference. Orlando, Florida. [pdf]({{ "/" | relative_url  }}assets/presentations/2020/jekel_scitech_nda_2020_rev01.pdf) 
 
