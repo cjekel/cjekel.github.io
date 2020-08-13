@@ -115,6 +115,7 @@ from matplotlib import rcParams
 rcParams['font.family'] = 'serif'
 #   3D plot of the
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 r, x0, y0, z0 = sphereFit(correctX,correctY,correctZ)
 u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
