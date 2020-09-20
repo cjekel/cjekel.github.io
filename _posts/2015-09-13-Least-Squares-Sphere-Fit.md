@@ -5,7 +5,7 @@ description: Fitting a sphere to data points using the least squares method
 keywords: [Python, least squares fit, sphere fit, Python sphere fit]
 ---
 
-*Update: 2020-09-20 If you are interested in fitting ellipsoids or formulating other least squares problems check out this new [post](https://jekel.me/2020/Least-Squares-Ellipsoid-Fit/).
+*Update: 2020-09-20 If you are interested in fitting ellipsoids or formulating other least squares problems check out this new [post](https://jekel.me/2020/Least-Squares-Ellipsoid-Fit/).*
 
 *Update: 2018-04-22 I've uploaded the data and a demo Python file [here](https://github.com/cjekel/cjekel.github.io/tree/master/assets/2015-09-13).*
 
