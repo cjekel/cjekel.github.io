@@ -143,4 +143,4 @@ c_ls = np.sqrt(1.0/B[2])
 print(a_ls, b_ls, c_ls)
 ```
 
-Running all of the code together will give you a_ls=1.1999999999999995, b_ls=0.19999999999999993 and c_ls=0.9000000000000006. This is double precision error on our original ellipsoid of <span>\\( a = 1.2 \\)</span>, <span>\\( b = 0.2 \\)</span>, and <span>\\( c = 0.9 \\)</span>. Not too bad! 
+Running all of the code together will give you a_ls=1.1999999999999995, b_ls=0.19999999999999993 and c_ls=0.9000000000000006. This is double precision error on our original ellipsoid of <span>\\( a = 1.2 \\)</span>, <span>\\( b = 0.2 \\)</span>, and <span>\\( c = 0.9 \\)</span>. Not too bad! Hopefully you can use this to formulate other least squares problems, or ellipsoids in higher dimensions. 
