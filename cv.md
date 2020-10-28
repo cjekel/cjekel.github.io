@@ -151,6 +151,8 @@ Created and taught the first Python Programming course in the MAE department at 
 ---
 ### Presentations
 
+2020: Surrogate Based Optimization. Overview presented for LLNL Center Design Optimization. [pdf]({{ "/" | relative_url  }}assets/presentations/2020/review_of_surrogate_based_optimization_final.pdf)
+
 2020: Fortifying Favorite Test Functions for Testing Global Optimization Algorithms. In 2020 AIAA AVIATION FORUM. [Video](https://www.youtube.com/watch?v=NPIVi60NNkc)
 
 2020: Risk Allocation for Design Optimization with Unidentified Statistical Distributions. In 2020 AIAA Non-Deterministic Approaches Conference. Orlando, Florida. [pdf]({{ "/" | relative_url  }}assets/presentations/2020/jekel_scitech_nda_2020_rev01.pdf) 
