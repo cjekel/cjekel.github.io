@@ -176,9 +176,9 @@ Created and taught the first Python Programming course in the MAE department at 
 ---
 ### Professional service
 
-- Structural and Multidisciplinary Optimization (SAMO) Journal reviewer (2017, 2018, 2019, 2020)
+- Structural and Multidisciplinary Optimization (SAMO) Journal reviewer (2017, 2018, 2019, 2020, 2021)
 - Society for Industrial and Applied Mathematics (SIAM) book review (2020)
-- Journal of Composite Materials reviewer (2019)
+- Journal of Composite Materials reviewer (2019, 2021)
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
