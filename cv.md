@@ -74,7 +74,9 @@ All-purpose IT wizard. Graphic design guru.
 0. Jekel, C.F., Haftka, R.T., Venter, G. and Venter, M.P., 2018. Lack-of-fit Tests to Indicate Material Model Improvement or Experimental Data Noise Reduction. In 2018 AIAA Non-Deterministic Approaches Conference (p. 1664). [doi:10.2514/6.2018-1664](https://doi.org/10.2514/6.2018-1664) [pdf]({{ "/" | relative_url  }}assets/papers/lofAIAA_rev04.pdf)<br><br>
 
 #### Technical reports and other non-refereed papers
-{:.no_toc}  
+{:.no_toc}
+0. Jekel, C.F. and Haftka, R.T., 2021. Testing Surrogate-Based Optimization with the Fortified Branin-Hoo Extended to Four Dimensions. arXiv preprint arXiv:[2107.08035](https://arxiv.org/abs/2107.08035) [pdf](https://arxiv.org/pdf/2107.08035.pdf) <br><br>
+0. Beck, V. A., Wong, J. J., Jekel, C. F., Tortorelli, D. A., Baker, S. E., Duoss, E. B., & Worsley, M. A. 2021. Computational Design of Microarchitected Flow-Through Electrodes for Energy Storage. arXiv preprint arXiv:[2106.01512](https://arxiv.org/abs/2106.01512) [pdf](https://arxiv.org/pdf/2106.01512.pdf) <br><br>
 0. Jekel, C.F. and Romero, V.J., Conservative Estimation of Tail Probabilities from Limited Sample Data. Sandia Report SAND2020-2828. March 2020. [doi:10.2172/1605343](https://dx.doi.org/10.2172/1605343) [pdf](https://dx.doi.org/10.2172/1605343) <br><br>
 0. Jekel, C.F. and Haftka, R.T., 2019. Fortified Test Functions for Global Optimization and the Power of Multiple Runs. arXiv preprint arXiv:[1912.10575](https://arxiv.org/abs/1912.10575) [pdf](https://arxiv.org/pdf/1912.10575.pdf) <br><br>
 0. Jekel, C.F. and Venter, G., 2019. pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions. [https://github.com/cjekel/piecewise_linear_fit_py](https://github.com/cjekel/piecewise_linear_fit_py) [pdf]({{ "/" | relative_url  }}assets/papers/pwlf_Jekel_Venter_v2.pdf) <br><br>
@@ -150,6 +152,8 @@ Created and taught the first Python Programming course in the MAE department at 
 
 ---
 ### Presentations
+
+2021: Surrogate models of elastic responses from truss lattices for multiscale design. 14th World Congress of Structural and Multidisciplinary Optimization. [Video](https://youtu.be/BtZCPH0b9ws) [pdf]({{ "/" | relative_url  }}assets/presentations/2021/jekel_wcsmo_rev01.pdf)
 
 2020: Surrogate Based Optimization. Overview presented for LLNL Center Design Optimization. [pdf]({{ "/" | relative_url  }}assets/presentations/2020/review_of_surrogate_based_optimization_final.pdf)
 
