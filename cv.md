@@ -59,7 +59,8 @@ All-purpose IT wizard. Graphic design guru.
 ---
 ### Publications
 #### Peer-reviewed journal articles
-{:.no_toc}  
+{:.no_toc}
+0. Victor A. Beck, Jonathan J. Wong, Charles F. Jekel, Daniel A. Tortorelli, Sarah E. Baker, Eric B. Duoss, Marcus A. Worsley. 2021. Computational design of microarchitected porous electrodes for redox flow batteries. Journal of Power Sources, Volume 512, 2021, 230453, ISSN 0378-7753, [doi:10.1016/j.jpowsour.2021.230453](https://doi.org/10.1016/j.jpowsour.2021.230453) <br><br>
 0. Jekel, C.F., Venter, G., Venter, M.P., Stander, N. and Haftka, R.T., 2018. Similarity measures for identifying material parameters from hysteresis loops using inverse analysis. International Journal of Material Forming, 12(3), 355-378. [doi:10.1007/s12289-018-1421-8](https://doi.org/10.1007/s12289-018-1421-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelArea_IJMF_rev05_final.pdf) <br><br>
 0. Jekel, C.F., Venter, G. and Venter, M.P., 2017. Modeling PVC-coated polyester as a hypoelastic non-linear orthotropic material. Composite Structures, 161, pp.51-64.  [doi:10.1016/j.compstruct.2016.11.019](https://dx.doi.org/10.1016/j.compstruct.2016.11.019) [pdf]({{ "/" | relative_url  }}assets/papers/JekelModelingPVC-CoatedPolyester.pdf) <br><br>
 0. Jekel, C.F., Venter, G. and Venter, M.P., 2016. Obtaining a hyperelastic non-linear orthotropic material model via inverse bubble inflation analysis. Structural and Multidisciplinary Optimization, 54(4), pp.927-935. [doi:10.1007/s00158-016-1456-8](https:////dx.doi.org/10.1007/s00158-016-1456-8) [pdf]({{ "/" | relative_url  }}assets/papers/JekelInverseBubbleInflationFinal.pdf) <br><br>
@@ -181,8 +182,9 @@ Created and taught the first Python Programming course in the MAE department at 
 ### Professional service
 
 - Structural and Multidisciplinary Optimization (SAMO) Journal reviewer (2017, 2018, 2019, 2020, 2021)
-- Society for Industrial and Applied Mathematics (SIAM) book review (2020)
+- Computer Methods in Applied Mechanics and Engineering (CMAME) Journal reviewer (2021)
 - Journal of Composite Materials reviewer (2019, 2021)
+- Society for Industrial and Applied Mathematics (SIAM) book review (2020)
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
