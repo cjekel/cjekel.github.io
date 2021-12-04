@@ -1,8 +1,8 @@
 ---
 title:  "Ellipsoid Non-linear Regression Fitting"
 date:   2021-12-01 06:00:00
-description: How to fit an ellipsoid to data points using non-linear regression, and a simple Python JAX example.
-keywords: [Python, fitting ellipsoids, JAX non-linear regression]
+description: How to fit an ellipsoid to data points using non-linear regression. Included is a simple Python example using JAX.
+keywords: [Python, fitting ellipsoids, JAX non-linear regression, ellipsoid regression]
 ---
 
 In one of my previous posts, I demonstrated [how to fit an ellipsoid using least squares](https://jekel.me/2021/Non-linear-Ellipsoid-Regression/). Unfortunately, this method won't work for many practical problems because the data will not be centered around the origin. For these cases, we will need to formulate a more expensive non-linear regression problem that uses optimization to find the ellipsoid parameters. We will use [jax.numpy](https://jax.readthedocs.io/en/latest/jax.numpy.html) as an automatic differentiation code to easily compute derivatives for our custom non-linear regression.
