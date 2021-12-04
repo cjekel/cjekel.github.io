@@ -26,7 +26,8 @@ BSc Mechanical Engineering: 3.72/4.00 GPA with honor
 
 #### Lawrence Livermore National Laboratory
 {:.no_toc}
-2020 - Present: Postdoctoral Researcher Staff Member
+2021 - Present: Research Staff Member  
+2020 - 2021: Postdoctoral Researcher  
 
 Build and deploy machine learning models for structural optimization software.
 
@@ -77,7 +78,6 @@ All-purpose IT wizard. Graphic design guru.
 #### Technical reports and other non-refereed papers
 {:.no_toc}
 0. Jekel, C.F. and Haftka, R.T., 2021. Testing Surrogate-Based Optimization with the Fortified Branin-Hoo Extended to Four Dimensions. arXiv preprint arXiv:[2107.08035](https://arxiv.org/abs/2107.08035) [pdf](https://arxiv.org/pdf/2107.08035.pdf) <br><br>
-0. Beck, V. A., Wong, J. J., Jekel, C. F., Tortorelli, D. A., Baker, S. E., Duoss, E. B., & Worsley, M. A. 2021. Computational Design of Microarchitected Flow-Through Electrodes for Energy Storage. arXiv preprint arXiv:[2106.01512](https://arxiv.org/abs/2106.01512) [pdf](https://arxiv.org/pdf/2106.01512.pdf) <br><br>
 0. Jekel, C.F. and Romero, V.J., Conservative Estimation of Tail Probabilities from Limited Sample Data. Sandia Report SAND2020-2828. March 2020. [doi:10.2172/1605343](https://dx.doi.org/10.2172/1605343) [pdf](https://dx.doi.org/10.2172/1605343) <br><br>
 0. Jekel, C.F. and Haftka, R.T., 2019. Fortified Test Functions for Global Optimization and the Power of Multiple Runs. arXiv preprint arXiv:[1912.10575](https://arxiv.org/abs/1912.10575) [pdf](https://arxiv.org/pdf/1912.10575.pdf) <br><br>
 0. Jekel, C.F. and Venter, G., 2019. pwlf: A Python Library for Fitting 1D Continuous Piecewise Linear Functions. [https://github.com/cjekel/piecewise_linear_fit_py](https://github.com/cjekel/piecewise_linear_fit_py) [pdf]({{ "/" | relative_url  }}assets/papers/pwlf_Jekel_Venter_v2.pdf) <br><br>
@@ -89,7 +89,7 @@ All-purpose IT wizard. Graphic design guru.
 #### pwlf
 {:.no_toc}
 <a class="github-button" href="https://github.com/cjekel/piecewise_linear_fit_py" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/piecewise_linear_fit_py on GitHub">Star</a>
-<a href="https://github.com/cjekel/piecewise_linear_fit_py"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/pwlf"> <img class="badge" alt="Build status" src="https://travis-ci.org/cjekel/piecewise_linear_fit_py.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/piecewise_linear_fit_py/badge.svg?branch=master"></a>
+<a href="https://github.com/cjekel/piecewise_linear_fit_py"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/pwlf"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/piecewise_linear_fit_py/badge.svg?branch=master"></a>
 - A Python library for fitting 1D continuous piecewise linear functions.
 - Technologies: Python, NumPy, SciPy, pyDOE, (Optional: TensorFlow).
 <br><br>
@@ -97,7 +97,7 @@ All-purpose IT wizard. Graphic design guru.
 #### similaritymeasures
 {:.no_toc}
 <a class="github-button" href="https://github.com/cjekel/similarity_measures" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/similarity_measures on GitHub">Star</a>
-<a href="https://github.com/cjekel/similarity_measures"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/similaritymeasures"> <img class="badge" alt="Build status" src="https://travis-ci.com/cjekel/similarity_measures.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/similarity_measures/badge.svg?branch=master"></a>
+<a href="https://github.com/cjekel/similarity_measures"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/similaritymeasures"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/similarity_measures/badge.svg?branch=master"></a>
 
 - Quantify the difference between two curves in space.
 - Includes Partial Curve Mapping method, Area between two curves, Discrete Fréchet distance, Dynamic Time Warping (DTW), or Curve Length based similarity measures.
@@ -119,7 +119,7 @@ All-purpose IT wizard. Graphic design guru.
 #### DTW c++
 {:.no_toc}
 <a class="github-button" href="https://github.com/cjekel/DTW_cpp" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/DTW_cpp on GitHub">Star</a>
-<a href="https://github.com/cjekel/DTW_cpp"> <img class="badge" alt="Build status" src="https://travis-ci.com/cjekel/DTW_cpp.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/DTW_cpp/badge.svg?branch=master"></a>
+<a href="https://github.com/cjekel/DTW_cpp"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/DTW_cpp/badge.svg?branch=master"></a>
 - Dynamic Time Warping (DTW) single header library for C++.
 - Compute the DTW distance between two c++ vectors of arbitrary length.
 - Supports N-Dimensional data.
@@ -128,12 +128,20 @@ All-purpose IT wizard. Graphic design guru.
 #### toleranceinterval
 {:.no_toc}
 <a class="github-button" href="https://github.com/cjekel/tolerance_interval_py" data-icon="octicon-star" data-show-count="true" aria-label="Star cjekel/tolerance_interval_py">Star</a>
-<a href="https://github.com/cjekel/tolerance_interval_py"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/toleranceinterval"> <img class="badge" alt="Build status" src="https://travis-ci.com/cjekel/tolerance_interval_py.svg?branch=master"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/tolerance_interval_py/badge.svg?branch=master"></a>
+<a href="https://github.com/cjekel/tolerance_interval_py"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/toleranceinterval"> <img class="badge" alt="Test coverage" src="https://coveralls.io/repos/github/cjekel/tolerance_interval_py/badge.svg?branch=master"></a>
 - A small Python library for one-sided tolerance bounds and two-sided tolerance intervals.
 - Supports two sided tolerance intervals for: Normal and Lognormal distributions
 - Supports one sided tolerance bounds for: Normal, Lognormal, Non-parametric, Hanson Koopmans, and Hanson Koopmans CHM methods 
 - Technologies: Python, NumPy, SciPy, SymPy
+<br><br>
 
+#### spdlayers
+{:.no_toc}
+<a class="github-button" href="https://github.com/llnl/spdlayers" data-icon="octicon-star" data-show-count="true" aria-label="Star llnl/spdlayers">Star</a>
+<a href="https://github.com/llnl/spdlayers"><img class="badge" alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/spdlayers"> 
+- Symmetric Positive Definite (SPD) enforcement layers for PyTorch
+- Regardless of the input, the output of these layers will always be a SPD tensor!
+- Technologies: PyTorch, Python
 
 ---
 ### Courses taught
