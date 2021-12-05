@@ -1,6 +1,6 @@
 ---
 title:  "Ellipsoid Non-linear Regression Fitting"
-date:   2021-12-01 06:00:00
+date:   2021-12-04 06:00:00
 description: How to fit an ellipsoid to data points using non-linear regression. Included is a simple Python example using JAX.
 keywords: [Python, fitting ellipsoids, JAX non-linear regression, ellipsoid regression]
 ---
