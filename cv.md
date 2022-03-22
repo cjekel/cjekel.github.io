@@ -162,6 +162,8 @@ Created and taught the first Python Programming course in the MAE department at 
 ---
 ### Presentations
 
+2022: Learning Richtmyer-Meshkov Instability Fields from Parametrized Hydrodynamic Simulations. JOWOG 34: Applied Computer Science. [pdf]({{ "/" | relative_url  }}assets/presentations/2022/jekel_jowog_2022_ACS_rev_04.pdf) 
+
 2021: Surrogate models of elastic responses from truss lattices for multiscale design. 14th World Congress of Structural and Multidisciplinary Optimization. [Video](https://youtu.be/BtZCPH0b9ws) [pdf]({{ "/" | relative_url  }}assets/presentations/2021/jekel_wcsmo_rev01.pdf)
 
 2020: Surrogate Based Optimization. Overview presented for LLNL Center Design Optimization. [pdf]({{ "/" | relative_url  }}assets/presentations/2020/review_of_surrogate_based_optimization_final.pdf)
