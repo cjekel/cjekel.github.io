@@ -162,6 +162,8 @@ Created and taught the first Python Programming course in the MAE department at 
 ---
 ### Presentations
 
+2022: Machine learning material models for multiscale topology optimization. Mechanics of Materials Lawrence Livermore National Lab working group. [pdf]({{ "/" | relative_url  }}assets/presentations/2022/ml_material_models_for_design_opt_02.pdf) 
+
 2022: Learning Richtmyer-Meshkov Instability Fields from Parametrized Hydrodynamic Simulations. JOWOG 34: Applied Computer Science. [pdf]({{ "/" | relative_url  }}assets/presentations/2022/jekel_jowog_2022_ACS_rev_04.pdf) 
 
 2021: Surrogate models of elastic responses from truss lattices for multiscale design. 14th World Congress of Structural and Multidisciplinary Optimization. [Video](https://youtu.be/BtZCPH0b9ws) [pdf]({{ "/" | relative_url  }}assets/presentations/2021/jekel_wcsmo_rev01.pdf)
