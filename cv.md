@@ -162,6 +162,8 @@ Created and taught the first Python Programming course in the MAE department at 
 ---
 ### Presentations
 
+2022: Using conservation laws to infer deep learning model accuracy of Richtmyer-Meshkov instabilities. 8th European Congress on Computational Methods in Applied Sciences and Engineering, Oslo, Norway. [pdf]({{ "/" | relative_url  }}assets/presentations/2022/jekel_eccomas_2022_rev02.pdf) 
+
 2022: Machine learning material models for multiscale topology optimization. Mechanics of Materials Lawrence Livermore National Lab working group. [pdf]({{ "/" | relative_url  }}assets/presentations/2022/ml_material_models_for_design_opt_02.pdf) 
 
 2022: Learning Richtmyer-Meshkov Instability Fields from Parametrized Hydrodynamic Simulations. JOWOG 34: Applied Computer Science. [pdf]({{ "/" | relative_url  }}assets/presentations/2022/jekel_jowog_2022_ACS_rev_04.pdf) 
