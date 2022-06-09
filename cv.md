@@ -77,6 +77,7 @@ All-purpose IT wizard. Graphic design guru.
 
 #### Technical reports and other non-refereed papers
 {:.no_toc}
+0. Jekel, C. F., Swartz, K. E., White, D. A., Tortorelli, D. A., & Watts, S. E. 2022. Neural Network Layers for Prediction of Positive Definite Elastic Stiffness Tensors. arXiv preprint arXiv:[2203.13938](https://arxiv.org/abs/2203.13938) [pdf](https://arxiv.org/abs/2203.13938.pdf)  <br><br>
 0. Jekel, C.F. and Haftka, R.T., 2021. Testing Surrogate-Based Optimization with the Fortified Branin-Hoo Extended to Four Dimensions. arXiv preprint arXiv:[2107.08035](https://arxiv.org/abs/2107.08035) [pdf](https://arxiv.org/pdf/2107.08035.pdf) <br><br>
 0. Jekel, C.F. and Romero, V.J., Conservative Estimation of Tail Probabilities from Limited Sample Data. Sandia Report SAND2020-2828. March 2020. [doi:10.2172/1605343](https://dx.doi.org/10.2172/1605343) [pdf](https://dx.doi.org/10.2172/1605343) <br><br>
 0. Jekel, C.F. and Haftka, R.T., 2019. Fortified Test Functions for Global Optimization and the Power of Multiple Runs. arXiv preprint arXiv:[1912.10575](https://arxiv.org/abs/1912.10575) [pdf](https://arxiv.org/pdf/1912.10575.pdf) <br><br>
