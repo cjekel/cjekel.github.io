@@ -69,6 +69,7 @@ All-purpose IT wizard. Graphic design guru.
 
 #### Conference papers
 {:.no_toc}
+0. Jekel, C.F., Sterbentz, D.M., Aubry, S., Choi, Y., White, D.A. and Belof, J.L., 2022. Using conservation laws to infer deep learning model accuracy of Richtmyer-Meshkov instabilities, In ECCOMAS 2022. [doi:10.23967/eccomas.2022.286](https://doi.org/10.23967/eccomas.2022.286) [pdf]({{ "/" | relative_url  }}assets/papers/jekel_eccomas_deep_learning_2022.pdf)<br><br>
 0. Jekel, C.F., and Haftka, R.T., 2020. Weaponizing Favorite Test Functions for Testing Global Optimization Algorithms: An illustration with the Branin-Hoo Function. In 2020 AIAA AVIATION FORUM. [doi:10.2514/6.2020-3132](https://doi.org/10.2514/6.2020-3132) [pdf]({{ "/" | relative_url  }}assets/papers/Weaponizing_Favorite_Test_Function_final_rev05.pdf)<br><br>
 0. Jekel, C.F., and Haftka, R.T., 2020. Risk Allocation for Design Optimization with Unidentified Statistical Distributions. In 2020 AIAA Non-Deterministic Approaches Conference. [doi:0.2514/6.2020-0415](https://doi.org/10.2514/6.2020-0415) [pdf]({{ "/" | relative_url  }}assets/papers/jekel_nda_mdo_scitech2020_rev08.pdf)<br><br>
 0. Jekel, C. F., Haftka, R. T., Venter, M. P., and Venter, G. Cross Validation to Select Material Models with Bulge Inflation Tests on PVC-coated Polyester. Structural Engineering, Mechanics and Computation, September 2019. [pdf]({{ "/" | relative_url  }}assets/papers/jekel_semc_2019.pdf)<br><br>
