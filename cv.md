@@ -29,7 +29,7 @@ BSc Mechanical Engineering: 3.72/4.00 GPA with honor
 2021 - Present: Research Staff Member  
 2020 - 2021: Postdoctoral Researcher  
 
-Build and deploy machine learning models for structural optimization software.
+Create end-to-end machine learning workflows on state of the art HPCs and cloud resources. My biggest problems can generate > 10 TBs of data and require thousands of GPUs to train. Developed real-time machine learning visualization software to quickly analyze thousands of simulation results.
 
 #### Sandia National Laboratories
 {:.no_toc}
