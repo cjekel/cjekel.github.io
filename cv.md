@@ -61,6 +61,8 @@ All-purpose IT wizard. Graphic design guru.
 ### Publications
 #### Peer-reviewed journal articles
 {:.no_toc}
+0. Jekel, C. F., Sterbentz, D. M., Stitt, T. M., Mocz, P., Rieben, R. N., White, D. A., & Belof, J. L. (2024). Machine learning visualization tool for exploring parameterized hydrodynamics. Machine Learning: Science and Technology, 5(4), 045048. [pdf]({{ "/" | relative_url  }}assets/papers/865692.pdf) <br><br>
+0. Sterbentz, D. M., Kline, D. J., White, D. A., Jekel, C. F., Hennessey, M. P., Amondson, D. K., ... & Belof, J. L. (2024). Explosively driven Richtmyer–Meshkov instability jet suppression and enhancement via coupling machine learning and additive manufacturing. J. Appl. Phys. 21 July 2024; 136 (3): 035102. [doi:10.1063/5.021312]https://doi.org/10.1063/5.0213123 [pdf]({{ "/" | relative_url  }}assets/papers/862011.pdf) <br><br>
 0. Sterbentz, D. M., Jekel, C. F., White, D., Rieben, R. N., & Belof, J. (2023). Linear shaped-charge jet optimization using machine learning methods. J. Appl. Phys. 134 (4): 045102. [doi:10.1063/5.0156373](https://doi.org/10.1063/5.0156373) [pdf]({{ "/" | relative_url  }}assets/papers/IM-1070436-6.pdf) <br><br>
 0. Sterbentz, D. M., Jekel, C. F., White, D., Aubry, S., Lorenzana, H., & Belof, J. (2022). Design optimization for Richtmyer-Meshkov instability suppression at shock-compressed material interfaces. Physics of Fluids. 34 (8): 082109. [doi:10.1063/5.0100100](https://doi.org/10.1063/5.0100100) [pdf]({{ "/" | relative_url  }}assets/papers/doi10.1063.5.0100100.pdf) <br><br>
 0. Beck, V. A., Wong, J. J., Jekel, C. F., Tortorelli, D. A., Baker, S. E., Duoss, E. B., & Worsley, M. A. (2021). Computational design of microarchitected porous electrodes for redox flow batteries. Journal of Power Sources, 512, 230453. [doi:10.1016/j.jpowsour.2021.230453](https://doi.org/10.1016/j.jpowsour.2021.230453) [pdf]({{ "/" | relative_url  }}assets/papers/doi10.1016.j.jpowsour.2021.230453.pdf) <br><br>
@@ -201,7 +203,7 @@ Created and taught the first Python Programming course in the MAE department at 
 ---
 ### Professional service
 
-- Structural and Multidisciplinary Optimization (SAMO) Journal reviewer (2017, 2018, 2019, 2020, 2021, 2022)
+- Structural and Multidisciplinary Optimization (SAMO) Journal reviewer (2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024)
 - Computer Methods in Applied Mechanics and Engineering (CMAME) Journal reviewer (2021)
 - Journal of Composite Materials reviewer (2019, 2021)
 - Society for Industrial and Applied Mathematics (SIAM) book review (2020)
